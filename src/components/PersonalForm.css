@@ -1,0 +1,201 @@
+.wrapper_form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.personaldata{
+    background-color: #F5F5F5;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    width:76%;
+    justify-content: center;
+    margin-top: 10px;
+    border-radius: 20px;
+    gap: 10%;
+    padding: 20px;
+}
+.personal1{
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5;
+    gap: 20px;
+    justify-content: center; 
+    
+}
+.personal2{background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    width: 300px;
+    
+    
+}
+
+.prsnl{
+    background-color: #fff;
+    text-align: center;
+    border:0px ;
+    width: 80%;
+    height: 55px;
+    font-size: 40px;
+    border-radius: 20px;
+    margin-left: 10%;
+    
+}
+.namer_label{
+    margin-left: -5%;
+}
+
+.butt{
+    float: left;
+    margin: 10px;
+    align-items: center;
+    width: 64px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+}
+.header{
+    color: white;
+    font-size:30px;
+    font-weight:bolder;
+    margin: 15px;
+    margin-left: 131px;
+}
+.group1{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    border-radius: 20px;
+    gap: 10px;
+}
+.group2{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    width: 50%;
+    justify-content: space-between;
+    gap: 150px;
+} 
+.email{
+    height: 30px;
+    border-radius: 10px;
+} 
+.temp{
+height: 50px;
+border-radius: 10px;
+    
+}
+.permnt{
+    height: 50px;
+    border-radius: 10px;
+}
+.marstatus{
+    height: 30px;
+    border-radius: 10px;
+}
+.pancard{
+    height: 30px;
+    border-radius: 10px;
+}
+.aadnum{
+    height: 30px;
+    border-radius: 10px;
+}
+.phnnum{
+    height: 30px;
+    border-radius: 10px;
+}
+.fname{
+    border-radius: 10px;
+
+}
+.lname{
+    border-radius: 10px;
+}
+.gen{
+    border-radius: 10px;
+}
+.bloodgrp{
+    border-radius: 10px;
+}
+.button{
+    background-color: #F89502;
+    border: none;
+    padding: 9px;
+    margin: 5px;
+    border-radius: 6px;
+    width: 100px;
+    color:white;
+}
+.cbutton{
+   display: flex; 
+   justify-content: space-around;
+    width: 100%;
+}
+.error{
+    font-size: small;
+    color: red;
+}
+.labelish{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .form-group label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+  .form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .form-group input:hover + label,
+  .form-group input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+ 
+  .wide{
+    width: 170px;
+  }
+  .selctor {
+    width: 150px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    margin-left: 10px;
+}
+
+

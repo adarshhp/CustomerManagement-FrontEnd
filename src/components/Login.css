@@ -1,3 +1,9 @@
+.loginscreen{
+    display: flex;
+    align-items: stretch;
+    align-content: center;
+    justify-content: center;
+}
 .loo {
     display: flex;
     align-items: stretch;
