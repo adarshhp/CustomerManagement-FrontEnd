@@ -1,0 +1,18 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  height: 100vh;
+  background-color: rgb(247, 201, 49);
+}
+
+.App{
+  display: flex;
+    align-items: stretch;
+    align-content: center;
+    justify-content: center;
+
+}
+
