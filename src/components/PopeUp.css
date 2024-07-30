@@ -1,0 +1,47 @@
+.largebox{
+    width: 70%;
+    height: 60%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.smallbox{
+    width: 50%;
+    height: 40%;
+    background-color: #F6EFEF;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    border: 1px solid;
+}
+.save{
+    background-color: #F58D11;
+    color: white;
+    border-radius: 10px;
+    width: 60px;
+    height: 30px;
+}
+.cancel{
+    background-color: #F58D11;
+    color: white;
+    border-radius: 10px;
+    width: 60px;
+    height: 30px;
+}
+.but{
+     display: flex;
+    gap: 20%;
+    margin-left: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+.msg{
+    display: flex;
+    justify-content: center;
+}
+.grouper{
+    justify-content: center;
+    gap: 20px;
+}

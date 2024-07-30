@@ -88,7 +88,8 @@ useEffect(() => {
   };
 
 return (
-  <div>
+  <div className="loginscreen">
+  <div >
     <div> <img src={enxclLogo} alt="logo" height='118px' class='loo' /></div>
 
 
@@ -119,6 +120,7 @@ return (
       <Model confirmHandler={confirmfunc} message={statusMessage} />
     )}
 
+  </div>
   </div>
 
 
