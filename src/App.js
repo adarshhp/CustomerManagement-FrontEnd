@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Register from './components/Register';
 function App() {
+  //sample comment
   return (
     <div className="App">
       <Router>
