@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import enxclLogo from '../assets/enxcl.png'
 import "./Login.css";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import Model from './Model';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
+  const notify = () => toast(statusMessage);
+  const nav = useNavigate();
 
   const generateRandomString = (length) => {
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -46,6 +50,7 @@ function Login() {
       setStatusMessage(await data.message);
       if (data.token != null) {
         localStorage.setItem('token', data.token);
+        nav("/register");
       }
     } else {
       alert("Invalid Captcha")
@@ -60,19 +65,9 @@ function Login() {
     setloginInfo({ ...loginInfo, [name]: value });
   }
 
-  function confirmfunc() {
-    setStatusMessage(null);
-    setloginInfo({ email: "", password: "" });
-    regenerateCaptcha();
-    setCaptcha("");
-  }
-
   const handleChange = (e) => {
     setEmail(e.target.value);
     setloginInfo({ ...loginInfo, 'email': e.target.value });
-
-    
-    
   };
 useEffect(() => {
   if (validateEmail(email)||email=='') {
@@ -88,8 +83,8 @@ useEffect(() => {
   };
 
 return (
-  <div className="loginscreen">
-  <div >
+  <div className='loginscreen'>
+  <div>
     <div> <img src={enxclLogo} alt="logo" height='118px' class='loo' /></div>
 
 
@@ -110,15 +105,13 @@ return (
         </div>
         {/* <button className='captcha-refresh'type="button" >   </button> */}
 
-        <button className='mil' type="submit" >Login</button>
-
-
-
+        <button className='mil' type="submit" onClick={notify}>Login</button>
+        <ToastContainer />
       </div>
     </form>
-    {statusMessage != null && (
+    {/* {statusMessage != null && (
       <Model confirmHandler={confirmfunc} message={statusMessage} />
-    )}
+    )}*/}
 
   </div>
   </div>
