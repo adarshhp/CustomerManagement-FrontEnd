@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const notify = () => toast(statusMessage);
   const nav = useNavigate();
-
   const generateRandomString = (length) => {
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result = '';
@@ -53,7 +52,8 @@ function Login() {
         nav("/register");
       }
     } else {
-      alert("Invalid Captcha")
+      toast('Invalid Captcha');
+      
     }
   }
   function changeHandler(e) {
@@ -86,13 +86,8 @@ return (
   <div className='loginscreen'>
   <div>
     <div> <img src={enxclLogo} alt="logo" height='118px' class='loo' /></div>
-
-
     <h3 className='head' >Time Sheet Management System</h3>
-
     <form className='container' onSubmit={submitHandler} >
-
-
       <div>
         <div><input name='email' placeholder='Email'  className='mail' value={loginInfo.email}  onChange={handleChange} autocomplete="off" list="autocompleteOff" required ></input><br />
         {error &&  <p style={{ color: 'white',fontSize:'15px'}}>{error}</p>}
@@ -100,7 +95,8 @@ return (
         <div>
           <div className='tcha'>{captchaText}</div>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <input placeholder='Enter Captcha  text' type='text' id="captcha-form" required onChange={changeHandler} value={captcha} ></input> <span onClick={regenerateCaptcha}> < RefreshIcon /></span>
+            <input placeholder='Enter Captcha  text' type='text' id="captcha-form" required onChange={changeHandler} value={captcha}></input> <span onClick={regenerateCaptcha}> < RefreshIcon /></span>
+          
           </div>
         </div>
         {/* <button className='captcha-refresh'type="button" >   </button> */}
@@ -115,10 +111,6 @@ return (
 
   </div>
   </div>
-
-
 )
 };
-
-
 export default Login;
