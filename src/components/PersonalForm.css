@@ -197,5 +197,8 @@ border-radius: 10px;
     transition: border-color 0.3s ease;
     margin-left: 10px;
 }
+.star{
+    color: red;
+}
 
 

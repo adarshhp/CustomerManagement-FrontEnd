@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./PersonalForm.css";
 import PopeUp from "./PopeUp";
 function PersonalForm() {
-    const [formsData, setformsData] = useState({
+    const [formsData, setformsData] =  useState({
         fname: "",
         lname: "",
         email: "",
@@ -20,33 +20,14 @@ function PersonalForm() {
     function handlechange(e) {
         const { name, value } = e.target;
         setformsData({ ...formsData, [name]: value });
+        console.log(name, value,e.target.value);
+    }
+    useEffect(()=>{
+        validatePan(formsData.panNum);
         validateEmail(formsData.email);
-        console.log(name, value)
-    }
-    async function fetchInitial() {
-        const response = await fetch('http://192.168.2.83:5003/api/getUnfinished');
-        const data = await response.json();
-        let previousUser = data.user;
-        if (previousUser != null) {
-            setformsData({
-                fname: previousUser.fname || "",
-                lname: previousUser.lname || "",
-                email: previousUser.email || "",
-                tempAddr: previousUser.tempAddr || "",
-                permAddr: previousUser.permAddr || "",
-                gender: previousUser.gender || "",
-                bldGrp: previousUser.bldGrp || "",
-                mstatus: previousUser.mstatus || "",
-                panNum: previousUser.panNum || "",
-                phNum: previousUser.phNum || "",
-                aadhaarNum: previousUser.aadhaarNum || "",
-            });
-            validateEmail(previousUser.email);
-
-        }
-        console.log(formsData, previousUser)
-
-    }
+        validateAdhar(formsData.aadhaarNum);
+    },[formsData]);
+   
 
 
     const [showPopeup, setshowPopeup] = useState(false);
@@ -89,29 +70,50 @@ function PersonalForm() {
         } else {
             setErrorMessage("Invalid Email Format");
         }
-    };
+    }
+    const validatePan = (panNum) => {
+        const pa = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
+        if (pa.test(panNum.toUpperCase())) {
+            seterrorPanMsg(null);
+        } else {
+            seterrorPanMsg("Invalid Pan Number")
+        }
+    }
+    const validateAdhar = (number) => {
+        const ad = new RegExp(/^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/);
+        console.log(number,ad.test(number));
+        if(ad.test(number)){
+            setAdharMsg(null);
+        }else{
+            setAdharMsg("Invalid Aadhaar Number");
+        }
+    }
+
     const [errorMessage, setErrorMessage] = useState(null);
+    const [errorPanMsg, seterrorPanMsg] = useState(null);
+    const [errorAdharMsg,setAdharMsg] = useState(null);
 
     return (
         <form className='personaldata' onSubmit={submitted} >
             <div className='personal1'>
                 <div className='group1'>
                     <div class="form-group">
-                        <input className='fname wide' name='fname' type='text' autocomplete="off" list="autocompleteOff" pattern="^[a-zA-Z ]*$" title="alphanumeric charecters only" placeholder="" value={formsData.fname} onChange={handlechange} required />
-                        <label for="fname">First Name</label>
+                        <input className='fname wide' name='fname' type='text' autocomplete="off" list="autocompleteOff" pattern="^[a-zA-Z ]*$" title="Alphabets only" placeholder="" value={formsData.fname} onChange={handlechange} required />
+                        <label htmlFor="fname"><span className="star">*</span>First Name</label>
                     </div>
                     <div className="form-group">
-                        <input className='lname' name='lname' type='text' autocomplete="off" list="autocompleteOff" pattern="^[a-zA-Z ]*$" title="alphanumeric charecters only" placeholder='' value={formsData.lname} onChange={handlechange} required />
-                        <label for="fname">Last Name</label>
+                        <input className='lname' name='lname' type='text' autocomplete="off" list="autocompleteOff" pattern="^[a-zA-Z ]*$" title="Alphabets only" placeholder='' value={formsData.lname} onChange={handlechange} required />
+                        <label for="fname"><span className="star">*</span>Last Name</label>
                     </div>
                 </div>
                 <div className="labelish">
                     <div className="form-group">
+                        <span className="star"></span>
                         <input className="email" name="email" autocomplete="off" list="autocompleteOff" type="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="" onChange={handlechange} value={formsData.email} required />
-                        <label for="email">Email</label>
+                        <label for="email"><span className="star">*</span>Email</label>
                         {errorMessage != null && formsData.email != "" && <span className="error">{errorMessage}</span>}
                     </div>
-                   
+
                 </div>
 
                 <div className="form-group">
@@ -119,8 +121,8 @@ function PersonalForm() {
                     <label for="permAddr">Permanent Address</label>
                 </div>
                 <div className="form-group">
-                <input className='temp' name='tempAddr' type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.tempAddr} onChange={handlechange} />
-                <label for="tempAddr">Temporary Address</label>
+                    <input className='temp' name='tempAddr' type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.tempAddr} onChange={handlechange} />
+                    <label for="tempAddr">Temporary Address</label>
                 </div>
                 <div className='group2'>
                     <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange}>
@@ -134,7 +136,9 @@ function PersonalForm() {
                         <option value='A+'> A+</option>
                         <option value='B+'>AB+</option>
                         <option value='O+'>O+</option>
+                        <option value='O-'> O-</option>
                         <option value='AB-'>AB-</option>
+                        <option value='others'> Others</option>
                     </select>
 
                 </div>
@@ -147,16 +151,18 @@ function PersonalForm() {
                     <option value='unmarried'>UnMarried</option>
                 </select>
                 <div className="form-group">
-                    <input className='pancard' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" value={formsData.panNum.toUpperCase()} onChange={handlechange} />
+                    <input className='pancard' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} />
                     <label for="panNum">Pan card no</label>
+                    {errorPanMsg != null && formsData.panNum != "" && <span className="error">{errorPanMsg}</span>}
                 </div>
                 <div className="form-group">
-                <input className='aadnum' type='number' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} />
-                <label for="aadhaarNum">aadhaar card no:</label>
+                    <input className='aadnum' type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} />
+                    <label for="aadhaarNum">aadhaar card no:</label>
+                    {errorAdharMsg != null && formsData.aadhaarNum != "" && <span className="error">{errorAdharMsg}</span>}
                 </div>
                 <div className="form-group">
-                <input className='phnnum' type='number' name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} />
-                <label for="phNum">phone no:</label>
+                    <input className='phnnum' type='text' pattern=".{5,10}"  name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} />
+                    <label for="phNum">phone no:</label>
                 </div>
                 <div className="cbutton">
                     <button className='button' type='submit'>Save</button>
