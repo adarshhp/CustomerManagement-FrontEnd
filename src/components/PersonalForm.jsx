@@ -47,9 +47,6 @@ function PersonalForm() {
         console.log(formsData, previousUser)
 
     }
-    useEffect(() => {
-        fetchInitial();
-    }, []);
 
 
     const [showPopeup, setshowPopeup] = useState(false);

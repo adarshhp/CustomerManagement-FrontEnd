@@ -5,7 +5,7 @@ function Wrapper({name,formComponent}){
     return(
         <>
          <div>
-            <h1 className="header"> User Profile</h1>
+            <h1 className="header"> ADD EMPLOYEE</h1>
                 <div className='prsnl'>
                   {showFormData == false?(
                       <button onClick={()=>{setShowFormData(!showFormData)}}  className='butt'> <svg width="35" height="35" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
