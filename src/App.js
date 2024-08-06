@@ -8,12 +8,19 @@ import {
   Route,
 } from "react-router-dom";
 import Register from './components/Register';
+import Education from './components/Education';
 function App() {
+  // <Router>
+  //     <Routes>
+  //       <Route path="/" element={<Login />} />   
+  //       <Route path="/register" element={<Register/>}/>
+  //     </Routes>
+  //   </Router>
   return (
     <div className="App">
       <Router>
       <Routes>
-        <Route path="/" element={<Login />} />   
+        <Route path="/" element={<Education/>} />   
         <Route path="/register" element={<Register/>}/>
       </Routes>
     </Router>
