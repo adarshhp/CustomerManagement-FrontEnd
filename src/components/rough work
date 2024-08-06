@@ -1,0 +1,35 @@
+import React from 'react'
+import "./Education.css";
+
+function Education() {
+  return (
+    <form className='details'>
+       <div className='Full'>
+         <div><select className='quali' >
+            <option>Qualification</option>
+            <option>PG Graduate </option>
+            <option> UG Graduate </option>
+            <option> Diploma </option>
+         </select></div>
+        <div className='second'><select className='quai'>
+            <option>Discipline</option>
+            <option>Mechanical</option>
+            <option> Electronics</option>
+            <option> Electrical</option>
+        </select></div>
+        <div className='Third'><input type= 'text' placeholder='University Name'></input></div>
+        <div className='fourth'><select className='qali' placeholder ='Year of passing'>
+            <option>2024</option>
+            <option>2023 </option>
+            <option>2022</option>
+        </select></div>
+        <div className='fifth'><input type= 'text' placeholder= 'CGPA'></input></div>
+        <div className='six'><input type= 'text' placeholder='Percentage %'></input></div>
+        </div>
+
+
+    </form>
+  )
+}
+
+export default Education;
