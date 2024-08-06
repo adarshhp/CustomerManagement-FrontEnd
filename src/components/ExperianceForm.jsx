@@ -31,6 +31,7 @@ function ExperianceForm() {
         const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
         if (!startDateError && !endDateError) {
             setShowStatus(true);
+            console.log(status);
         } else {
             setErrors({ startDateError, endDateError });
         }
@@ -38,7 +39,7 @@ function ExperianceForm() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-            setFormsData({...formsData,[name] : value})
+        setFormsData({ ...formsData, [name]: value })
 
         if (name === 'startDate' || name === 'lastDate') {
             const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
@@ -72,10 +73,9 @@ function ExperianceForm() {
         const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
         if (!startDateError && !endDateError) {
 
-            const dataToSend = {
-                ...formsData, userid: 7
-            };
+            
             const payload = {
+                userid:7,
                 companyName: formsData.companyName,
                 designation: formsData.companyName,
                 startDate: new Date(formsData.startDate).toISOString(),
@@ -198,11 +198,11 @@ function ExperianceForm() {
                             <label htmlFor="messi4">End Date</label>
                             {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
                         </div>
-                        <div onClick={handleSubmit} className='submiticon'>
-                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button type="submit" className='submiticon'>
+                            <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M34 42V26H14V42M14 6V16H30M38 42H10C8.93913 42 7.92172 41.5786 7.17157 40.8284C6.42143 40.0783 6 39.0609 6 38V10C6 8.93913 6.42143 7.92172 7.17157 7.17157C7.92172 6.42143 8.93913 6 10 6H32L42 16V38C42 39.0609 41.5786 40.0783 40.8284 40.8284C40.0783 41.5786 39.0609 42 38 42Z" stroke="#1E1E1E" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
-                        </div>
+                        </button>
                     </div>
 
 
@@ -227,7 +227,7 @@ function ExperianceForm() {
                         </ul>
                     </div>
                 </div>
-                {status && <PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} />}
+                { status && <PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} />}
             </form>
         </div>
     );
