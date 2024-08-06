@@ -52,11 +52,19 @@ function ExperianceForm() {
     const validateDates = (startDate, lastDate) => {
         let startDateError = '';
         let endDateError = '';
+        const today=new Date().setHours(0,0,0,0);
 
-        if (startDate && lastDate && new Date(startDate) > new Date(lastDate)) {
-            startDateError = 'Start date cannot be after end date.';
-            endDateError = 'End date cannot be before start date.';
+        if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
+            startDateError = 'Start date cannot be same or after end date.';
+            endDateError = 'End date cannot be same or before start date.';
         }
+        if(startDate && new Date(startDate) > today){
+            startDateError='cannot enter a future reference'
+        }
+        if(lastDate && new Date(lastDate)> today){
+            endDateError='cannot enter a future reference'
+        }
+
 
         return { startDateError, endDateError };
     };
@@ -73,16 +81,16 @@ function ExperianceForm() {
         const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
         if (!startDateError && !endDateError) {
 
-            
+
             const payload = {
-                userid:7,
+                userid: 7,
                 companyName: formsData.companyName,
                 designation: formsData.companyName,
                 startDate: new Date(formsData.startDate).toISOString(),
                 lastDate: new Date(formsData.lastDate).toISOString()
             };
 
-            fetch('http://192.168.2.81:5003/api/preexp', {
+            fetch('http://192.168.2.83:5003/api/preexp', {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(payload)
@@ -110,7 +118,7 @@ function ExperianceForm() {
     useEffect(() => {
 
         const fetchEvents = () => {
-            axios.get('http://192.168.2.81:5003/api/GetPrevExp/7')
+            axios.get('http://192.168.2.83:5003/api/GetPrevExp/7')
                 .then((resposne) => {
 
                     if (resposne?.status === 200) {
@@ -126,7 +134,6 @@ function ExperianceForm() {
         }
         fetchEvents();
     }, [])
-
 
 
 
@@ -157,7 +164,7 @@ function ExperianceForm() {
                                 name='companyName'
                                 required
                             />
-                            <label htmlFor="messi">Company Name</label>
+                            <label htmlFor="messi"><span className="star">*</span>Company Name</label>
                         </div>
                         <div className='form-group'>
                             <input
@@ -170,7 +177,7 @@ function ExperianceForm() {
                                 onChange={handleChange}
                                 name='designation'
                             />
-                            <label htmlFor="messi2">Designation</label>
+                            <label htmlFor="messi2"><span className="star">*</span>Designation</label>
                         </div>
                         <div className='form-group'>
                             <input
@@ -182,7 +189,7 @@ function ExperianceForm() {
                                 onChange={handleChange}
                                 name='startDate'
                             />
-                            <label htmlFor="messi3">Start Date</label>
+                            <label htmlFor="messi3"><span className="star">*</span>Start Date</label>
                             {errors.startDateError && <p className='error'>{errors.startDateError}</p>}
                         </div>
                         <div className='form-group'>
@@ -195,7 +202,7 @@ function ExperianceForm() {
                                 onChange={handleChange}
                                 name='lastDate'
                             />
-                            <label htmlFor="messi4">End Date</label>
+                            <label htmlFor="messi4"><span className="star">*</span>End Date</label>
                             {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
                         </div>
                         <button type="submit" className='submiticon'>
@@ -219,7 +226,7 @@ function ExperianceForm() {
                                     <p className='form-group' id='edit-icon'>
                                         <svg width="100" height="32" viewBox="0 0 151 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M117.688 51.5713C116.278 51.5713 115.072 51.0386 114.069 49.9733C113.066 48.908 112.564 47.6259 112.562 46.1268V10.738H110V5.29351H122.812V2.57129H138.188V5.29351H151V10.738H148.438V46.1268C148.438 47.6241 147.936 48.9062 146.933 49.9733C145.931 51.0405 144.724 51.5731 143.312 51.5713H117.688ZM143.312 10.738H117.688V46.1268H143.312V10.738ZM122.812 40.6824H127.938V16.1824H122.812V40.6824ZM133.062 40.6824H138.188V16.1824H133.062V40.6824Z" fill="black" />
-                                            <path d="M79.1576 2.57129L73.9647 8.69629L84.3505 20.9463L89.5435 14.8213L79.1576 2.57129ZM68.7717 14.8213L48 39.3213V51.5713H58.3859L79.1576 27.0713L68.7717 14.8213Z" fill="black" />
+                                       
                                         </svg>
                                     </p>
                                 </li>
@@ -227,7 +234,7 @@ function ExperianceForm() {
                         </ul>
                     </div>
                 </div>
-                { status && <PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} />}
+                {status && <PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} />}
             </form>
         </div>
     );
