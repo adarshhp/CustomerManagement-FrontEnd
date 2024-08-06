@@ -1,13 +1,19 @@
+.submitbtn{
+    border: none;
+}
+.sel{
+    width: 126.34px;
+}
 .row{
     display: flex;
-    gap: 5px;
-    margin-top: 15px;
+    gap: 4px;
+    margin-top: 10px;
 }
 .item{
     display: inline;
 }
 .Full {
-    width:90%;
+width:90%;
 display: flex;
 justify-content: center;
 padding-top: 35px;
@@ -22,14 +28,21 @@ gap: 5px;
     gap: 5px;
 }
 .quali{
-    background-color:white;
+    background-color: white;
+    border: 1px solid lightgrey;
     border-radius: 10px;
-    width: 145px;
-    height:35px;}
+    width: 120px;
+    height: 35px;
+    /* padding: 0px; */
+    padding-left: 5px;
+    font-size: small;
+}
 .details{
     padding-left: 30px;
     gap: 5px;
     padding-top: 30px;
+    height: 370px;
+    overflow-y: scroll;
 }  
 .row{
     gap:9px;
@@ -43,4 +56,12 @@ gap: 5px;
     height: 30%;
     
 }  
+.centertext{
+    text-align: center;
+    padding-top: 120px;
+    
+}
 /*  */
+.star{
+    color: red;
+}

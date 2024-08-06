@@ -1,8 +1,8 @@
 import "./PersonalForm.css"
 import { useState } from "react";
 //import MainHeading from "./MainHeading";
-function Wrapper({ name, formComponent ,openflip }) {
-    const [showFormData, setShowFormData] = useState(openflip);
+function Wrapper({ name, formComponent ,isOpen=false }) {
+    const [showFormData, setShowFormData] = useState(isOpen);
     return (
         <>
             <div>

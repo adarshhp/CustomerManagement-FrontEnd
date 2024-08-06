@@ -4,6 +4,8 @@ import './PersonalForm.css';
 import PopeUp from './PopeUp';
 import './YourComponent.css';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ExperianceForm() {
     const [status, setShowStatus] = useState(false);
@@ -85,7 +87,7 @@ function ExperianceForm() {
             const payload = {
                 userid: 7,
                 companyName: formsData.companyName,
-                designation: formsData.companyName,
+                designation: formsData.designation,
                 startDate: new Date(formsData.startDate).toISOString(),
                 lastDate: new Date(formsData.lastDate).toISOString()
             };
@@ -95,8 +97,8 @@ function ExperianceForm() {
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(payload)
             })
-                .then(() => {
-                    setExperiences([...experiences, formsData]);
+                .then((res) => {
+                    setExperiences([...experiences]);
                     setFormsData({
                         companyName: "",
                         designation: "",
@@ -105,6 +107,9 @@ function ExperianceForm() {
                     });
                     setShowStatus(false);
                     setErrors(startDateError, '');
+                    if (res?.status === 200) {
+                        res.json().then((res)=>toast(res.message));
+                    }
 
                 })
                 .catch(error => {
@@ -122,10 +127,14 @@ function ExperianceForm() {
                 .then((resposne) => {
 
                     if (resposne?.status === 200) {
+                        toast(resposne.message);
                         setExperiences(resposne?.data)
                         console.log(resposne?.data);
                     } else {
                         alert('something went wrong')
+                    }
+                    if(resposne?.status === 405){
+                        toast(resposne.message);
                     }
                 })
                 .catch((error) => {
@@ -133,7 +142,7 @@ function ExperianceForm() {
                 })
         }
         fetchEvents();
-    }, [])
+    }, [formsData])
 
 
 
@@ -150,6 +159,7 @@ function ExperianceForm() {
 
     return (
         <div>
+        <ToastContainer />
             <form onSubmit={handleSubmit} className='formfull'>
                 <div className='formitem1'>
                     <div className='inneritems'>
@@ -175,7 +185,7 @@ function ExperianceForm() {
                                 className='textbox1'
                                 value={formsData.designation}
                                 onChange={handleChange}
-                                name='designation'
+                                name="designation"
                             />
                             <label htmlFor="messi2"><span className="star">*</span>Designation</label>
                         </div>
@@ -188,6 +198,7 @@ function ExperianceForm() {
                                 value={formsData.startDate}
                                 onChange={handleChange}
                                 name='startDate'
+                                required
                             />
                             <label htmlFor="messi3"><span className="star">*</span>Start Date</label>
                             {errors.startDateError && <p className='error'>{errors.startDateError}</p>}
@@ -201,6 +212,7 @@ function ExperianceForm() {
                                 value={formsData.lastDate}
                                 onChange={handleChange}
                                 name='lastDate'
+                                required
                             />
                             <label htmlFor="messi4"><span className="star">*</span>End Date</label>
                             {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
