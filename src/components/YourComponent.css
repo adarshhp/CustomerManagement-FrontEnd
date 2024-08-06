@@ -1,0 +1,32 @@
+.form-group {
+    position: relative;
+    width: 100%;
+  }
+  
+  .datepicker {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .datepicker-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.2s ease;
+    font-size: 16px;
+    background: white;
+    padding: 0 5px;
+  }
+  
+  .datepicker:focus + .datepicker-label,
+  .datepicker:not(:placeholder-shown) + .datepicker-label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #333;
+  }
+  
