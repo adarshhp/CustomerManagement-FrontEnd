@@ -174,8 +174,9 @@ function ExperianceForm() {
 
 
 
-    const handleDelete = () => {
-        const url = "";
+    const handleDelete = (id) => {
+
+        const url = `http://192.168.2.81:5003/api/preexp/${id}`;
         try {
             fetch(url, {
                 method: "DELETE",
@@ -188,7 +189,8 @@ function ExperianceForm() {
         catch (error) {
             console.log(error);
         }
-
+      fetchEvents();
+      console.log(fetchEvents)
     }
 
 
@@ -275,7 +277,7 @@ function ExperianceForm() {
                                             <path d="M31.1576 0.571289L25.9647 6.69629L36.3505 18.9463L41.5435 12.8213L31.1576 0.571289ZM20.7717 12.8213L0 37.3213V49.5713H10.3859L31.1576 25.0713L20.7717 12.8213Z" fill="black" />
                                         </svg>
                                     </p>
-                                    <p id='delete-icon' onClick={handleDelete}>
+                                    <p id='delete-icon' onClick={handleDelete(exp.id)}>
                                         <svg width="30" height="37" viewBox="0 0 41 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M7.6875 49.5713C6.27812 49.5713 5.07204 49.0386 4.06925 47.9733C3.06646 46.908 2.56421 45.6259 2.5625 44.1268V8.73796H0V3.29351H12.8125V0.571289H28.1875V3.29351H41V8.73796H38.4375V44.1268C38.4375 45.6241 37.9361 46.9062 36.9333 47.9733C35.9305 49.0405 34.7236 49.5731 33.3125 49.5713H7.6875ZM33.3125 8.73796H7.6875V44.1268H33.3125V8.73796ZM12.8125 38.6824H17.9375V14.1824H12.8125V38.6824ZM23.0625 38.6824H28.1875V14.1824H23.0625V38.6824Z" fill="black" />
                                         </svg>
