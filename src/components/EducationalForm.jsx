@@ -68,7 +68,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     setIsFilled(initialDetails.qualification !== "");
     setSelQual(initialDetails.qualification);
     setIsDisciplineFilled(initialDetails.decipline !== "");
-    setYoPFilled(initialDetails.yearOfPassing !== ""&& typeof(parseInt(initialDetails.yearOfPassing)) == 'number');
+    setYoPFilled(initialDetails.yearOfPassing !== "" && typeof(parseInt(initialDetails.yearOfPassing)) == 'number' && initialDetails.yearOfPassing != null);
     const fetchInitial = async () => {
       const data = await apiRequest("/qualdetail");
       setQualData(data.data);
