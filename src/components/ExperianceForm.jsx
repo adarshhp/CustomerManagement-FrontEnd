@@ -6,6 +6,7 @@ import './YourComponent.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Edit from './Edit';
 
 function ExperianceForm() {
     const [status, setShowStatus] = useState(false);
@@ -54,17 +55,17 @@ function ExperianceForm() {
     const validateDates = (startDate, lastDate) => {
         let startDateError = '';
         let endDateError = '';
-        const today=new Date().setHours(0,0,0,0);
+        const today = new Date().setHours(0, 0, 0, 0);
 
         if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
             startDateError = 'Start date cannot be same or after end date.';
             endDateError = 'End date cannot be same or before start date.';
         }
-        if(startDate && new Date(startDate) > today){
-            startDateError='cannot enter a future reference'
+        if (startDate && new Date(startDate) > today) {
+            startDateError = 'cannot enter a future reference'
         }
-        if(lastDate && new Date(lastDate)> today){
-            endDateError='cannot enter a future reference'
+        if (lastDate && new Date(lastDate) > today) {
+            endDateError = 'cannot enter a future reference'
         }
 
 
@@ -108,7 +109,7 @@ function ExperianceForm() {
                     setShowStatus(false);
                     setErrors(startDateError, '');
                     if (res?.status === 200) {
-                        res.json().then((res)=>toast(res.message));
+                        res.json().then((res) => toast(res.message));
                     }
 
                 })
@@ -117,11 +118,7 @@ function ExperianceForm() {
                 });
         }
     };
-
-
-
     useEffect(() => {
-
         const fetchEvents = () => {
             axios.get(process.env.REACT_APP_SERVER+'5003/api/GetPrevExp/7')
                 .then((resposne) => {
@@ -156,10 +153,48 @@ function ExperianceForm() {
         return `${day}-${month}-${year}`;
     };
 
+    const [editstatus, setEditStatus] = useState(false);
+    const [identity, setEditId] = useState()
+    //handling the edit
+    const handleEdit = (id) => {
+        setEditStatus(true);
+        setEditId(id);
+        console.log(editstatus);
+
+    }
+
+
+    const handleClose = () => {
+        console.log("handleClosemethod triggered")
+        setEditStatus(false);
+        fetchEvents();
+    }
+
+
+
+    const handleDelete = (id) => {
+
+        const url = `http://192.168.2.81:5003/api/preexp/${id}`;
+        try {
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+
+        }
+        catch (error) {
+            console.log(error);
+        }
+      fetchEvents();
+      console.log(fetchEvents)
+    }
+
 
     return (
         <div>
-        <ToastContainer />
+            <ToastContainer />
             <form onSubmit={handleSubmit} className='formfull'>
                 <div className='formitem1'>
                     <div className='inneritems'>
@@ -235,10 +270,14 @@ function ExperianceForm() {
                                     <p className='form-group' id="ff">{exp.designation}</p>
                                     <p className='form-group' id="ff">{formatDate(exp.startDate)}</p>
                                     <p className='form-group' id="ff">{formatDate(exp.lastDate)}</p>
-                                    <p className='form-group' id='edit-icon'>
-                                        <svg width="100" height="32" viewBox="0 0 151 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M117.688 51.5713C116.278 51.5713 115.072 51.0386 114.069 49.9733C113.066 48.908 112.564 47.6259 112.562 46.1268V10.738H110V5.29351H122.812V2.57129H138.188V5.29351H151V10.738H148.438V46.1268C148.438 47.6241 147.936 48.9062 146.933 49.9733C145.931 51.0405 144.724 51.5731 143.312 51.5713H117.688ZM143.312 10.738H117.688V46.1268H143.312V10.738ZM122.812 40.6824H127.938V16.1824H122.812V40.6824ZM133.062 40.6824H138.188V16.1824H133.062V40.6824Z" fill="black" />
-                                       
+                                    <p className='form-group' id='edit-icon' onClick={() => handleEdit(exp.id)}>
+                                        <svg width="30" height="37" viewBox="0 0 42 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M31.1576 0.571289L25.9647 6.69629L36.3505 18.9463L41.5435 12.8213L31.1576 0.571289ZM20.7717 12.8213L0 37.3213V49.5713H10.3859L31.1576 25.0713L20.7717 12.8213Z" fill="black" />
+                                        </svg>
+                                    </p>
+                                    <p id='delete-icon' onClick={handleDelete(exp.id)}>
+                                        <svg width="30" height="37" viewBox="0 0 41 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.6875 49.5713C6.27812 49.5713 5.07204 49.0386 4.06925 47.9733C3.06646 46.908 2.56421 45.6259 2.5625 44.1268V8.73796H0V3.29351H12.8125V0.571289H28.1875V3.29351H41V8.73796H38.4375V44.1268C38.4375 45.6241 37.9361 46.9062 36.9333 47.9733C35.9305 49.0405 34.7236 49.5731 33.3125 49.5713H7.6875ZM33.3125 8.73796H7.6875V44.1268H33.3125V8.73796ZM12.8125 38.6824H17.9375V14.1824H12.8125V38.6824ZM23.0625 38.6824H28.1875V14.1824H23.0625V38.6824Z" fill="black" />
                                         </svg>
                                     </p>
                                 </li>
@@ -247,6 +286,7 @@ function ExperianceForm() {
                     </div>
                 </div>
                 {status && <PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} />}
+                {editstatus && <Edit status={editstatus} close={handleClose} ide={identity} />}
             </form>
         </div>
     );

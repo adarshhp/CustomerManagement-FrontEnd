@@ -96,3 +96,14 @@ padding-left: 50px;
 .error{
     position:absolute;
 }
+#edit-icon{
+height:30px;
+width:30px;
+margin-left:45px;
+}
+#delete-icon{
+    height:30px;
+width:30px;
+margin-left: -90px;
+
+}
