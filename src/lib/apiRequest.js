@@ -1,4 +1,4 @@
-const baseURL = 'http://192.168.2.83:5003/api';
+const baseURL = process.env.REACT_APP_SERVER+'/api';
 
 const apiRequest = async (endpoint, method = 'GET', body = null) => {
     const token = localStorage.getItem('token');

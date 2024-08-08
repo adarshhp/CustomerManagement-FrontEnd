@@ -93,7 +93,7 @@ function ExperianceForm() {
                 lastDate: new Date(formsData.lastDate).toISOString()
             };
 
-            fetch('http://192.168.2.81:5003/api/preexp', {
+            fetch(process.env.REACT_APP_SERVER+'/api/preexp', {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(payload)
@@ -118,28 +118,26 @@ function ExperianceForm() {
                 });
         }
     };
-
-
-    const fetchEvents = () => {
-        axios.get('http://192.168.2.81:5003/api/GetPrevExp/7')
-            .then((resposne) => {
-
-                if (resposne?.status === 200) {
-                    toast(resposne.message);
-                    setExperiences(resposne?.data)
-                    console.log(resposne?.data);
-                } else {
-                    alert('something went wrong')
-                }
-                if (resposne?.status === 405) {
-                    toast(resposne.message);
-                }
-            })
-            .catch((error) => {
-                return error
-            })
-    }
     useEffect(() => {
+        const fetchEvents = () => {
+            axios.get(process.env.REACT_APP_SERVER+'5003/api/GetPrevExp/7')
+                .then((resposne) => {
+
+                    if (resposne?.status === 200) {
+                        toast(resposne.message);
+                        setExperiences(resposne?.data)
+                        console.log(resposne?.data);
+                    } else {
+                        alert('something went wrong')
+                    }
+                    if(resposne?.status === 405){
+                        toast(resposne.message);
+                    }
+                })
+                .catch((error) => {
+                    return error
+                })
+        }
         fetchEvents();
     }, [formsData])
 

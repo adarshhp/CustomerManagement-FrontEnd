@@ -12,8 +12,8 @@ function Register(){
             <div>
                     {<MainHeading />}
                 </div >   
-                <Wrapper name="Personal" formComponent={<PersonalForm/>} isOpen={true}/>
-                <Wrapper name="Educational Details" formComponent={<EducationalForm/>}/>
+                <Wrapper name="Personal" formComponent={<PersonalForm/>} />
+                <Wrapper name="Educational Details" formComponent={<EducationalForm/>} isOpen={true}/>
                 <Wrapper name="Previous Experience" formComponent={<ExperianceForm/> }/>
         </div>
 
