@@ -5,8 +5,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditPopUp from "./EditPopUp";
 import sty from "./formatedStyle.module.css";
+import edb from "./EditPopUp.module.css";
+import Model from "./Model";
 
-function EducationalForm() {
+function EducationalForm({initialDetails,setInitialDetails}) {
   const [qualData, setQualData] = useState([]);
   const [discipline, setdiscipline] = useState([]);
   const [selQual, setSelQual] = useState("");
@@ -17,6 +19,9 @@ function EducationalForm() {
   const [isDisciplineFilled, setIsDisciplineFilled] = useState(false);
   const [isYoPFilled, setYoPFilled] = useState(false);
   const [currentEdit,setCurrentEdit] = useState(null);
+  const [currentDelete,setCurrentDelete] = useState(null);
+  const [showDeleteMessage,setDeleteMessage] = useState(false);
+  const [allYears,setAllYears] = useState([]);
   const [formdata, setformdata] = useState({
     qualification: "",
     decipline: "",
@@ -36,6 +41,11 @@ function EducationalForm() {
     }
   }, [formdata.cgpa, formdata.percentage]);
 
+  useEffect(()=>{
+    setInitialDetails(formdata);
+    console.log("changed");
+  },[formdata]);
+
   function handleChange(e) {
     const { name, value } = e.target;
     if (name == "qualification") {
@@ -53,10 +63,17 @@ function EducationalForm() {
     }
   }
   useEffect(() => {
+    setformdata(initialDetails);
+    setSelQual(initialDetails.qualification);
+    setIsFilled(initialDetails.qualification !== "");
+    setSelQual(initialDetails.qualification);
+    setIsDisciplineFilled(initialDetails.decipline !== "");
+    setYoPFilled(initialDetails.yearOfPassing !== ""&& typeof(parseInt(initialDetails.yearOfPassing)) == 'number');
     const fetchInitial = async () => {
       const data = await apiRequest("/qualdetail");
       setQualData(data.data);
     };
+    setAllYears(fillYears());
     fetchInitial();
     getEduData();
   }, []);
@@ -81,6 +98,18 @@ function EducationalForm() {
     const response = await apiRequest("/EducationalDetails", "POST", formdata);
     if (response) {
       toast(response?.message);
+      setformdata({
+        qualification: "",
+        decipline: "",
+        university: "",
+        yearOfPassing: '',
+        cgpa: '',
+        percentage: null,
+        userid: 7,
+      });
+      setIsFilled(false);
+      setIsDisciplineFilled(false);
+      setYoPFilled(false);
     }
     getEduData();
   };
@@ -89,8 +118,11 @@ function EducationalForm() {
     setPrevList(response?.data || []);
     console.log(response);
   };
-  const year = new Date().getFullYear();
-  const years = Array.from(new Array(40), (val, index) => year - index);
+  const fillYears = () => {
+    const year = new Date().getFullYear();
+    const years = Array.from(new Array(40), (val, index) => year - index);
+    return years;
+  }
   const showRequired = () => {
     if (
       (formdata.cgpa == null && formdata.percentage == null) ||
@@ -105,13 +137,35 @@ function EducationalForm() {
     console.log("edited", id);
     setCurrentEdit(id);
   };
+  const DeleteEntry = (entry) => {
+    setCurrentDelete(entry);
+    setDeleteMessage(true);
+  }
   const closeEditDialog = () => {
     setCurrentEdit(null);
+    getEduData();
+  }
+  const notify = (mesg) => {
+    toast(mesg);
+  }
+  const confirmSubmit = async () => {
+    let responce = await apiRequest('/EducationalDetails','DELETE',currentDelete);
+    if(responce.message){
+      toast(responce.message);
+      setDeleteMessage(false);
+      setCurrentEdit(null);
+      getEduData();
+    }
+  }
+  const closeMessage = () => {
+    setCurrentDelete(null);
+    setDeleteMessage(false);
   }
 
   return (
     <div className="tota">
-      {currentEdit!=null && <EditPopUp initialDetails={currentEdit} close={closeEditDialog}/>}
+      <ToastContainer/>
+      {currentEdit!=null && <EditPopUp initialDetails={currentEdit} close={closeEditDialog} notify={notify}/>}
       <form className="details" onSubmit={handleSubmit}>
         <div className="row">
           <div
@@ -154,7 +208,7 @@ function EducationalForm() {
               value={formdata.decipline}
               required
             >
-              <option value=""></option>
+              <option value=""> </option>
               {discipline.map((val, index) => (
                 <>
                   <option value={val} key={index}>
@@ -197,7 +251,7 @@ function EducationalForm() {
               required
             >
               <option value=""></option>
-              {years.map((year, index) => {
+              {allYears.map((year, index) => {
                 return (
                   <option key={`year${index}`} value={year}>
                     {year}
@@ -305,7 +359,12 @@ function EducationalForm() {
                         />
                       </svg>
                     </button>
-
+                    <button type="button"
+                      className={sty.save}
+                      onClick={() => {
+                        DeleteEntry(val);
+                      }}
+                    >
                     <svg
                       width="22"
                       height="22"
@@ -318,6 +377,7 @@ function EducationalForm() {
                         fill="black"
                       />
                     </svg>
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -327,6 +387,11 @@ function EducationalForm() {
           <p className="centertext">No previous educational details added</p>
         )}
       </form>
+      {showDeleteMessage &&
+      <div className={edb.Message}>
+      <Model message="Are you sure you want to delete Previous experience" confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
+      </div>
+      }
     </div>
   );
 }
