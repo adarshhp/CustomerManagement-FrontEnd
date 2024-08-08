@@ -37,7 +37,7 @@ function Login() {
     e.preventDefault();
    
     if (captchaText == captcha) {
-      const response = await fetch('http://192.168.2.83:5003/api/login', {
+      const response = await fetch(process.env.REACT_APP_SERVER+'/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

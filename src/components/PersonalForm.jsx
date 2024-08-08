@@ -46,7 +46,7 @@ function PersonalForm() {
         setshowPopeup(false);
     }
     async function submitconfirm() {
-        fetch('http://192.168.2.83:5003/api/adduserinprogression/0', {
+        fetch(process.env.REACT_APP_SERVER+'/api/adduserinprogression/0', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
