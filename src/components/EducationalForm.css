@@ -30,17 +30,17 @@ gap: 5px;
 .quali{
     background-color: white;
     border: 1px solid lightgrey;
-    border-radius: 10px;
-    width: 120px;
-    height: 35px;
-    /* padding: 0px; */
+    border-radius: 3px;
+    width: 130px;
+    height: 40px;
+    padding: 0px;
     padding-left: 5px;
     font-size: small;
 }
 .details{
-    padding-left: 30px;
+    padding: 30px;
     gap: 5px;
-    padding-top: 30px;
+    padding-top: 16px;
     height: 370px;
     overflow-y: scroll;
 }  
@@ -65,3 +65,57 @@ gap: 5px;
 .star{
     color: red;
 }
+
+/* General Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures no double borders */
+    margin: 20px 0; /* Adds some spacing around the table */
+  }
+  
+  /* Table Header Styles */
+  thead {
+    background-color: #f7c9316e;
+  }
+  
+  th {
+    padding: 12px 15px; /* Adds padding for better readability */
+    text-align: left; /* Aligns text to the left */
+    color: #333; /* Dark gray text color */
+    font-weight: bold; /* Makes header text bold */
+  }
+  
+  /* Table Body Styles */
+  tbody tr:nth-child(even) {
+    background-color: #ffd42a1a;
+  }
+  
+  tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Alternating row colors */
+  }
+  
+  td {
+    padding: 12px 15px; /* Adds padding for better readability */
+    border-bottom: 1px solid #ddd; /* Light border under rows */
+    color: #333; /* Dark gray text color */
+  }
+  
+  /* Action Icons Styles */
+  td svg {
+    margin: 0 5px; /* Spacing between icons */
+    cursor: pointer; /* Indicates the icons are clickable */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  td svg:hover {
+    color: #007bff; /* Changes color on hover */
+  }
+  
+  /* Empty State Message */
+  .centertext {
+    text-align: center; /* Centers the text */
+    font-size: 18px; /* Increases font size */
+    color: #666; /* Light gray color */
+    margin: 20px 0; /* Adds some spacing */
+  }
+  
