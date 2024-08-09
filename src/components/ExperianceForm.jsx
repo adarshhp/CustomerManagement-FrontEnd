@@ -246,7 +246,7 @@ function ExperianceForm() {
         <div>
             <ToastContainer />
             <form onSubmit={handleSubmit} className='formfull'>
-                <div className='formitem1'>
+                <div className='formydata'>
                     <div className='inneritems'>
                         <div className={sty.form_group}>
                             <input
