@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Edit.css';
 import EditButton from '../icons/EditButton';
+import Model from './Model';
+import { toast } from 'react-toastify';
 
-function Edit({ status, close,ide }) {
+function Edit({ status, close, ide }) {
     const [formsData, setFormsData] = useState({
         companyName: "",
         designation: "",
@@ -10,54 +12,86 @@ function Edit({ status, close,ide }) {
         lastDate: ""
     });
 
+    const [updateState, setUpdateState] = useState(false);
 
-    console.log(status + "hello from edit.jsx");
-    console.log(ide+"yeahhhhh i got the id here fantastic");
-   
+    // Fetch data for editing
+    useEffect(() => {
+        const fetchData = async () => {
+            if (ide) {
+                try {
+                    const response = await fetch(`http://192.168.2.81:5003/api/preexp/${ide}`);
+                    const data = await response.json();
+                    if (response.ok) {
+                        setFormsData({
+                            companyName: data.companyName,
+                            designation: data.designation,
+                            startDate: new Date(data.startDate).toISOString().split('T')[0],
+                            lastDate: new Date(data.lastDate).toISOString().split('T')[0]
+                        });
+                    } else {
+                        console.error('Failed to fetch data for editing');
+                    }
+                } catch (error) {
+                    console.error('Error during fetch:', error);
+                }
+            }
+        };
 
+        fetchData();
+    }, [ide]);
 
     const handleChange = (e) => {
-
         const { name, value } = e.target;
         setFormsData({ ...formsData, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmitting = async () => {
         const payload = {
-            id:ide,
+            id: ide,
             userid: 7,
             companyName: formsData.companyName,
             designation: formsData.designation,
             startDate: new Date(formsData.startDate).toISOString(),
             lastDate: new Date(formsData.lastDate).toISOString()
-            
         };
-
         try {
             const response = await fetch('http://192.168.2.81:5003/api/preexp', {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
                 
-            });
+            }).then(()=>{
+toast('Previous Experiance has been updated successfully');
+close();
+            })
 
-            if (!response.ok) {
-                // close();
-                throw new Error('Network response was not ok   manhhhh');
+            if (response.ok) {
+                // Optionally close the modal and refresh data
+                close();
+            } else {
+                throw new Error('Network response was not ok');
             }
-
-
         } catch (error) {
             console.error('Error during fetch:', error);
         }
+    };
 
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevent default form submission
+        setUpdateState(true);
+    };
+
+    const handleCancelling = () => {
+        setUpdateState(false);
     };
 
     return (
         <div className='editbox'>
             <div className='editpage'>
-                <p>EDIT PERSONAL EXPERIENCE</p>
+                <div className='edit-header'>
+                    <p className='heading'>EDIT PERSONAL EXPERIENCE</p>
+                    <button type="button" onClick={close} className='closebutton'>X</button>
+                </div>
                 <div className='inneritemss'>
                     <div className='form-groups'>
                         <input
@@ -114,13 +148,18 @@ function Edit({ status, close,ide }) {
                     <button type="submit" className='submiticon' onClick={handleSubmit}>
                         <EditButton />
                     </button>
-                    <button type="button" onClick={close}>Close</button>
                 </div>
-                <p style={{ textAlign: 'center', marginTop: '40px', color: 'red' }}>
+                <p style={{ textAlign: 'center', marginTop: '10px', color: 'black' ,fontFamily:'revert',fontSize:'15px' }}>
                     Click on the save button to confirm the update
                 </p>
+                {updateState && (
+                    <Model
+                        message='Are you sure you want to update Previous Experiance?'
+                        cancelHandler={handleCancelling}
+                        confirmHandler={handleSubmitting}
+                    />
+                )}
             </div>
-
         </div>
     );
 }
