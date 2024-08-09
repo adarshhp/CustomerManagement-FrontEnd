@@ -331,7 +331,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               </tr>
             </thead>
             <tbody>
-              {prevList.reverse().map((val, index) => (
+              {prevList.sort((a,b)=>b.yearOfPassing - a.yearOfPassing).map((val, index) => (
                 <tr key={index}>
                   <td>{val.qualification}</td>
                   <td>{val.decipline}</td>
