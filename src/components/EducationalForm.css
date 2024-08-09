@@ -8,6 +8,8 @@
     display: flex;
     gap: 4px;
     margin-top: 10px;
+    position: relative;
+    z-index: 1;
 }
 .item{
     display: inline;
@@ -41,7 +43,7 @@ gap: 5px;
     padding: 30px;
     gap: 5px;
     padding-top: 16px;
-    height: 370px;
+    height: 354px;
     overflow-y: scroll;
 }  
 .row{
