@@ -9,15 +9,17 @@
     gap: 10%;
     padding-bottom: 300px;
 align-items: flex-start;
-height:300px;
+height:max-content;
 padding-top:15px;
+padding:30px;
+
   
 }
 
 .formitem1{
 display: flex;
 flex-direction: column;
-background-color: #F5F5F5;
+background-color: #f7c9316e;
 gap: 20px;
 justify-content: center; 
 padding-left: 50px;
@@ -25,7 +27,7 @@ padding-left: 50px;
 
 .textbox1{
     border-radius: 10px;
-    background-color:  #D9D9FD;
+    background-color:  white;
     width:50px;
     
 }
@@ -33,8 +35,8 @@ padding-left: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-   
-    gap:5%; 
+   margin-top: 15px;
+    gap:0%; 
     padding-right: 55px;
 
 }
@@ -99,7 +101,7 @@ padding-left: 50px;
 #edit-icon{
 height:30px;
 width:30px;
-margin-left:45px;
+margin-left:70px;
 }
 #delete-icon{
     height:30px;
@@ -107,3 +109,33 @@ width:30px;
 margin-left: -90px;
 
 }
+
+.tablehead{
+    background-color: #f7c9316e;
+    width:95%;
+}
+.tabl {
+    width: 95%;
+    border-collapse: collapse; /* Ensures no double borders */
+    margin: 20px 0; /* Adds some spacing around the table */
+  }
+  .submiticon{
+    border: none;
+
+  }
+  .delete-button{
+    border:none;
+    background-color: none;
+  }
+  .font-correction{
+    font-size: smaller;
+    font-weight: bold;
+    font-style: inherit;
+  }
+  .decrese-me-there{
+    height:30px;
+  }
+  .top-heading{
+    font-weight:bolder;
+    font-size:medium;
+  }
