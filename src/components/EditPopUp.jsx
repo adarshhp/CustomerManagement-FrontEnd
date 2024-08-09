@@ -2,7 +2,10 @@ import apiRequest from "../lib/apiRequest";
 import sty from "./formatedStyle.module.css";
 import edb from "./EditPopUp.module.css";
 import { useEffect, useState } from "react";
-export default function EditPopUp({initialDetails,close}) {
+import Model from "./Model"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+export default function EditPopUp({initialDetails,close,notify}) {
   const [isFilled, setIsFilled] = useState(false);
   const [isDisciplineFilled, setIsDisciplineFilled] = useState(false);
   const [isYoPFilled, setYoPFilled] = useState(false);
@@ -10,6 +13,7 @@ export default function EditPopUp({initialDetails,close}) {
   const [discipline, setdiscipline] = useState([]);
   const [required, setRequired] = useState(true);
   const [selQual, setSelQual] = useState("");
+  const [showDialog,setShowDialog] = useState(false);
   const [formdata, setformdata] = useState({
     qualification: "",
     decipline: "",
@@ -20,7 +24,7 @@ export default function EditPopUp({initialDetails,close}) {
     userid: 7,
   });
   useEffect(() => {
-    if (formdata.cgpa == null && formdata.percentage == null) {
+    if (formdata.cgpa === null && formdata.percentage === null) {
       setRequired(true);
       console.log("none is filled");
     } else {
@@ -30,28 +34,34 @@ export default function EditPopUp({initialDetails,close}) {
   }, [formdata.cgpa, formdata.percentage]);
   function handleChange(e) {
     const { name, value } = e.target;
-    if (name == "qualification") {
+    if (name === "qualification") {
       setIsFilled(e.target.value !== "");
       setSelQual(value);
-    } else if (name == "decipline") {
+    } else if (name === "decipline") {
       setIsDisciplineFilled(e.target.value !== "");
-    } else if (name == "yearOfPassing") {
+    } else if (name === "yearOfPassing") {
       setYoPFilled(e.target.value !== "");
     }
-    if ((name == "percentage" || name == "cgpa") && value == "") {
+    if ((name === "percentage" || name === "cgpa") && value === "") {
       setformdata({ ...formdata, [name]: null });
     } else {
       setformdata({ ...formdata, [name]: value });
     }
   }
   useEffect(() => {
-    setformdata({...formdata,initialDetails});
+    setIsFilled(initialDetails.qualification !== "");
+    setSelQual(initialDetails.qualification);
+    setIsDisciplineFilled(initialDetails.decipline !== "");
+    setYoPFilled(initialDetails.yearOfPassing !== "");
+    setformdata(initialDetails);
+    console.log(initialDetails);
+    
     const fetchInitial = async () => {
       const data = await apiRequest("/qualdetail");
       setQualData(data.data);
     };
     fetchInitial();
-  }, []);
+  }, [initialDetails]);
   useEffect(() => {
     const fetchDisp = async () => {
       const data = await apiRequest("/listdeciplines", "POST", {
@@ -65,13 +75,32 @@ export default function EditPopUp({initialDetails,close}) {
   }, [selQual]);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShowDialog(true);
+   
+  }
+  const confirmSubmit = async () => {
+    let response = await apiRequest('/EducationalDetails','PUT',formdata);
+    if(response.qualificationDetails){
+      notify(response.message);
+      setShowDialog(false);
+      close();
+    }
+    console.log(response);
   }
   const year = new Date().getFullYear();
   const years = Array.from(new Array(40), (val, index) => year - index);
+  const closeMessage = () => {
+    setShowDialog(false);
+  }
   return (
     <>
+    {/* <ToastContainer/> */}
     <form onSubmit={(e)=>handleSubmit(e)}>
       <div className={edb.largebox}>
+        <div className={edb.top_bar}>
+          <h5>Edit Previous Experience</h5>
+          <button className={edb.close} type="button" onClick={()=>{close()}}><span>X</span></button>
+        </div>
         <div className={edb.smallbox}>
           <div className="row">
             <div
@@ -227,6 +256,11 @@ export default function EditPopUp({initialDetails,close}) {
           </div>
         </div>
       </div>
+      {showDialog &&
+      <div className={edb.Message}>
+      <Model message="Are you sure, you want to update previous experience." confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
+      </div>
+      }
       </form>
     </>
   );

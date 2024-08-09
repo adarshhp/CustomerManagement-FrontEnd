@@ -17,4 +17,4 @@ function Model({message,confirmHandler,cancelHandler}) {
   )
 }
 
-export default Model
+export default Model;

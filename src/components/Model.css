@@ -14,13 +14,15 @@
 }
 .smallbox{
     min-height: 100px;
-    width: 400px;
+    width: 508px;
     background-color: white;
-    border: 1px solid black;
+    border: none;
+    border-radius: 11px;
     padding: 10px;
 }
 .control{
     padding-right: 10px;
+    margin-top: 25px;
 }
 .message{
     font-weight: 600;
@@ -30,14 +32,17 @@
 .btn-diag{
     height: 40px;
     min-width: 80px;
-    border-radius:10px;
+    border-radius: 10px;
     margin: 7px;
     float: right;
-    border: 1px solid #2C2C2C;
+    border: none;
 }
 .confirm {
     background-color:#5F5DC1;
     color: white;
+}
+.confirm:hover{
+    background-color:#5351a9;
 }
 
 .wrapperdis{
