@@ -26,6 +26,21 @@ function Register(){
     useEffect(()=>{
         console.log(formdata);
     },[formdata])
+
+
+//experiance component
+const [formsData, setdataForm] = useState({
+    companyName: "",
+        designation: "",
+        startDate: "",
+        lastDate: "",
+    userid: 7,
+  });
+  const setInitial = (data) => {
+    console.log(data);
+    setdataForm(data);
+}
+ 
     return(
         <div className="wrapperdis">
             <div>
@@ -33,7 +48,7 @@ function Register(){
                 </div >   
                 <Wrapper name="Personal" formComponent={<PersonalForm/>} isOpen={true} />
                 <Wrapper name="Educational Details" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>} />
-                <Wrapper name="Previous Experience" formComponent={<ExperianceForm/> }/>
+                <Wrapper name="Previous Experience" formComponent={<ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial}/> }/>
 
         </div>
 

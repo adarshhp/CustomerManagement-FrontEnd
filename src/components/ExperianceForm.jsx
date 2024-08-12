@@ -14,7 +14,7 @@ import edb from "./EditPopUp.module.css";
 
 
 
-function ExperianceForm() {
+function ExperianceForm({initialDetailss,setInitialDetails}) {
     const [status, setShowStatus] = useState(false);
     const [formsData, setFormsData] = useState({
         companyName: "",
@@ -22,6 +22,17 @@ function ExperianceForm() {
         startDate: "",
         lastDate: ""
     });
+
+useEffect(()=>{
+    setFormsData(initialDetailss);
+},[])
+
+//added this shit
+//const[initialDetailss,setInitialDetails]=useState([])
+useEffect(()=>{
+    setInitialDetails(formsData);
+    console.log("changed");
+  },[formsData]);
 
 
 
@@ -50,6 +61,7 @@ function ExperianceForm() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormsData({ ...formsData, [name]: value })
+        setInitialDetails(formsData);
 
         if (name === 'startDate' || name === 'lastDate') {
             const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
@@ -327,7 +339,7 @@ function ExperianceForm() {
                         <table className='tabl'>
                             <thead className='tablehead'>
                                 <tr className='top-heading'>
-                                    <th>S.No</th>
+                                    <th>EXP.No</th>
                                     <th>CompanyName</th>
                                     <th>Designation</th>
                                     <th>StartDate</th>
