@@ -85,6 +85,7 @@ table {
     text-align: left; /* Aligns text to the left */
     color: #333; /* Dark gray text color */
     font-weight: bold; /* Makes header text bold */
+    text-align: center;
   }
   
   /* Table Body Styles */
@@ -100,6 +101,7 @@ table {
     padding: 12px 15px; /* Adds padding for better readability */
     border-bottom: 1px solid #ddd; /* Light border under rows */
     color: #333; /* Dark gray text color */
+    text-align: center;
   }
   
   /* Action Icons Styles */

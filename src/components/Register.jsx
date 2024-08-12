@@ -25,15 +25,24 @@ function Register(){
     }
     useEffect(()=>{
         console.log(formdata);
-    },[formdata])
+    },[formdata]);
+    const [currentOpen, setCurrentOpen] = useState("Personal");
+
+    const handleToggle = (section) => {
+        // Toggle the visibility of the section
+        setCurrentOpen((prev) => (prev === section ? null : section));
+    };
     return(
         <div className="wrapperdis">
             <div>
                     {<MainHeading />}
                 </div >   
-                <Wrapper name="Personal" formComponent={<PersonalForm/>} isOpen={true} />
-                <Wrapper name="Educational Details" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>} />
-                <Wrapper name="Previous Experience" formComponent={<ExperianceForm/> }/>
+                <Wrapper name="Personal" formComponent={<PersonalForm/>} isOpen={currentOpen === "Personal"}
+                onToggle={() => handleToggle("Personal")} />
+                <Wrapper name="Educational Details" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>}  isOpen={currentOpen === "Educational Details"}
+                onToggle={() => handleToggle("Educational Details")} />
+                <Wrapper name="Previous Experience" formComponent={<ExperianceForm/> }  isOpen={currentOpen === "Previous Experience"}
+                onToggle={() => handleToggle("Previous Experience")}/>
 
         </div>
 

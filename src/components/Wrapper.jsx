@@ -1,15 +1,23 @@
 import "./PersonalForm.css";
 import { useState } from "react";
 //import MainHeading from "./MainHeading";
-function Wrapper({ name, formComponent, isOpen = false }) {
+function Wrapper({ name, formComponent, isOpen = false,onToggle }) {
   const [showFormData, setShowFormData] = useState(isOpen);
+  const toggleFormVisibility = () => {
+    setShowFormData((prev) => !prev);
+    if (onToggle) {
+      onToggle(); // Notify parent to update the current open section
+    }
+  };
+  console.log(showFormData,isOpen);
   return (
     <>
       <div>
-        <div className="prsnl" onClick={() => {
-                setShowFormData(!showFormData);
+        <div className="prsnl" onClick={(e) => {
+                  e.stopPropagation(); // Prevent click from propagating to the parent div
+                  toggleFormVisibility();
               }}>
-          {showFormData == false ? (
+          {showFormData? (
             <button
               className="butt"
             >
@@ -54,7 +62,7 @@ function Wrapper({ name, formComponent, isOpen = false }) {
           <span className="namer_label"> {name} </span>
         </div>
       </div>
-      {showFormData && <div className="wrapper_form">{formComponent}</div>}
+      {isOpen && <div className="wrapper_form">{formComponent}</div>}
     </>
   );
 }

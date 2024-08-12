@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Model from "./Model"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function EditPopUp({initialDetails,close,notify}) {
+export default function EditPopUp({initialDetails,close,notify,name}) {
   const [isFilled, setIsFilled] = useState(false);
   const [isDisciplineFilled, setIsDisciplineFilled] = useState(false);
   const [isYoPFilled, setYoPFilled] = useState(false);
@@ -47,6 +47,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
     } else {
       setformdata({ ...formdata, [name]: value });
     }
+    
   }
   useEffect(() => {
     setIsFilled(initialDetails.qualification !== "");
@@ -54,6 +55,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
     setIsDisciplineFilled(initialDetails.decipline !== "");
     setYoPFilled(initialDetails.yearOfPassing !== "");
     setformdata(initialDetails);
+    
     console.log(initialDetails);
     
     const fetchInitial = async () => {
@@ -98,7 +100,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
     <form onSubmit={(e)=>handleSubmit(e)}>
       <div className={edb.largebox}>
         <div className={edb.top_bar}>
-          <h5>Edit Previous Experience</h5>
+          <h5>{name}</h5>
           <button className={edb.close} type="button" onClick={()=>{close()}}><span>X</span></button>
         </div>
         <div className={edb.smallbox}>
@@ -115,7 +117,6 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 name="qualification"
                 required
               >
-                <option value=""></option>
                 {qualData.map((val, index) => (
                   <>
                     <option value={val} key={index}>
@@ -145,7 +146,6 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 value={formdata.decipline}
                 required
               >
-                <option value=""></option>
                 {discipline.map((val, index) => (
                   <>
                     <option value={val} key={index}>
@@ -258,7 +258,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
       </div>
       {showDialog &&
       <div className={edb.Message}>
-      <Model message="Are you sure, you want to update previous experience." confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
+      <Model message="Are you sure, you want to update Educational Details." confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
       </div>
       }
       </form>
