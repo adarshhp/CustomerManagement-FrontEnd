@@ -11,6 +11,7 @@ import './EducationalForm.css';
 import sty from "./formatedStyle.module.css";
 import Model from './Model';
 import edb from "./EditPopUp.module.css";
+import apiRequest from '../lib/apiRequest';
 
 
 
@@ -113,6 +114,7 @@ useEffect(()=>{
             };
 
             fetch('http://192.168.2.81:5003/api/preexp', {
+//apiRequest('/api/preexp',{
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(payload)
@@ -139,6 +141,7 @@ useEffect(()=>{
     };
     const fetchEvents = () => {
         axios.get('http://192.168.2.81:5003/api/GetPrevExp/7')
+     //  apiRequest('/api/GetPrevExp/7')
             .then((resposne) => {
 
                 if (resposne?.status === 200) {
@@ -227,7 +230,8 @@ useEffect(()=>{
         const url = `http://192.168.2.81:5003/api/preexp`;
         try {
             console.log(itemToDelete)
-            await fetch(url, {
+          await fetch(url, {
+        // apiRequest('/api/preexp',{
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json"

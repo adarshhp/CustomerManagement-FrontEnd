@@ -78,8 +78,8 @@ height:70%;
 .editpage{
    display: flex;
 flex-direction: column;
-background-color: #F6E5A6;
-border:5px solid #9b700d;
+background-color: #F5F5F5;
+border:1px solid black;
 gap: 20px;
 padding-left: 50px;
 padding-top: 20px;

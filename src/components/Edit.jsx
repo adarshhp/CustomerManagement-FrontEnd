@@ -4,6 +4,7 @@ import EditButton from '../icons/EditButton';
 import Model from './Model';
 import { toast } from 'react-toastify';
 import edb from "./EditPopUp.module.css";
+import apiRequest from '../lib/apiRequest';
 
 
 function Edit({ status, close, ide }) {
@@ -57,6 +58,7 @@ function Edit({ status, close, ide }) {
         try {
             console.log(payload);
             const response = await fetch('http://192.168.2.81:5003/api/preexp', {
+          // apiRequest('/api/preexp',{
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -66,12 +68,12 @@ function Edit({ status, close, ide }) {
                 close();
             })
 
-            if (response.ok) {
-                // Optionally close the modal and refresh data
-                close();
-            } else {
-                throw new Error('Network response was not ok');
-            }
+            // if (response.ok) {
+            //     // Optionally close the modal and refresh data
+            //     close();
+            // } else {
+            //     throw new Error('Network response was not ok');
+            // }
         } catch (error) {
             console.error('Error during fetch:', error);
         }
