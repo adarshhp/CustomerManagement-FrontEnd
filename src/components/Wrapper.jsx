@@ -17,7 +17,7 @@ function Wrapper({ name, formComponent, isOpen = false,onToggle }) {
                   e.stopPropagation(); // Prevent click from propagating to the parent div
                   toggleFormVisibility();
               }}>
-          {showFormData? (
+          {!isOpen? (
             <button
               className="butt"
             >

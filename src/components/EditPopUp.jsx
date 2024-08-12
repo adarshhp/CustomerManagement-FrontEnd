@@ -90,7 +90,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
     console.log(response);
   }
   const year = new Date().getFullYear();
-  const years = Array.from(new Array(40), (val, index) => year - index);
+  const years = Array.from(new Array(125), (val, index) => year - index);
   const closeMessage = () => {
     setShowDialog(false);
   }
@@ -115,6 +115,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 onChange={handleChange}
                 value={formdata.qualification}
                 name="qualification"
+                title="Please select a qualification from the dropdown list"
                 required
               >
                 {qualData.map((val, index) => (
@@ -129,7 +130,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 htmlFor="qualification"
                 className={`${isFilled ? `${sty.sel_label}` : ""}`}
               >
-                <span className="star">*</span>Qualifiction
+                <span className="star">*</span>Qualification
               </label>
             </div>
             <div
@@ -142,6 +143,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
               <select
                 className="item quali sel"
                 name="decipline"
+                title="Please select a Decipline from the dropdown list"
                 onChange={handleChange}
                 value={formdata.decipline}
                 required
@@ -167,6 +169,8 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 placeholder=""
                 className="quali"
                 name="university"
+                title="Please enter a University( Alphabets only )"
+                pattern="[A-Za-z ]+"
                 onChange={handleChange}
                 value={formdata.university}
                 required
@@ -185,6 +189,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 name="yearOfPassing"
                 onChange={handleChange}
                 value={formdata.yearOfPassing}
+                title="Please select a year from the dropdown list"
                 required
               >
                 <option value=""></option>
@@ -214,7 +219,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 name="cgpa"
                 onChange={handleChange}
                 value={formdata.cgpa}
-                title="Please select either one of CGPA or Percentage"
+                title="Please select either one of CGPA or Percentage in decimal values"
                 required={required}
               ></input>
               <label htmlFor="cgpa">CGPA</label>
@@ -230,11 +235,11 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 onChange={handleChange}
                 value={formdata.percentage}
                 required={required}
-                title="Please select either one of CGPA or Percentage"
-              />
+                title="Please select either one of Percentage or CGPA in decimal values"
+                />
               <label htmlFor="percentage">Percentage %</label>
             </div>
-            <button type="submit" className="submitbtn">
+            <button type="submit" className="submitbtn" title="Save">
               <svg
                 width="30"
                 height="30"

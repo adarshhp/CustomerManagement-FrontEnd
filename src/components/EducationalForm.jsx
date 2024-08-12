@@ -24,7 +24,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   const [allYears,setAllYears] = useState([]);
   const [formdata, setformdata] = useState({
     qualification: "",
-    decipline: "",
+    discipline: "",
     university: "",
     yearOfPassing: null,
     cgpa: null,
@@ -55,7 +55,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
         setSelQual("");
         setIsDisciplineFilled(false)
       }
-    } else if (name == "decipline") {
+    } else if (name == "discipline") {
       setIsDisciplineFilled(e.target.value !== "");
     } else if (name == "yearOfPassing") {
       setYoPFilled(e.target.value !== "");
@@ -72,10 +72,10 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     setIsFilled(initialDetails.qualification !== "");
     if(initialDetails.qualification === ""){
       setSelQual([]);
-      setformdata({...formdata,decipline:null})
+      setformdata({...formdata,discipline:null})
     }else{
     setSelQual(initialDetails.qualification);
-    setIsDisciplineFilled(initialDetails.decipline !== "");
+    setIsDisciplineFilled(initialDetails.discipline !== "");
     }
     setYoPFilled(initialDetails.yearOfPassing !== "" && typeof(parseInt(initialDetails.yearOfPassing)) == 'number' && initialDetails.yearOfPassing != null);
     const fetchInitial = async () => {
@@ -98,8 +98,8 @@ function EducationalForm({initialDetails,setInitialDetails}) {
       fetchDisp();
     }else{
       // setformdata({...formdata,decipline:""});
-      if(selQual === "" && isDisciplineFilled == false && discipline.length > 0){
-        setformdata({...formdata,decipline:""});
+      if(selQual === "" && isDisciplineFilled == false && discipline.length > 0 ){
+        setformdata({...formdata,discipline:""});
       }
     }
 
@@ -115,11 +115,11 @@ function EducationalForm({initialDetails,setInitialDetails}) {
       toast(response?.message);
       setformdata({
         qualification: "",
-        decipline: "",
+        discipline: "",
         university: "",
         yearOfPassing: '',
         cgpa: '',
-        percentage: null,
+        percentage: '',
         userid: 7,
       });
 
@@ -181,7 +181,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   return (
     <div className="tota">
       <ToastContainer/>
-      {currentEdit!=null && <EditPopUp initialDetails={currentEdit} close={closeEditDialog} notify={notify} name={"Edit Educational Details"}/>}
+      {currentEdit!=null &&<div className={edb.edit}><EditPopUp initialDetails={currentEdit} close={closeEditDialog} notify={notify} name={"Edit Educational Details"}/></div>}
       <form className="details" onSubmit={handleSubmit}>
         <div className="row">
           <div
@@ -210,7 +210,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               htmlFor="qualification"
               className={`${isFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Qualifiction
+              <span className="star">*</span>Qualification
             </label>
           </div>
           <div
@@ -220,10 +220,10 @@ function EducationalForm({initialDetails,setInitialDetails}) {
           >
             <select
               className="item quali sel"
-              name="decipline"
+              name="discipline"
               onChange={handleChange}
-              value={formdata.decipline}
-              title="Please select a Decipline from the dropdown list"
+              value={formdata.discipline}
+              title="Please select a Discipline from the dropdown list"
               required
             >
               <option value=""> </option>
@@ -236,7 +236,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               ))}
             </select>
             <label
-              htmlFor="decipline"
+              htmlFor="discipline"
               className={`${isDisciplineFilled ? `${sty.sel_label}` : ""}`}
             >
               <span className="star">*</span>Discipline
@@ -355,7 +355,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               {prevList.sort((a,b)=>a.Id - b.Id).map((val, index) => (
                 <tr key={index}>
                   <td>{val.qualification}</td>
-                  <td>{val.decipline}</td>
+                  <td>{val.discipline}</td>
                   <td>{val.university}</td>
                   <td>{val.yearOfPassing}</td>
                   <td>{val.cgpa}</td>
