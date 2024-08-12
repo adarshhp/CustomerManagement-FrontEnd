@@ -10,6 +10,8 @@ import Edit from './Edit';
 import './EducationalForm.css';
 import sty from "./formatedStyle.module.css";
 import Model from './Model';
+import edb from "./EditPopUp.module.css";
+
 
 
 function ExperianceForm() {
@@ -258,6 +260,7 @@ function ExperianceForm() {
                                 value={formsData.companyName}
                                 onChange={handleChange}
                                 name='companyName'
+                                title='enter companyName'
                                 required
                             // autoFocus="off"
                             />
@@ -272,6 +275,8 @@ function ExperianceForm() {
                                 className='textbox1'
                                 value={formsData.designation}
                                 onChange={handleChange}
+                                title='enter Designation'
+
                                 name="designation"
                             />
                             <label htmlFor="messi2"><span className="star">*</span>Designation</label>
@@ -284,6 +289,8 @@ function ExperianceForm() {
                                 className='textbox1'
                                 value={formsData.startDate}
                                 onChange={handleChange}
+                                title='fill StartingDate'
+
                                 name='startDate'
                                 required
                             />
@@ -298,6 +305,8 @@ function ExperianceForm() {
                                 className='textbox1'
                                 value={formsData.lastDate}
                                 onChange={handleChange}
+                                title='fill EndingDate'
+
                                 name='lastDate'
                                 required
                             />
@@ -318,6 +327,7 @@ function ExperianceForm() {
                         <table className='tabl'>
                             <thead className='tablehead'>
                                 <tr className='top-heading'>
+                                    <th>S.No</th>
                                     <th>CompanyName</th>
                                     <th>Designation</th>
                                     <th>StartDate</th>
@@ -329,6 +339,7 @@ function ExperianceForm() {
                             <tbody>
                                 {[...experiences].sort((a, b) => b.id - a.id).map((val, index) => (//here i want to sort by val.id
                                     <tr className='decrease-me-there' key={index}>
+                                        <td className='font-correction'>{index}</td>
                                         <td className='font-correction'>{val.companyName}</td>
                                         <td className='font-correction'>{val.designation}</td>
                                         <td className='font-correction'>{formatDate(val.startDate)}</td>
@@ -359,9 +370,10 @@ function ExperianceForm() {
 
             </form>
 
-            {status && <PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} />}
+            {status && <div className={edb.Message}><PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} /></div>}
             {editstatus && <Edit status={editstatus} close={handleClose} ide={identity} />}
-            {deleteStatus && <Model message='Are you sure you want to Delete Previous Experiance!!' confirmHandler={confirmDelete} cancelHandler={cancelDelete} />}
+
+            {deleteStatus &&<div className={edb.Message}> <Model message='Are you sure you want to Delete Previous Experiance!!' confirmHandler={confirmDelete} cancelHandler={cancelDelete} /></div>}
         </div>
     );
 }

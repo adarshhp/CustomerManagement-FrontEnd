@@ -3,6 +3,8 @@ import './Edit.css';
 import EditButton from '../icons/EditButton';
 import Model from './Model';
 import { toast } from 'react-toastify';
+import edb from "./EditPopUp.module.css";
+
 
 function Edit({ status, close, ide }) {
     const [formsData, setFormsData] = useState(ide);
@@ -85,11 +87,11 @@ function Edit({ status, close, ide }) {
     };
 
     return (
-        <div className='editbox'>
+        <div className={edb.largebox}>
             <div className='editpage'>
-                <div className='edit-header'>
+                <div className={edb.top_bar}>
                     <p className='heading'>EDIT PREVIOUS EXPERIENCE</p>
-                    <button type="button" onClick={close} className='closebutton'title='CLOSE'>X</button>
+                    <button type="button" onClick={close} className={edb.close}title='CLOSE'>X</button>
                 </div>
                 <div className='inneritemss'>
                     <div className='form-groups'>
@@ -152,11 +154,14 @@ function Edit({ status, close, ide }) {
                     Click on the save button to confirm the update
                 </p>
                 {updateState && (
+                    <div className={edb.Message}>
                     <Model
+                  
                         message='Are you sure you want to update Previous Experiance?'
                         cancelHandler={handleCancelling}
                         confirmHandler={handleSubmitting}
                     />
+                    </div>
                 )}
             </div>
         </div>
