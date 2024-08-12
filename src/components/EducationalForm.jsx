@@ -24,7 +24,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   const [allYears,setAllYears] = useState([]);
   const [formdata, setformdata] = useState({
     qualification: "",
-    decipline: "",
+    discipline: "",
     university: "",
     yearOfPassing: null,
     cgpa: null,
@@ -51,7 +51,11 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     if (name == "qualification") {
       setIsFilled(e.target.value !== "");
       setSelQual(value);
-    } else if (name == "decipline") {
+      if(e.target.value === ""){
+        setSelQual("");
+        setIsDisciplineFilled(false)
+      }
+    } else if (name == "discipline") {
       setIsDisciplineFilled(e.target.value !== "");
     } else if (name == "yearOfPassing") {
       setYoPFilled(e.target.value !== "");
@@ -64,10 +68,15 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   }
   useEffect(() => {
     setformdata(initialDetails);
-    setSelQual(initialDetails.qualification);
+    // setSelQual(initialDetails.qualification);
     setIsFilled(initialDetails.qualification !== "");
+    if(initialDetails.qualification === ""){
+      setSelQual([]);
+      setformdata({...formdata,discipline:null})
+    }else{
     setSelQual(initialDetails.qualification);
-    setIsDisciplineFilled(initialDetails.decipline !== "");
+    setIsDisciplineFilled(initialDetails.discipline !== "");
+    }
     setYoPFilled(initialDetails.yearOfPassing !== "" && typeof(parseInt(initialDetails.yearOfPassing)) == 'number' && initialDetails.yearOfPassing != null);
     const fetchInitial = async () => {
       const data = await apiRequest("/qualdetail");
@@ -87,7 +96,13 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     };
     if (selQual != "") {
       fetchDisp();
+    }else{
+      // setformdata({...formdata,decipline:""});
+      if(selQual === "" && isDisciplineFilled == false && discipline.length > 0 ){
+        setformdata({...formdata,discipline:""});
+      }
     }
+
   }, [selQual]);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -100,13 +115,14 @@ function EducationalForm({initialDetails,setInitialDetails}) {
       toast(response?.message);
       setformdata({
         qualification: "",
-        decipline: "",
+        discipline: "",
         university: "",
         yearOfPassing: '',
         cgpa: '',
-        percentage: null,
+        percentage: '',
         userid: 7,
       });
+
       setIsFilled(false);
       setIsDisciplineFilled(false);
       setYoPFilled(false);
@@ -120,7 +136,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   };
   const fillYears = () => {
     const year = new Date().getFullYear();
-    const years = Array.from(new Array(40), (val, index) => year - index);
+    const years = Array.from(new Array(125), (val, index) => year - index);
     return years;
   }
   const showRequired = () => {
@@ -165,7 +181,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   return (
     <div className="tota">
       <ToastContainer/>
-      {currentEdit!=null && <EditPopUp initialDetails={currentEdit} close={closeEditDialog} notify={notify}/>}
+      {currentEdit!=null &&<div className={edb.edit}><EditPopUp initialDetails={currentEdit} close={closeEditDialog} notify={notify} name={"Edit Educational Details"}/></div>}
       <form className="details" onSubmit={handleSubmit}>
         <div className="row">
           <div
@@ -178,6 +194,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               onChange={handleChange}
               value={formdata.qualification}
               name="qualification"
+              title="Please select a qualification from the dropdown list"
               required
             >
               <option value=""></option>
@@ -193,7 +210,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               htmlFor="qualification"
               className={`${isFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Qualifiction
+              <span className="star">*</span>Qualification
             </label>
           </div>
           <div
@@ -203,9 +220,10 @@ function EducationalForm({initialDetails,setInitialDetails}) {
           >
             <select
               className="item quali sel"
-              name="decipline"
+              name="discipline"
               onChange={handleChange}
-              value={formdata.decipline}
+              value={formdata.discipline}
+              title="Please select a Discipline from the dropdown list"
               required
             >
               <option value=""> </option>
@@ -218,7 +236,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               ))}
             </select>
             <label
-              htmlFor="decipline"
+              htmlFor="discipline"
               className={`${isDisciplineFilled ? `${sty.sel_label}` : ""}`}
             >
               <span className="star">*</span>Discipline
@@ -232,6 +250,8 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               name="university"
               onChange={handleChange}
               value={formdata.university}
+              title="Please enter a University( Alphabets only )"
+              pattern="[A-Za-z ]+"
               required
             ></input>
             <label htmlFor="university">
@@ -248,6 +268,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               name="yearOfPassing"
               onChange={handleChange}
               value={formdata.yearOfPassing}
+              title="Please select a year from the dropdown list"
               required
             >
               <option value=""></option>
@@ -277,7 +298,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               name="cgpa"
               onChange={handleChange}
               value={formdata.cgpa}
-              title="Please select either one of CGPA or Percentage"
+              title="Please select either one of CGPA or Percentage in decimal values"
               required={required}
             ></input>
             <label htmlFor="cgpa">CGPA</label>
@@ -293,11 +314,11 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               onChange={handleChange}
               value={formdata.percentage}
               required={required}
-              title="Please select either one of CGPA or Percentage"
+              title="Please select either one of Percentage or CGPA in decimal values"
             />
             <label htmlFor="percentage">Percentage %</label>
           </div>
-          <button type="submit" className="submitbtn">
+          <button type="submit" className="submitbtn" title="Save">
             <svg
               width="30"
               height="30"
@@ -331,16 +352,16 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               </tr>
             </thead>
             <tbody>
-              {prevList.sort((a,b)=>b.yearOfPassing - a.yearOfPassing).map((val, index) => (
+              {prevList.sort((a,b)=>a.Id - b.Id).map((val, index) => (
                 <tr key={index}>
                   <td>{val.qualification}</td>
-                  <td>{val.decipline}</td>
+                  <td>{val.discipline}</td>
                   <td>{val.university}</td>
                   <td>{val.yearOfPassing}</td>
                   <td>{val.cgpa}</td>
                   <td>{val.percentage}</td>
                   <td>
-                    <button type="button"
+                    <button type="button" title="Edit"
                       className={sty.save}
                       onClick={() => {
                         editEntry(val);
@@ -359,7 +380,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
                         />
                       </svg>
                     </button>
-                    <button type="button"
+                    <button type="button" title="Delete"
                       className={sty.save}
                       onClick={() => {
                         DeleteEntry(val);
@@ -389,7 +410,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
       </form>
       {showDeleteMessage &&
       <div className={edb.Message}>
-      <Model message="Are you sure you want to delete Previous experience" confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
+      <Model message="Are you sure you want to delete Educational Details" confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
       </div>
       }
     </div>

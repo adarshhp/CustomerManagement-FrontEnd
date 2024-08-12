@@ -20,6 +20,8 @@
     color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
+   pointer-events: none;
+
   }
   .form_group input:focus {
     border-color: #007bff;
@@ -77,6 +79,8 @@
     border-radius: 4px;
     left: 9px;
     position: absolute;
+   pointer-events: none;
+
   }
 
 
