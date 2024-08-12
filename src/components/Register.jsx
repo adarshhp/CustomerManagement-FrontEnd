@@ -32,15 +32,14 @@ function Register(){
         // Toggle the visibility of the section
         setCurrentOpen((prev) => (prev === section ? null : section));
     };
-    },[formdata])
 
 
 //experiance component
 const [formsData, setdataForm] = useState({
     companyName: "",
-        designation: "",
-        startDate: "",
-        lastDate: "",
+    designation: "",
+    startDate: "",
+    lastDate: "",
     userid: 7,
   });
   const setInitial = (data) => {
@@ -56,8 +55,8 @@ const [formsData, setdataForm] = useState({
                 onToggle={() => handleToggle("Personal")} />
                 <Wrapper name="Educational Details" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>}  isOpen={currentOpen === "Educational Details"}
                 onToggle={() => handleToggle("Educational Details")} />
-                <Wrapper name="Previous Experience" formComponent={<ExperianceForm/> }  isOpen={currentOpen === "Previous Experience"}
-                onToggle={() => handleToggle("Previous Experience")}  setInitialDetails={setInitial}/>
+                <Wrapper name="Previous Experience" formComponent={<ExperianceForm  initialDetailss={formsData} setInitialDetails={setInitial}/> }  isOpen={currentOpen === "Previous Experience"}
+                onToggle={() => handleToggle("Previous Experience")} />
         </div>
 
     )
