@@ -66,6 +66,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
       setformdata({ ...formdata, [name]: value });
     }
   }
+  
   useEffect(() => {
     setformdata(initialDetails);
     // setSelQual(initialDetails.qualification);
