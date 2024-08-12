@@ -40,6 +40,7 @@
    color: #777;
    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
    user-select: none;
+   pointer-events: none;
  }
  .form-groups input:focus {
    border-color: #007bff;

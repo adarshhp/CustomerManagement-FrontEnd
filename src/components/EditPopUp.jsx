@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Model from "./Model"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function EditPopUp({initialDetails,close,notify}) {
+export default function EditPopUp({initialDetails,close,notify,name}) {
   const [isFilled, setIsFilled] = useState(false);
   const [isDisciplineFilled, setIsDisciplineFilled] = useState(false);
   const [isYoPFilled, setYoPFilled] = useState(false);
@@ -47,6 +47,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
     } else {
       setformdata({ ...formdata, [name]: value });
     }
+    
   }
   useEffect(() => {
     setIsFilled(initialDetails.qualification !== "");
@@ -54,6 +55,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
     setIsDisciplineFilled(initialDetails.decipline !== "");
     setYoPFilled(initialDetails.yearOfPassing !== "");
     setformdata(initialDetails);
+    
     console.log(initialDetails);
     
     const fetchInitial = async () => {
@@ -88,7 +90,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
     console.log(response);
   }
   const year = new Date().getFullYear();
-  const years = Array.from(new Array(40), (val, index) => year - index);
+  const years = Array.from(new Array(125), (val, index) => year - index);
   const closeMessage = () => {
     setShowDialog(false);
   }
@@ -98,7 +100,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
     <form onSubmit={(e)=>handleSubmit(e)}>
       <div className={edb.largebox}>
         <div className={edb.top_bar}>
-          <h5>Edit Previous Experience</h5>
+          <h5>{name}</h5>
           <button className={edb.close} type="button" onClick={()=>{close()}}><span>X</span></button>
         </div>
         <div className={edb.smallbox}>
@@ -113,9 +115,9 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 onChange={handleChange}
                 value={formdata.qualification}
                 name="qualification"
+                title="Please select a qualification from the dropdown list"
                 required
               >
-                <option value=""></option>
                 {qualData.map((val, index) => (
                   <>
                     <option value={val} key={index}>
@@ -128,7 +130,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 htmlFor="qualification"
                 className={`${isFilled ? `${sty.sel_label}` : ""}`}
               >
-                <span className="star">*</span>Qualifiction
+                <span className="star">*</span>Qualification
               </label>
             </div>
             <div
@@ -141,11 +143,11 @@ export default function EditPopUp({initialDetails,close,notify}) {
               <select
                 className="item quali sel"
                 name="decipline"
+                title="Please select a Decipline from the dropdown list"
                 onChange={handleChange}
                 value={formdata.decipline}
                 required
               >
-                <option value=""></option>
                 {discipline.map((val, index) => (
                   <>
                     <option value={val} key={index}>
@@ -167,6 +169,8 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 placeholder=""
                 className="quali"
                 name="university"
+                title="Please enter a University( Alphabets only )"
+                pattern="[A-Za-z ]+"
                 onChange={handleChange}
                 value={formdata.university}
                 required
@@ -185,6 +189,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 name="yearOfPassing"
                 onChange={handleChange}
                 value={formdata.yearOfPassing}
+                title="Please select a year from the dropdown list"
                 required
               >
                 <option value=""></option>
@@ -214,7 +219,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 name="cgpa"
                 onChange={handleChange}
                 value={formdata.cgpa}
-                title="Please select either one of CGPA or Percentage"
+                title="Please select either one of CGPA or Percentage in decimal values"
                 required={required}
               ></input>
               <label htmlFor="cgpa">CGPA</label>
@@ -230,11 +235,11 @@ export default function EditPopUp({initialDetails,close,notify}) {
                 onChange={handleChange}
                 value={formdata.percentage}
                 required={required}
-                title="Please select either one of CGPA or Percentage"
-              />
+                title="Please select either one of Percentage or CGPA in decimal values"
+                />
               <label htmlFor="percentage">Percentage %</label>
             </div>
-            <button type="submit" className="submitbtn">
+            <button type="submit" className="submitbtn" title="Save">
               <svg
                 width="30"
                 height="30"
@@ -258,7 +263,7 @@ export default function EditPopUp({initialDetails,close,notify}) {
       </div>
       {showDialog &&
       <div className={edb.Message}>
-      <Model message="Are you sure, you want to update previous experience." confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
+      <Model message="Are you sure, you want to update Educational Details." confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
       </div>
       }
       </form>

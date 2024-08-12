@@ -22,6 +22,8 @@
     transition: all 0.2s ease-out;
     background: white; /* Match background color of input */
     padding: 0 4px; /* To cover input border */
+   pointer-events: none;
+
   }
   
   .floating-label-input input:focus + label,
