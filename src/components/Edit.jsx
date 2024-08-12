@@ -5,40 +5,38 @@ import Model from './Model';
 import { toast } from 'react-toastify';
 
 function Edit({ status, close, ide }) {
-    const [formsData, setFormsData] = useState({
-        companyName: "",
-        designation: "",
-        startDate: "",
-        lastDate: ""
-    });
+    const [formsData, setFormsData] = useState(ide);
+    const formatDate = async (dateString) => {
+        const date = new Date(dateString);
+
+        const year = date.getFullYear();
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+       
+
+        return `${year}-${month}-${day}`;
+    };
+
 
     const [updateState, setUpdateState] = useState(false);
 
     // Fetch data for editing
     useEffect(() => {
-        const fetchData = async () => {
-            if (ide) {
-                try {
-                    const response = await fetch(`http://192.168.2.81:5003/api/preexp/${ide}`);
-                    const data = await response.json();
-                    if (response.ok) {
-                        setFormsData({
-                            companyName: data.companyName,
-                            designation: data.designation,
-                            startDate: new Date(data.startDate).toISOString().split('T')[0],
-                            lastDate: new Date(data.lastDate).toISOString().split('T')[0]
-                        });
-                    } else {
-                        console.error('Failed to fetch data for editing');
-                    }
-                } catch (error) {
-                    console.error('Error during fetch:', error);
-                }
-            }
-        };
+        async function func() {
+            const s = await formatDate(formsData.startDate);
+            const l = await formatDate(formsData.lastDate);
+            setFormsData({
+                companyName: ide.companyName,
+                designation: ide.designation,
+                startDate: s,
+                lastDate: l
+            })
+            console.log(l, s);
+        }
+        func();
 
-        fetchData();
-    }, [ide]);
+    }, []);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,7 +45,7 @@ function Edit({ status, close, ide }) {
 
     const handleSubmitting = async () => {
         const payload = {
-            id: ide,
+            id: ide.id,
             userid: 7,
             companyName: formsData.companyName,
             designation: formsData.designation,
@@ -55,14 +53,15 @@ function Edit({ status, close, ide }) {
             lastDate: new Date(formsData.lastDate).toISOString()
         };
         try {
+            console.log(payload);
             const response = await fetch('http://192.168.2.81:5003/api/preexp', {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
-                
-            }).then(()=>{
-toast('Previous Experiance has been updated successfully');
-close();
+
+            }).then(() => {
+                toast('Previous Experiance has been updated successfully');
+                close();
             })
 
             if (response.ok) {
@@ -89,8 +88,8 @@ close();
         <div className='editbox'>
             <div className='editpage'>
                 <div className='edit-header'>
-                    <p className='heading'>EDIT PERSONAL EXPERIENCE</p>
-                    <button type="button" onClick={close} className='closebutton'>X</button>
+                    <p className='heading'>EDIT PREVIOUS EXPERIENCE</p>
+                    <button type="button" onClick={close} className='closebutton'title='CLOSE'>X</button>
                 </div>
                 <div className='inneritemss'>
                     <div className='form-groups'>
@@ -145,11 +144,11 @@ close();
                         />
                         <label htmlFor="messi4"><span className="star">*</span>End Date</label>
                     </div>
-                    <button type="submit" className='submiticon' onClick={handleSubmit}>
+                    <button type="submit" className='submiticon' onClick={handleSubmit} title="SAVE">
                         <EditButton />
                     </button>
                 </div>
-                <p style={{ textAlign: 'center', marginTop: '10px', color: 'black' ,fontFamily:'revert',fontSize:'15px' }}>
+                <p style={{ textAlign: 'center', marginTop: '10px', color: 'black', fontFamily: 'revert', fontSize: '15px' }}>
                     Click on the save button to confirm the update
                 </p>
                 {updateState && (
