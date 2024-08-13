@@ -144,3 +144,9 @@ margin-left: -73px;
     display: flex;
     flex-direction: row;
   }
+
+  .datevalue{
+    display:flex;
+    flex-direction: row;
+    gap:0%;
+  }
