@@ -13,8 +13,8 @@ function Wrapper({ name, formComponent, isOpen = false,onToggle }) {
   return (
     <>
       <div>
-        <div className="prsnl" onClick={(e) => {
-                  e.stopPropagation(); // Prevent click from propagating to the parent div
+        <div className={`${isOpen?"showColor":""} prsnl`} onClick={(e) => {
+                  e.stopPropagation(); 
                   toggleFormVisibility();
               }}>
           {!isOpen? (

@@ -8,7 +8,7 @@ import sty from "./formatedStyle.module.css";
 import edb from "./EditPopUp.module.css";
 import Model from "./Model";
 
-function EducationalForm({initialDetails,setInitialDetails}) {
+function EducationalForm({ initialDetails, setInitialDetails }) {
   const [qualData, setQualData] = useState([]);
   const [discipline, setdiscipline] = useState([]);
   const [selQual, setSelQual] = useState("");
@@ -18,10 +18,10 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   const [isFilled, setIsFilled] = useState(false);
   const [isDisciplineFilled, setIsDisciplineFilled] = useState(false);
   const [isYoPFilled, setYoPFilled] = useState(false);
-  const [currentEdit,setCurrentEdit] = useState(null);
-  const [currentDelete,setCurrentDelete] = useState(null);
-  const [showDeleteMessage,setDeleteMessage] = useState(false);
-  const [allYears,setAllYears] = useState([]);
+  const [currentEdit, setCurrentEdit] = useState(null);
+  const [currentDelete, setCurrentDelete] = useState(null);
+  const [showDeleteMessage, setDeleteMessage] = useState(false);
+  const [allYears, setAllYears] = useState([]);
   const [formdata, setformdata] = useState({
     qualification: "",
     discipline: "",
@@ -41,19 +41,19 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     }
   }, [formdata.cgpa, formdata.percentage]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setInitialDetails(formdata);
     console.log("changed");
-  },[formdata]);
+  }, [formdata]);
 
   function handleChange(e) {
     const { name, value } = e.target;
     if (name == "qualification") {
       setIsFilled(e.target.value !== "");
       setSelQual(value);
-      if(e.target.value === ""){
+      if (e.target.value === "") {
         setSelQual("");
-        setIsDisciplineFilled(false)
+        setIsDisciplineFilled(false);
       }
     } else if (name == "discipline") {
       setIsDisciplineFilled(e.target.value !== "");
@@ -62,6 +62,10 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     }
     if ((name == "percentage" || name == "cgpa") && value == "") {
       setformdata({ ...formdata, [name]: null });
+    } else if(name == "university"){
+      let val = e.target.value.replace(/\d/g, '');
+      setformdata({ ...formdata, [name]: val });
+      console.log(val);
     } else {
       setformdata({ ...formdata, [name]: value });
     }
@@ -70,14 +74,18 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     setformdata(initialDetails);
     // setSelQual(initialDetails.qualification);
     setIsFilled(initialDetails.qualification !== "");
-    if(initialDetails.qualification === ""){
+    if (initialDetails.qualification === "") {
       setSelQual([]);
-      setformdata({...formdata,discipline:null})
-    }else{
-    setSelQual(initialDetails.qualification);
-    setIsDisciplineFilled(initialDetails.discipline !== "");
+      setformdata({ ...formdata, discipline: null });
+    } else {
+      setSelQual(initialDetails.qualification);
+      setIsDisciplineFilled(initialDetails.discipline !== "");
     }
-    setYoPFilled(initialDetails.yearOfPassing !== "" && typeof(parseInt(initialDetails.yearOfPassing)) == 'number' && initialDetails.yearOfPassing != null);
+    setYoPFilled(
+      initialDetails.yearOfPassing !== "" &&
+        typeof parseInt(initialDetails.yearOfPassing) == "number" &&
+        initialDetails.yearOfPassing != null
+    );
     const fetchInitial = async () => {
       const data = await apiRequest("/qualdetail");
       setQualData(data.data);
@@ -96,13 +104,16 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     };
     if (selQual != "") {
       fetchDisp();
-    }else{
+    } else {
       // setformdata({...formdata,decipline:""});
-      if(selQual === "" && isDisciplineFilled == false && discipline.length > 0 ){
-        setformdata({...formdata,discipline:""});
+      if (
+        selQual === "" &&
+        isDisciplineFilled == false &&
+        discipline.length > 0
+      ) {
+        setformdata({ ...formdata, discipline: "" });
       }
     }
-
   }, [selQual]);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -117,9 +128,9 @@ function EducationalForm({initialDetails,setInitialDetails}) {
         qualification: "",
         discipline: "",
         university: "",
-        yearOfPassing: '',
-        cgpa: '',
-        percentage: '',
+        yearOfPassing: "",
+        cgpa: "",
+        percentage: "",
         userid: 7,
       });
 
@@ -138,7 +149,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
     const year = new Date().getFullYear();
     const years = Array.from(new Array(125), (val, index) => year - index);
     return years;
-  }
+  };
   const showRequired = () => {
     if (
       (formdata.cgpa == null && formdata.percentage == null) ||
@@ -156,32 +167,45 @@ function EducationalForm({initialDetails,setInitialDetails}) {
   const DeleteEntry = (entry) => {
     setCurrentDelete(entry);
     setDeleteMessage(true);
-  }
+  };
   const closeEditDialog = () => {
     setCurrentEdit(null);
     getEduData();
-  }
+  };
   const notify = (mesg) => {
     toast(mesg);
-  }
+  };
   const confirmSubmit = async () => {
-    let responce = await apiRequest('/EducationalDetails','DELETE',currentDelete);
-    if(responce.message){
+    let responce = await apiRequest(
+      "/EducationalDetails",
+      "DELETE",
+      currentDelete
+    );
+    if (responce.message) {
       toast(responce.message);
       setDeleteMessage(false);
       setCurrentEdit(null);
       getEduData();
     }
-  }
+  };
   const closeMessage = () => {
     setCurrentDelete(null);
     setDeleteMessage(false);
-  }
+  };
 
   return (
     <div className="tota">
-      <ToastContainer/>
-      {currentEdit!=null &&<div className={edb.edit}><EditPopUp initialDetails={currentEdit} close={closeEditDialog} notify={notify} name={"Edit Educational Details"}/></div>}
+      <ToastContainer />
+      {currentEdit != null && (
+        <div className={edb.edit}>
+          <EditPopUp
+            initialDetails={currentEdit}
+            close={closeEditDialog}
+            notify={notify}
+            name={"Edit Educational Details"}
+          />
+        </div>
+      )}
       <form className="details" onSubmit={handleSubmit}>
         <div className="row">
           <div
@@ -342,6 +366,7 @@ function EducationalForm({initialDetails,setInitialDetails}) {
           <table>
             <thead>
               <tr>
+                <th>Sl_no.</th>
                 <th>Qualification</th>
                 <th>Discipline</th>
                 <th>University</th>
@@ -352,67 +377,78 @@ function EducationalForm({initialDetails,setInitialDetails}) {
               </tr>
             </thead>
             <tbody>
-              {prevList.sort((a,b)=>a.Id - b.Id).map((val, index) => (
-                <tr key={index}>
-                  <td>{val.qualification}</td>
-                  <td>{val.discipline}</td>
-                  <td>{val.university}</td>
-                  <td>{val.yearOfPassing}</td>
-                  <td>{val.cgpa}</td>
-                  <td>{val.percentage}</td>
-                  <td>
-                    <button type="button" title="Edit"
-                      className={sty.save}
-                      onClick={() => {
-                        editEntry(val);
-                      }}
-                    >
-                      <svg
-                        width="22"
-                        height="22"
-                        viewBox="0 0 44 49"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+              {prevList
+                .sort((a, b) => a.Id - b.Id)
+                .map((val, index) => (
+                  <tr key={index}>
+                    <td>{++index}</td>
+                    <td>{val.qualification}</td>
+                    <td>{val.discipline}</td>
+                    <td>{val.university}</td>
+                    <td>{val.yearOfPassing}</td>
+                    <td>{val.cgpa}</td>
+                    <td>{val.percentage}</td>
+                    <td>
+                      <button
+                        type="button"
+                        title="Edit"
+                        className={sty.save}
+                        onClick={() => {
+                          editEntry(val);
+                        }}
                       >
-                        <path
-                          d="M32.7058 0L27.2965 6.125L38.1152 18.375L43.5245 12.25L32.7058 0ZM21.8872 12.25L0.25 36.75V49H11.0686L32.7058 24.5L21.8872 12.25Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </button>
-                    <button type="button" title="Delete"
-                      className={sty.save}
-                      onClick={() => {
-                        DeleteEntry(val);
-                      }}
-                    >
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 43 49"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M8.00793 49C6.53984 49 5.2835 48.4674 4.23892 47.4021C3.19435 46.3368 2.67117 45.0546 2.66939 43.5556V8.16667H0.00012207V2.72222H13.3465V0H29.3621V2.72222H42.7085V8.16667H40.0392V43.5556C40.0392 45.0528 39.5169 46.3349 38.4723 47.4021C37.4277 48.4692 36.1705 49.0018 34.7006 49H8.00793ZM34.7006 8.16667H8.00793V43.5556H34.7006V8.16667ZM13.3465 38.1111H18.685V13.6111H13.3465V38.1111ZM24.0236 38.1111H29.3621V13.6111H24.0236V38.1111Z"
-                        fill="black"
-                      />
-                    </svg>
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                        <svg
+                          width="22"
+                          height="22"
+                          viewBox="0 0 44 49"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M32.7058 0L27.2965 6.125L38.1152 18.375L43.5245 12.25L32.7058 0ZM21.8872 12.25L0.25 36.75V49H11.0686L32.7058 24.5L21.8872 12.25Z"
+                            fill="black"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        type="button"
+                        title="Delete"
+                        className={sty.save}
+                        onClick={() => {
+                          DeleteEntry(val);
+                        }}
+                      >
+                        <svg
+                          width="22"
+                          height="22"
+                          viewBox="0 0 43 49"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M8.00793 49C6.53984 49 5.2835 48.4674 4.23892 47.4021C3.19435 46.3368 2.67117 45.0546 2.66939 43.5556V8.16667H0.00012207V2.72222H13.3465V0H29.3621V2.72222H42.7085V8.16667H40.0392V43.5556C40.0392 45.0528 39.5169 46.3349 38.4723 47.4021C37.4277 48.4692 36.1705 49.0018 34.7006 49H8.00793ZM34.7006 8.16667H8.00793V43.5556H34.7006V8.16667ZM13.3465 38.1111H18.685V13.6111H13.3465V38.1111ZM24.0236 38.1111H29.3621V13.6111H24.0236V38.1111Z"
+                            fill="black"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         ) : (
           <p className="centertext">No previous educational details added</p>
         )}
       </form>
-      {showDeleteMessage &&
-      <div className={edb.Message}>
-      <Model message="Are you sure you want to delete Educational Details" confirmHandler={confirmSubmit} cancelHandler={closeMessage}/>
-      </div>
-      }
+      {showDeleteMessage && (
+        <div className={edb.Message}>
+          <Model
+            message="Are you sure you want to delete Educational Details"
+            confirmHandler={confirmSubmit}
+            cancelHandler={closeMessage}
+          />
+        </div>
+      )}
     </div>
   );
 }

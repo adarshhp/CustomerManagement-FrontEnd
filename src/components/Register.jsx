@@ -53,8 +53,8 @@ const [formsData, setdataForm] = useState({
                 </div >   
                 <Wrapper name="Personal" formComponent={<PersonalForm/>} isOpen={currentOpen === "Personal"}
                 onToggle={() => handleToggle("Personal")} />
-                <Wrapper name="Educational Details" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>}  isOpen={currentOpen === "Educational Details"}
-                onToggle={() => handleToggle("Educational Details")} />
+                <Wrapper name="Educational Qualification" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>}  isOpen={currentOpen === "Educational Qualification"}
+                onToggle={() => handleToggle("Educational Qualification")} />
                 <Wrapper name="Previous Experience" formComponent={<ExperianceForm  initialDetailss={formsData} setInitialDetails={setInitial}/> }  isOpen={currentOpen === "Previous Experience"}
                 onToggle={() => handleToggle("Previous Experience")} />
         </div>

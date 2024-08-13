@@ -5,7 +5,9 @@
 
 :root {
   height: 100vh;
-  background-color: rgb(247, 201, 49);
+  /* background-color: rgb(247, 201, 49); */
+  background-color: #E0D8CE;
+
 }
 
 /* .App{
