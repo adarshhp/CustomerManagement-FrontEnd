@@ -12,6 +12,7 @@ import sty from "./formatedStyle.module.css";
 import Model from './Model';
 import edb from "./EditPopUp.module.css";
 import apiRequest from '../lib/apiRequest';
+import DateImage from '../icons/DateImage';
 
 
 
@@ -409,8 +410,8 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
                                         <td className='font-correction'>{index + 1}</td>
                                         <td className='font-correction'>{val.companyName}</td>
                                         <td className='font-correction'>{val.designation}</td>
-                                        <td className='font-correction'>{formatDate(val.startDate)}</td>
-                                        <td className='font-correction'>{formatDate(val.lastDate)}</td>
+                                        <td className='font-correction'><div className='datevalue'>{formatDate(val.startDate)}+<DateImage/></div></td>
+                                        <td className='font-correction'><div className='datevalue'>{formatDate(val.lastDate)}+<DateImage/></div></td>
 
                                         <td className='editdeleteicons'>
                                             <p className='' id='edit-icon' title='edit' onClick={() => handleEdit(val)}>
