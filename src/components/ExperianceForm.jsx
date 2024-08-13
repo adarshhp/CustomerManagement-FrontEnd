@@ -15,7 +15,7 @@ import apiRequest from '../lib/apiRequest';
 
 
 
-function ExperianceForm({initialDetailss,setInitialDetails}) {
+function ExperianceForm({ initialDetailss, setInitialDetails }) {
     const [status, setShowStatus] = useState(false);
     const [formsData, setFormsData] = useState({
         companyName: "",
@@ -24,22 +24,24 @@ function ExperianceForm({initialDetailss,setInitialDetails}) {
         lastDate: ""
     });
 
-useEffect(()=>{
-    setFormsData(initialDetailss);
-},[])
+    useEffect(() => {
+        setFormsData(initialDetailss);
+    }, [])
 
-//added this shit
-//const[initialDetailss,setInitialDetails]=useState([])
-useEffect(()=>{
-    setInitialDetails(formsData);
-    console.log("changed");
-  },[formsData]);
+    //added this shit
+    //const[initialDetailss,setInitialDetails]=useState([])
+    useEffect(() => {
+        setInitialDetails(formsData);
+        console.log("changed");
+    }, [formsData]);
 
 
 
     const [errors, setErrors] = useState({
         startDateError: '',
-        endDateError: ''
+        endDateError: '',
+        designationError:''
+
     });
 
 
@@ -50,23 +52,35 @@ useEffect(()=>{
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
-        if (!startDateError && !endDateError) {
+        // const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
+        // const { designationError } = validateDesignation(formsData.designation);
+
+        const datainfo = validateForm();
+        console.log(datainfo, "uuuuuuuuuu");
+        
+        if (datainfo == true) {
             setShowStatus(true);
-            console.log(status);
+            console.log(status,"HHHHHHHHH");
         } else {
-            setErrors({ startDateError, endDateError });
+            // setErrors({ startDateError, endDateError, designationError });
+            console.log("error occured");
+            
         }
     };
 
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormsData({ ...formsData, [name]: value })
-        setInitialDetails(formsData);
+        setFormsData({ ...formsData, [name]: value });
 
         if (name === 'startDate' || name === 'lastDate') {
             const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
-            setErrors({ startDateError, endDateError });
+            setErrors({ ...errors, startDateError, endDateError });
+        }
+
+        if (name === 'designation') {
+            const designationError = validateDesignation(value);
+            setErrors({ ...errors, designationError });
         }
     };
 
@@ -77,18 +91,18 @@ useEffect(()=>{
         let endDateError = '';
         const today = new Date().setHours(0, 0, 0, 0);
 
-        if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
-            startDateError = 'Start date cannot be same or after end date.';
-            endDateError = 'End date cannot be same or before start date.';
+    //    if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
+        if ( new Date(startDate) >= new Date(lastDate)) {
+           // startDateError = 'Invalid Date';
+            endDateError = 'Invalid Date';
         }
         if (startDate && new Date(startDate) > today) {
-            startDateError = 'cannot enter a future reference'
-        }
+            startDateError = 'Invalid Date'
+        }      
         if (lastDate && new Date(lastDate) > today) {
-            endDateError = 'cannot enter a future reference'
+            endDateError = 'Invalid Date'
         }
-
-
+       
         return { startDateError, endDateError };
     };
 
@@ -97,14 +111,38 @@ useEffect(()=>{
     const handleCancel = () => {
         setShowStatus(false);
     };
+    //i am addding the designation validation logic here
+    const validateDesignation = (designation) => {
+        if (designation.trim() === '') {
+            return '';
+        }
+        const designationRegex = /^[A-Za-z\s]+$/;
+        return designationRegex.test(designation) ? '' : 'Invalid Character';
+
+    };
+
+    const validateForm = () => {
+        const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
+        const designationError = validateDesignation(formsData.designation);
+        console.log(designationError +'latest check');
+
+        if (startDateError || endDateError || designationError) {
+            setErrors({ startDateError, endDateError, designationError });
+            return false;
+        }
+
+        return true;
+    };
 
 
 
     const handleConfirm = () => {
         const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
-        if (!startDateError && !endDateError) {
-
-
+        const designationError = validateDesignation(formsData.designation);
+        // if (!startDateError && !endDateError ) {
+        if (validateForm()) {
+            console.log(validateForm(), "KKKKKKKKKKKKK");
+            
             const payload = {
                 userid: 7,
                 companyName: formsData.companyName,
@@ -114,7 +152,7 @@ useEffect(()=>{
             };
 
             fetch('http://192.168.2.81:5003/api/preexp', {
-//apiRequest('/api/preexp',{
+                //apiRequest('/api/preexp',{
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify(payload)
@@ -129,19 +167,26 @@ useEffect(()=>{
                     });
                     setShowStatus(false);
                     setErrors(startDateError, '');
+                    setErrors(designationError);
                     if (res?.status === 200) {
                         res.json().then((res) => toast(res.message));
                     }
+
 
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        }else{
+            console.log('else part is working of handle confirm')
+            setErrors(...errors,{designationError:'Invalid character'})
+
+
         }
     };
     const fetchEvents = () => {
         axios.get('http://192.168.2.81:5003/api/GetPrevExp/7')
-     //  apiRequest('/api/GetPrevExp/7')
+            //  apiRequest('/api/GetPrevExp/7')
             .then((resposne) => {
 
                 if (resposne?.status === 200) {
@@ -230,14 +275,14 @@ useEffect(()=>{
         const url = `http://192.168.2.81:5003/api/preexp`;
         try {
             console.log(itemToDelete)
-          await fetch(url, {
-        // apiRequest('/api/preexp',{
+            await fetch(url, {
+                // apiRequest('/api/preexp',{
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json"
                 },
                 body: JSON.stringify(itemToDelete)
-            }).then(()=>{
+            }).then(() => {
                 toast('Your previous experiance has been successfully deleted');
             })
 
@@ -276,7 +321,7 @@ useEffect(()=>{
                                 value={formsData.companyName}
                                 onChange={handleChange}
                                 name='companyName'
-                                title='enter companyName'
+                                // title='enter companyName'
                                 required
                             // autoFocus="off"
                             />
@@ -291,11 +336,17 @@ useEffect(()=>{
                                 className='textbox1'
                                 value={formsData.designation}
                                 onChange={handleChange}
-                                title='enter Designation'
+                                // title='enter Designation'
 
                                 name="designation"
                             />
                             <label htmlFor="messi2"><span className="star">*</span>Designation</label>
+
+                            {  errors.designationError && (
+                                <p className='error'>{errors.designationError}</p>
+                            )}
+
+
                         </div>
                         <div className={sty.form_group}>
                             <input
@@ -305,7 +356,7 @@ useEffect(()=>{
                                 className='textbox1'
                                 value={formsData.startDate}
                                 onChange={handleChange}
-                                title='fill StartingDate'
+                                // title='fill StartingDate'
 
                                 name='startDate'
                                 required
@@ -321,7 +372,7 @@ useEffect(()=>{
                                 className='textbox1'
                                 value={formsData.lastDate}
                                 onChange={handleChange}
-                                title='fill EndingDate'
+                                //  title='fill EndingDate'
 
                                 name='lastDate'
                                 required
@@ -329,7 +380,7 @@ useEffect(()=>{
                             <label htmlFor="messi4"><span className="star">*</span>End Date</label>
                             {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
                         </div>
-                        <button type="submit" className='submiticon' title='SAVE'>
+                        <button type="submit" className='submiticon' title='save'>
                             <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M34 42V26H14V42M14 6V16H30M38 42H10C8.93913 42 7.92172 41.5786 7.17157 40.8284C6.42143 40.0783 6 39.0609 6 38V10C6 8.93913 6.42143 7.92172 7.17157 7.17157C7.92172 6.42143 8.93913 6 10 6H32L42 16V38C42 39.0609 41.5786 40.0783 40.8284 40.8284C40.0783 41.5786 39.0609 42 38 42Z" stroke="#1E1E1E" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -343,11 +394,11 @@ useEffect(()=>{
                         <table className='tabl'>
                             <thead className='tablehead'>
                                 <tr className='top-heading'>
-                                    <th>EXP.No</th>
-                                    <th>CompanyName</th>
+                                    <th>SL.No</th>
+                                    <th>Company Name</th>
                                     <th>Designation</th>
-                                    <th>StartDate</th>
-                                    <th>EndDate</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Actions</th>
                                     <th></th>
                                 </tr>
@@ -355,26 +406,26 @@ useEffect(()=>{
                             <tbody>
                                 {[...experiences].sort((a, b) => b.id - a.id).map((val, index) => (//here i want to sort by val.id
                                     <tr className='decrease-me-there' key={index}>
-                                        <td className='font-correction'>{index}</td>
+                                        <td className='font-correction'>{index + 1}</td>
                                         <td className='font-correction'>{val.companyName}</td>
                                         <td className='font-correction'>{val.designation}</td>
                                         <td className='font-correction'>{formatDate(val.startDate)}</td>
                                         <td className='font-correction'>{formatDate(val.lastDate)}</td>
 
-                                        <td>
-                                            <p className='form-group' id='edit-icon' title='EDIT' onClick={() => handleEdit(val)}>
+                                        <td className='editdeleteicons'>
+                                            <p className='' id='edit-icon' title='edit' onClick={() => handleEdit(val)}>
                                                 <svg width="22" height="30" viewBox="0 0 42 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M31.1576 0.571289L25.9647 6.69629L36.3505 18.9463L41.5435 12.8213L31.1576 0.571289ZM20.7717 12.8213L0 37.3213V49.5713H10.3859L31.1576 25.0713L20.7717 12.8213Z" fill="black" />
                                                 </svg>
                                             </p>
-                                        </td>
-                                        <td>
-                                            <p className='delete-button' id='delete-icon' title='DELETE' onClick={() => handleDelete(val)}>
+                                        
+                                            <p className='delete-button' id='delete-icon' title='delete' onClick={() => handleDelete(val)}>
                                                 <svg width="22" height="30" viewBox="0 0 41 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M7.6875 49.5713C6.27812 49.5713 5.07204 49.0386 4.06925 47.9733C3.06646 46.908 2.56421 45.6259 2.5625 44.1268V8.73796H0V3.29351H12.8125V0.571289H28.1875V3.29351H41V8.73796H38.4375V44.1268C38.4375 45.6241 37.9361 46.9062 36.9333 47.9733C35.9305 49.0405 34.7236 49.5731 33.3125 49.5713H7.6875ZM33.3125 8.73796H7.6875V44.1268H33.3125V8.73796ZM12.8125 38.6824H17.9375V14.1824H12.8125V38.6824ZM23.0625 38.6824H28.1875V14.1824H23.0625V38.6824Z" fill="black" />
                                                 </svg>
                                             </p>
                                         </td>
+                                        <td></td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -389,7 +440,7 @@ useEffect(()=>{
             {status && <div className={edb.Message}><PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} /></div>}
             {editstatus && <Edit status={editstatus} close={handleClose} ide={identity} />}
 
-            {deleteStatus &&<div className={edb.Message}> <Model message='Are you sure you want to Delete Previous Experiance!!' confirmHandler={confirmDelete} cancelHandler={cancelDelete} /></div>}
+            {deleteStatus && <div className={edb.Message}> <Model message='Are you sure, you want to Delete Previous Experiance' confirmHandler={confirmDelete} cancelHandler={cancelDelete} /></div>}
         </div>
     );
 }
