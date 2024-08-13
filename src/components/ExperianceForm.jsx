@@ -410,8 +410,8 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
                                         <td className='font-correction'>{index + 1}</td>
                                         <td className='font-correction'>{val.companyName}</td>
                                         <td className='font-correction'>{val.designation}</td>
-                                        <td className='font-correction'><div className='datevalue'>{formatDate(val.startDate)}+<DateImage/></div></td>
-                                        <td className='font-correction'><div className='datevalue'>{formatDate(val.lastDate)}+<DateImage/></div></td>
+                                        <td className='font-correction'><div className='datevalue'>{formatDate(val.startDate)}<DateImage/></div></td>
+                                        <td className='font-correction'><div className='datevalue'>{formatDate(val.lastDate)}<DateImage/></div></td>
 
                                         <td className='editdeleteicons'>
                                             <p className='' id='edit-icon' title='edit' onClick={() => handleEdit(val)}>
