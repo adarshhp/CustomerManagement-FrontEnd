@@ -42,8 +42,10 @@
     font-size: 40px;
     border-radius: 20px;
     margin-left: 10%;
-    margin-top: 15px;
-    
+    margin-top: 15px;  
+}
+.showColor {
+    background-color: #F1A953;
 }
 .namer_label{
     margin-left: -5%;

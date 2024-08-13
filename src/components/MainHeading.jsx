@@ -4,7 +4,7 @@ import style from "./utilStyle.module.css";
 function MainHeading() {
   return (
     <div className={style.text}>
-      <h1>ADD EMPLOYEE</h1>
+      <h1>EMPLOYEE DETAILS</h1>
     </div>
   )
 }

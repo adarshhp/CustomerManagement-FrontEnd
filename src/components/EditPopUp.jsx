@@ -239,7 +239,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 />
               <label htmlFor="percentage">Percentage %</label>
             </div>
-            <button type="submit" className="submitbtn" title="Save">
+            <button type="submit" className="submitbtn" title="Update">
               <svg
                 width="30"
                 height="30"
