@@ -106,6 +106,7 @@ function Edit({ status, close, ide }) {
                             onChange={handleChange}
                             name='companyName'
                             required
+                            label='update Company Name'
                         />
                         <label htmlFor="messi"><span className="star">*</span>Company</label>
                     </div>
@@ -119,6 +120,7 @@ function Edit({ status, close, ide }) {
                             value={formsData.designation}
                             onChange={handleChange}
                             name="designation"
+                            title='update designation'
                         />
                         <label htmlFor="messi2"><span className="star">*</span>Designation</label>
                     </div>
@@ -132,6 +134,7 @@ function Edit({ status, close, ide }) {
                             onChange={handleChange}
                             name='startDate'
                             required
+                            label='update start date'
                         />
                         <label htmlFor="messi3"><span className="star">*</span>Start Date</label>
                     </div>
@@ -145,6 +148,7 @@ function Edit({ status, close, ide }) {
                             onChange={handleChange}
                             name='lastDate'
                             required
+                            label='update end date'
                         />
                         <label htmlFor="messi4"><span className="star">*</span>End Date</label>
                     </div>
