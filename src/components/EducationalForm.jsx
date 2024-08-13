@@ -32,14 +32,17 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     userid: 7,
   });
   useEffect(() => {
-    if (formdata.cgpa == null && formdata.percentage == null) {
+    checkRequired();
+  }, [formdata.cgpa, formdata.percentage]);
+  const checkRequired = () => {
+    if ((formdata.cgpa == null || formdata.cgpa == "") && (formdata.percentage == null || formdata.percentage=="")) {
       setRequired(true);
       console.log("none is filled");
     } else {
       console.log("one is fillind");
       setRequired(false);
     }
-  }, [formdata.cgpa, formdata.percentage]);
+  }
 
   useEffect(() => {
     setInitialDetails(formdata);
@@ -60,7 +63,8 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     } else if (name == "yearOfPassing") {
       setYoPFilled(e.target.value !== "");
     }
-    if ((name == "percentage" || name == "cgpa") && value == "") {
+    if ((name == "percentage" || name == "cgpa") && (value == "" || value == " ")) {
+      console.log(null,"value spotted");
       setformdata({ ...formdata, [name]: null });
     } else if(name == "university"){
       let val = e.target.value.replace(/\d/g, '');
@@ -122,7 +126,15 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
   };
 
   const postEduData = async () => {
-    const response = await apiRequest("/EducationalDetails", "POST", formdata);
+    let payload = formdata;
+    console.log(formdata);
+    if(payload.cgpa == ""){
+      payload.cgpa = null;
+    }
+    if(payload.percentage == ""){
+      payload.percentage = null;
+    }
+    const response = await apiRequest("/EducationalDetails", "POST", payload);
     if (response) {
       toast(response?.message);
       setformdata({
@@ -134,7 +146,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
         percentage: "",
         userid: 7,
       });
-
+      checkRequired();
       setIsFilled(false);
       setIsDisciplineFilled(false);
       setYoPFilled(false);
