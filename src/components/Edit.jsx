@@ -6,24 +6,71 @@ import { toast } from 'react-toastify';
 import edb from "./EditPopUp.module.css";
 import apiRequest from '../lib/apiRequest';
 
-
 function Edit({ status, close, ide }) {
     const [formsData, setFormsData] = useState(ide);
+    const [errors, setErrors] = useState({
+        startDateError: '',
+        endDateError: '',
+        designationError: ''
+    });
+    const [updateState, setUpdateState] = useState(false);
+
+    const validateDates = (startDate, lastDate) => {
+        let startDateError = '';
+        let endDateError = '';
+        const today = new Date().setHours(0, 0, 0, 0);
+
+      //  if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
+        if ( new Date(startDate) >= new Date(lastDate)) {
+
+          //  startDateError = 'Invalid Date';
+            endDateError = 'Invalid Date';
+        }
+        if (startDate && new Date(startDate) > today) {
+            startDateError = 'Invalid Date';
+        }
+        if (lastDate && new Date(lastDate) > today) {
+            endDateError = 'Invalid Date';
+        }
+        if(new Date(startDate)<=new Date(lastDate)){
+            startDateError='';
+            endDateError='';
+        }
+
+
+        return { startDateError, endDateError };
+    };
+
+    const validateDesignation = (designation) => {
+        if (designation.trim() === '') {
+            return ''; 
+        }
+        const designationRegex = /^[A-Za-z\s]+$/;
+        return designationRegex.test(designation) ? '' : 'Invalid Character';
+    };
+
+    const validateForm = () => {
+        console.log('validate form called');
+        const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
+        const designationError = validateDesignation(formsData.designation);
+
+
+        if (startDateError || endDateError || designationError) {
+            setErrors({ startDateError, endDateError, designationError });
+            console.log(errors+'from the validate form');
+            return false;
+        }
+        return true;
+    };
+
     const formatDate = async (dateString) => {
         const date = new Date(dateString);
-
         const year = date.getFullYear();
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
-       
-
         return `${year}-${month}-${day}`;
     };
 
-
-    const [updateState, setUpdateState] = useState(false);
-
-    // Fetch data for editing
     useEffect(() => {
         async function func() {
             const s = await formatDate(formsData.startDate);
@@ -33,55 +80,60 @@ function Edit({ status, close, ide }) {
                 designation: ide.designation,
                 startDate: s,
                 lastDate: l
-            })
-            console.log(l, s);
+            });
         }
         func();
-
-    }, []);
-
+    }, [ide]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormsData({ ...formsData, [name]: value });
+
+        if (name === 'startDate' || name === 'lastDate') {
+            const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
+            setErrors({ ...errors, startDateError, endDateError });
+        }
+
+        if (name === 'designation') {
+            const designationError = validateDesignation(value);
+            setErrors({ ...errors, designationError });
+        }
     };
 
     const handleSubmitting = async () => {
-        const payload = {
-            id: ide.id,
-            userid: 7,
-            companyName: formsData.companyName,
-            designation: formsData.designation,
-            startDate: new Date(formsData.startDate).toISOString(),
-            lastDate: new Date(formsData.lastDate).toISOString()
-        };
-        try {
-            console.log(payload);
-            const response = await fetch('http://192.168.2.81:5003/api/preexp', {
-          // apiRequest('/api/preexp',{
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
+        
+        if (validateForm()) {
+            const payload = {
+                id: ide.id,
+                userid: 7,
+                companyName: formsData.companyName,
+                designation: formsData.designation,
+                startDate: new Date(formsData.startDate).toISOString(),
+                lastDate: new Date(formsData.lastDate).toISOString()
+            };
 
-            }).then(() => {
-                toast('Previous Experiance has been updated successfully');
+            try {
+                console.log(payload);
+                await fetch('http://192.168.2.81:5003/api/preexp', {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                toast('Previous Experience has been updated successfully');
                 close();
-            })
-
-            // if (response.ok) {
-            //     // Optionally close the modal and refresh data
-            //     close();
-            // } else {
-            //     throw new Error('Network response was not ok');
-            // }
-        } catch (error) {
-            console.error('Error during fetch:', error);
+            } catch (error) {
+                console.error('Error during fetch:', error);
+            }
         }
+
     };
 
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent default form submission
-        setUpdateState(true);
+
+        if (validateForm()) {
+            setUpdateState(true);
+        }
     };
 
     const handleCancelling = () => {
@@ -93,9 +145,9 @@ function Edit({ status, close, ide }) {
             <div className='editpage'>
                 <div className={edb.top_bar}>
                     <p className='heading'>EDIT PREVIOUS EXPERIENCE</p>
-                    <button type="button" onClick={close} className={edb.close}title='CLOSE'>X</button>
+                    <button type="button" onClick={close} className={edb.close} title='close'>X</button>
                 </div>
-                <div className='inneritemss'>
+                <form className='inneritemss' onSubmit={handleSubmit}>
                     <div className='form-groups'>
                         <input
                             type="text"
@@ -106,7 +158,6 @@ function Edit({ status, close, ide }) {
                             onChange={handleChange}
                             name='companyName'
                             required
-                            label='update Company Name'
                         />
                         <label htmlFor="messi"><span className="star">*</span>Company</label>
                     </div>
@@ -120,9 +171,12 @@ function Edit({ status, close, ide }) {
                             value={formsData.designation}
                             onChange={handleChange}
                             name="designation"
-                            title='update designation'
+                            
                         />
                         <label htmlFor="messi2"><span className="star">*</span>Designation</label>
+                        {formsData.designation.trim() !== '' && errors.designationError && (
+                            <p className='error'>{errors.designationError}</p>
+                        )}
                     </div>
                     <div className='form-groups'>
                         <input
@@ -134,9 +188,9 @@ function Edit({ status, close, ide }) {
                             onChange={handleChange}
                             name='startDate'
                             required
-                            label='update start date'
                         />
                         <label htmlFor="messi3"><span className="star">*</span>Start Date</label>
+                        {errors.startDateError && <p className='error'>{errors.startDateError}</p>}
                     </div>
                     <div className='form-groups'>
                         <input
@@ -148,25 +202,23 @@ function Edit({ status, close, ide }) {
                             onChange={handleChange}
                             name='lastDate'
                             required
-                            label='update end date'
                         />
                         <label htmlFor="messi4"><span className="star">*</span>End Date</label>
+                        {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
                     </div>
-                    <button type="submit" className='submiticon' onClick={handleSubmit} title="SAVE">
+                    <button type="submit" className='submiticon'  title="update">
                         <EditButton />
                     </button>
-                </div>
+                </form>
                 <p style={{ textAlign: 'center', marginTop: '10px', color: 'black', fontFamily: 'revert', fontSize: '15px' }}>
-                    Click on the save button to confirm the update
                 </p>
                 {updateState && (
                     <div className={edb.Message}>
-                    <Model
-                  
-                        message='Are you sure you want to update Previous Experiance?'
-                        cancelHandler={handleCancelling}
-                        confirmHandler={handleSubmitting}
-                    />
+                        <Model
+                            message='Are you sure , you want to update Previous Experience?'
+                            cancelHandler={handleCancelling}
+                            confirmHandler={handleSubmitting}
+                        />
                     </div>
                 )}
             </div>

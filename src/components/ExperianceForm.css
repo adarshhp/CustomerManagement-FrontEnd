@@ -97,16 +97,17 @@
 
 .error{
     position:absolute;
+    color:black;
 }
 #edit-icon{
 height:30px;
 width:30px;
-margin-left:70px;
+margin-left:89px;
 }
 #delete-icon{
     height:30px;
 width:30px;
-margin-left: -90px;
+margin-left: -73px;
 
 }
 
@@ -138,4 +139,8 @@ margin-left: -90px;
   .top-heading{
     font-weight:bolder;
     font-size:medium;
+  }
+  .editdeleteicons{
+    display: flex;
+    flex-direction: row;
   }
