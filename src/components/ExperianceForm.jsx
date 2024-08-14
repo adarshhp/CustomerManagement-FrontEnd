@@ -47,23 +47,16 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
 
 
     const [experiences, setExperiences] = useState([]);
-
+console.log(experiences+'gvykhyukefvfgysgvoyefuskfev');
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
-        // const { designationError } = validateDesignation(formsData.designation);
-
-        const datainfo = validateForm();
-        console.log(datainfo, "uuuuuuuuuu");
-        
-        if (datainfo == true) {
-            setShowStatus(true);
-            console.log(status,"HHHHHHHHH");
+             const datainfo = validateForm();
+             if (datainfo == true) {
+            setShowStatus(true);        
         } else {
-            // setErrors({ startDateError, endDateError, designationError });
             console.log("error occured");
             
         }
@@ -137,7 +130,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
 
 
 
-    const handleConfirm = () => {
+    const handleConfirm = async() => {
         const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
         const designationError = validateDesignation(formsData.designation);
         // if (!startDateError && !endDateError ) {
@@ -152,13 +145,15 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
                 lastDate: new Date(formsData.lastDate).toISOString()
             };
 
-            fetch(process.env.REACT_APP_SERVER+'/api/preexp', {
-                //apiRequest('/api/preexp',{
-                method: "POST",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify(payload)
-            })
-                .then((res) => {
+           // fetch('http://localhost:5003/api/preexp', {
+                const res= await apiRequest('/preexp',"POST",payload)
+            //     method: "POST",
+            //     headers: { "content-type": "application/json" },
+            //     body: JSON.stringify(payload)
+            // })
+
+                if(res) {
+               
                     setExperiences([...experiences]);
                     setFormsData({
                         companyName: "",
@@ -167,17 +162,16 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
                         lastDate: ""
                     });
                     setShowStatus(false);
+                    console.log("works until here");
                     setErrors(startDateError, '');
                     setErrors(designationError);
-                    if (res?.status === 200) {
-                        res.json().then((res) => toast(res.message));
+                    if (res) {
+                        toast(res.message);
                     }
 
 
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                }
+               
         }else{
             console.log('else part is working of handle confirm')
             setErrors(...errors,{designationError:'Invalid character'})
@@ -185,47 +179,21 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
 
         }
     };
-    const fetchEvents = () => {
-        axios.get(process.env.REACT_APP_SERVER+'/api/GetPrevExp/7')
-            //  apiRequest('/api/GetPrevExp/7')
-            .then((resposne) => {
+    const fetchEvents = async () => {
+       // axios.get('http://localhost:5003/api/GetPrevExp/7')
+        const response = await apiRequest("/GetPrevExp/7");
 
-                if (resposne?.status === 200) {
-                    toast(resposne.message);
-                    setExperiences(resposne?.data)
-                    console.log(resposne?.data);
-                } else {
-                    alert('something went wrong')
+                if (response) {
+                    toast(response.message);
+                    setExperiences(response)
+                    console.log(response);
+                }else{
+                    alert('some error while fetching data')
                 }
-                if (resposne?.status === 405) {
-                    toast(resposne.message);
-                }
-            })
-            .catch((error) => {
-                return error
-            })
+           
     }
     useEffect(() => {
-        //REMOVE THIS
-        // const fetchEvents = () => {
-        //     axios.get(process.env.REACT_APP_SERVER+'5003/api/GetPrevExp/7')
-        //         .then((resposne) => {
-
-        //             if (resposne?.status === 200) {
-        //                 toast(resposne.message);
-        //                 setExperiences(resposne?.data)
-        //                 console.log(resposne?.data);
-        //             } else {
-        //                 alert('something went wrong')
-        //             }
-        //             if(resposne?.status === 405){
-        //                 toast(resposne.message);
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             return error
-        //         })
-        // }
+    
         fetchEvents();
     }, [formsData])
 
@@ -273,20 +241,20 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
     const confirmDelete = async () => {
         if (!itemToDelete) return;
 
-        const url = process.env.REACT_APP_SERVER+`/preexp`;
+     //   const url = `http://localhost:5003/api/preexp`;
         try {
             console.log(itemToDelete)
-            await fetch(url, {
-                // apiRequest('/api/preexp',{
-                method: "DELETE",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify(itemToDelete)
-            }).then(() => {
-                toast('Your previous experiance has been successfully deleted');
-            })
-
+           // await fetch(url, {
+                 apiRequest('/preexp',"DELETE",itemToDelete);
+            //     method: "DELETE",
+            //     headers: {
+            //         "content-type": "application/json"
+            //     },
+            //     body: JSON.stringify(itemToDelete)
+            // }).then(() => {
+            //     toast('Your previous experiance has been successfully deleted');
+            // })
+            toast('Your previous experiance has been successfully deleted');
         }
         catch (error) {
             console.log(error);

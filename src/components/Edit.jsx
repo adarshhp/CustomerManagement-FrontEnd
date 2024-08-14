@@ -113,12 +113,15 @@ function Edit({ status, close, ide }) {
             };
 
             try {
-                console.log(payload);
-                await fetch(process.env.REACT_APP_SERVER+'/preexp', {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
+                // console.log(payload);
+                // await fetch('http://localhost:5003/api/preexp', {
+                //     method: "PUT",
+                //     headers: { "Content-Type": "application/json" },
+                //     body: JSON.stringify(payload)
+                // });
+                apiRequest('/preexp',"PUT",payload)
+
+
                 toast('Previous Experience has been updated successfully');
                 close();
             } catch (error) {
