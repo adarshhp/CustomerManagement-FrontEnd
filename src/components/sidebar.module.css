@@ -1,0 +1,7 @@
+.sidebar {
+    width: 180px;
+    grid-area: 2 / 1 / 6 / 2; 
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
