@@ -152,7 +152,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
                 lastDate: new Date(formsData.lastDate).toISOString()
             };
 
-            fetch('http://192.168.2.81:5003/api/preexp', {
+            fetch(process.env.REACT_APP_SERVER+'/api/preexp', {
                 //apiRequest('/api/preexp',{
                 method: "POST",
                 headers: { "content-type": "application/json" },
@@ -186,7 +186,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
         }
     };
     const fetchEvents = () => {
-        axios.get('http://192.168.2.81:5003/api/GetPrevExp/7')
+        axios.get(process.env.REACT_APP_SERVER+'/api/GetPrevExp/7')
             //  apiRequest('/api/GetPrevExp/7')
             .then((resposne) => {
 
@@ -273,7 +273,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
     const confirmDelete = async () => {
         if (!itemToDelete) return;
 
-        const url = `http://192.168.2.81:5003/api/preexp`;
+        const url = process.env.REACT_APP_SERVER+`/preexp`;
         try {
             console.log(itemToDelete)
             await fetch(url, {

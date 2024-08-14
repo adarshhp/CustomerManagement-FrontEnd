@@ -114,7 +114,7 @@ function Edit({ status, close, ide }) {
 
             try {
                 console.log(payload);
-                await fetch('http://192.168.2.81:5003/api/preexp', {
+                await fetch(process.env.REACT_APP_SERVER+'/preexp', {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)

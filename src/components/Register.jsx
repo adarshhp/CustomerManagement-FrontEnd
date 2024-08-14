@@ -51,8 +51,8 @@ const [formsData, setdataForm] = useState({
             <div>
                     {<MainHeading />}
                 </div >   
-                <Wrapper name="Personal" formComponent={<PersonalForm/>} isOpen={currentOpen === "Personal"}
-                onToggle={() => handleToggle("Personal")} />
+                <Wrapper name="Personal Details" formComponent={<PersonalForm/>} isOpen={currentOpen === "Personal Details"}
+                onToggle={() => handleToggle("Personal Details")} />
                 <Wrapper name="Educational Qualification" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>}  isOpen={currentOpen === "Educational Qualification"}
                 onToggle={() => handleToggle("Educational Qualification")} />
                 <Wrapper name="Previous Experience" formComponent={<ExperianceForm  initialDetailss={formsData} setInitialDetails={setInitial}/> }  isOpen={currentOpen === "Previous Experience"}
