@@ -29,30 +29,53 @@ function Register() {
         setCurrentTab(tab);
     };
 
+    // Experience component state
+    const [formsData, setdataForm] = useState({
+        companyName: "",
+        designation: "",
+        startDate: "",
+        lastDate: "",
+        userid: 7,
+    });
 
-//experiance component
-const [formsData, setdataForm] = useState({
-    companyName: "",
-    designation: "",
-    startDate: "",
-    lastDate: "",
-    userid: 7,
-  });
-  const setInitial = (data) => {
-    console.log(data);
-    setdataForm(data);
-}
-    return(
-        <div className="wrapperdis">
-            <div>
-                    {<MainHeading />}
-                </div >   
-                <Wrapper name="Personal" formComponent={<PersonalForm/>} isOpen={currentOpen === "Personal"}
-                onToggle={() => handleToggle("Personal")} />
-                <Wrapper name="Educational Qualification" formComponent={<EducationalForm initialDetails={formdata} setInitialDetails={setterFunc}/>}  isOpen={currentOpen === "Educational Qualification"}
-                onToggle={() => handleToggle("Educational Qualification")} />
-                <Wrapper name="Previous Experience" formComponent={<ExperianceForm  initialDetailss={formsData} setInitialDetails={setInitial}/> }  isOpen={currentOpen === "Previous Experience"}
-                onToggle={() => handleToggle("Previous Experience")} />
+    const setInitial = (data) => {
+        console.log(data);
+        setdataForm(data);
+    }
+
+    return (
+        <div className="register-container">
+          
+            <div className="tabs">
+                <button
+                    className={`tab-button ${currentTab === "Personal" ? "active" : ""}`}
+                    onClick={() => handleTabChange("Personal")}
+                >
+                    Personal
+                </button>
+                <button
+                    className={`tab-button ${currentTab === "Educational Qualification" ? "active" : ""}`}
+                    onClick={() => handleTabChange("Educational Qualification")}
+                >
+                    Educational Qualification
+                </button>
+                <button
+                    className={`tab-button ${currentTab === "Previous Experience" ? "active" : ""}`}
+                    onClick={() => handleTabChange("Previous Experience")}
+                >
+                    Previous Experience
+                </button>
+            </div>
+            <div className="tab-content">
+                
+                {currentTab === "Personal" && <PersonalForm />}
+                {currentTab === "Educational Qualification" && 
+                    <EducationalForm initialDetails={formdata} setInitialDetails={setterFunc} />
+                }
+                {currentTab === "Previous Experience" && 
+                    <ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial} />
+                }
+            </div>
         </div>
     );
 }
