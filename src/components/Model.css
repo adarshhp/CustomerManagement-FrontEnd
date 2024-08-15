@@ -87,8 +87,12 @@
 }
 
 .tab-content {
-    padding: 20px;
+    padding: -4px;
     border: 1px solid #ccc;
     border-top: none;
 
+}
+.create-tab{
+    font-weight: bold;
+    padding-bottom: 10px;
 }

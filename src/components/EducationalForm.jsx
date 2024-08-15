@@ -154,9 +154,14 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     getEduData();
   };
   const getEduData = async () => {
+try{
     const response = await apiRequest("/EducationalDetails/7");
     setPrevList(response?.data || []);
-    console.log(response);
+    console.log(response);}
+    catch(error){
+      console.log(error);
+    }
+
   };
   const fillYears = () => {
     const year = new Date().getFullYear();

@@ -1,7 +1,9 @@
+import Register from "./Register";
+
 export default function Dashboard(){
     return(
         <>
-        <h2>THIS IS DASHBOARD</h2>
+       <p>DASHBOARD</p>
         </>
     )
 }

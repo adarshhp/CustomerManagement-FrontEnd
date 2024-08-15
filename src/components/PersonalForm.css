@@ -8,8 +8,8 @@
     display: flex;
     align-content: center;
     flex-direction: row;
-    width:100%;
-    justify-content: center;
+    width:96%;
+    /* justify-content: center; */
     margin-top: 10px;
     border-radius: 20px;
     gap: 10%;
@@ -68,24 +68,19 @@
     margin: 15px;
     margin-left: 131px;
 }
-.group1{
-    display: flex;
-    flex-direction: row;
-    height: 30px;
-    border-radius: 20px;
-    gap: 10px;
-}
+
 .group2{
     display: flex;
     flex-direction: row;
     height: 30px;
-    width: 50%;
+    width: 100%;
     justify-content: space-between;
-    gap: 150px;
+    gap: 0%;
 } 
 .email{
-    height: 30px;
+    height: 18px;
     border-radius: 10px;
+    width:52%
 } 
 .temp{
 height: 50px;
@@ -97,19 +92,19 @@ border-radius: 10px;
     border-radius: 10px;
 }
 .marstatus{
-    height: 30px;
+    height: 18px;
     border-radius: 10px;
 }
 .pancard{
-    height: 30px;
+    height: 18px;
     border-radius: 10px;
 }
 .aadnum{
-    height: 30px;
+    height: 18px;
     border-radius: 10px;
 }
 .phnnum{
-    height: 30px;
+    height: 18px;
     border-radius: 10px;
 }
 .fname{
@@ -136,8 +131,11 @@ border-radius: 10px;
 }
 .cbutton{
    display: flex; 
-   justify-content: space-around;
+   /* justify-content: space-around; */
     width: 100%;
+    position: relative;
+    left: 55%;
+    gap:5%
 }
 .error{
     font-size: small;
@@ -145,7 +143,8 @@ border-radius: 10px;
 }
 .labelish{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap:30px;
 }
 
 
@@ -156,7 +155,7 @@ border-radius: 10px;
     margin: 0 10px;
   }
   .form-group input {
-    width: 100%;
+    width: 83%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -194,7 +193,7 @@ border-radius: 10px;
     width: 170px;
   }
   .selctor {
-    width: 150px;
+    width: 87%;
     height: 40px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -206,5 +205,334 @@ border-radius: 10px;
 .star{
     color: red;
 }
+.reporting{
+    width: 30%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    margin-left: 10px;
+    position: relative;
+    left:60px;
+}
+.group1{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    border-radius: 20px;
+    gap: 100px;
+    justify-content: space-between;
+}
+#thirdrow{
+    display:flex;
+    flex-direction: row;
+}
+#forthrow{
+    display:flex;
+    flex-direction: row;
+}
 
 
+
+.forgrp {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .forgrp input {
+    width: 52%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .forgrp label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .forgrp input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .forgrp input:hover + label,
+  .forgrp input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  .group4{
+    display:flex;
+    flex-direction: row;
+  }
+  .closeone{
+    gap:2%;
+    display:flex;
+    flex-direction: row;
+  }
+  .labelish{
+    position: relative;
+    left: 0%;
+  }
+
+  .distance{
+    gap:1%;
+  }
+  #phoneno{
+
+  }
+
+
+  .fo {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .fo input {
+    width: 235%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .fo label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .fo input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .fo input:hover + label,
+  .fo input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+
+
+  .f {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .f input {
+    width: 52%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .f label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .f input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .f input:hover + label,
+  .f input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+
+
+
+
+
+  
+
+  .fe {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .fe input {
+    width: 178%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .fe label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .fe input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .fe input:hover + label,
+  .fe input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+
+  
+
+  .feemp {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .feemp input {
+    width: 86%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    margin-left:146%;
+  }
+  .feemp label {
+    position: absolute;
+    left: 152%;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .feemp input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .feemp input:hover + label,
+  .feemp input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 150%;
+  }
+  .over{
+    position:relative;
+    left:23%;
+    width:56%;
+  }
+  .together{
+    display:flex;
+    width:68%;
+  }
+  .overr{
+    position:relative;
+    left:43%;
+    width:46%;
+    gap:5%;
+  }
+  .widdth{
+    width: 70%;
+  }
+
+
+  .finale {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .finale input {
+    width: 86%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    position: relative;
+    left: -3%;
+  }
+  .finale label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 14px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .finale input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .finale input:hover + label,
+  .finale input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+
+
+
+
+  

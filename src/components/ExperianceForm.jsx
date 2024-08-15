@@ -180,6 +180,7 @@ console.log(experiences+'gvykhyukefvfgysgvoyefuskfev');
         }
     };
     const fetchEvents = async () => {
+try{
        // axios.get('http://localhost:5003/api/GetPrevExp/7')
         const response = await apiRequest("/GetPrevExp/7");
 
@@ -190,6 +191,10 @@ console.log(experiences+'gvykhyukefvfgysgvoyefuskfev');
                 }else{
                     alert('some error while fetching data')
                 }
+            }catch(error){
+                console.log(error);
+            }
+
            
     }
     useEffect(() => {

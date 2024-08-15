@@ -1,7 +1,25 @@
 .sidebar {
     width: 180px;
     grid-area: 2 / 1 / 6 / 2; 
-    background-color: #f4f4f4;
+    background-color: #FEEBBD;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   }
+  
+  .unlist{
+padding-top:20px;
+list-style: none;
+list-style-type: none;
+
+  }
+  .lilist{
+text-align: center;
+margin:10px;
+text-decoration: none;
+color:inherit;
+
+
+  }
+  .lilist a:hover {
+    color: white; 
+}

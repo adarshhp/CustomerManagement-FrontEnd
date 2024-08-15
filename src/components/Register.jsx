@@ -45,7 +45,7 @@ function Register() {
 
     return (
         <div className="register-container">
-          
+          <div className="create-tab">Create Employee</div>
             <div className="tabs">
                 <button
                     className={`tab-button ${currentTab === "Personal" ? "active" : ""}`}
