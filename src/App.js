@@ -19,6 +19,8 @@ function App() {
         <Route path="/" element={<Layout/>} >   
           <Route index element={<Dashboard/>} />
           <Route path="/register" element={<Register/>}/>
+          <Route path="/about" element={<Register/>}/>
+
         </Route>
       </Routes>
     </Router>
