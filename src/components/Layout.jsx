@@ -10,7 +10,7 @@ export default function Layout() {
         <div className={sty.logo}>
           <img src="/logo.png" alt="Enxcl" />
         </div>
-        <div className={sty.name}>Name</div>
+        <div className={sty.name}>Welcome HR !</div>
         <div className="icon">
           <svg
             width="40"

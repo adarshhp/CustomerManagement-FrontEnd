@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./PersonalForm.css";
+import apiRequest from "../lib/apiRequest";
 import PopeUp from "./PopeUp";
 import sty from "./formatedStyle.module.css";
 
@@ -18,7 +19,8 @@ function PersonalForm() {
         phNum: "",
         aadhaarNum: "",
         DOB: "",
-        Nationlity: ""
+        Nationlity: "",
+        reportingmanager:""
     })
     //usestate for changing form from readonly to editable
     const [editForm, setEditForm] = useState(true);
@@ -93,7 +95,24 @@ function PersonalForm() {
             setAdharMsg("Invalid Aadhaar Number");
         }
     }
+  useEffect(() => {
+    const fetchDropdownData = async () => {
+      try {
+        const response = await apiRequest("/ListofUser");
+        const data = await response.json();
+        setDropdownData(data);
+      } catch (error) {
+        console.error('Error fetching dropdown data:', error);
+      }
+    };
+    fetchDropdownData();
+    }, []); 
 
+    const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+    const [dropdownData, setDropdownData] = useState([]);
+    const [selectedOption, setSelectedOption] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
     const [errorPanMsg, seterrorPanMsg] = useState(null);
     const [errorAdharMsg, setAdharMsg] = useState(null);
@@ -113,8 +132,13 @@ function PersonalForm() {
                         </div>
                     </div>
 
-                    <select name="gender" className="reporting" value="Reporting Manager" onChange={handlechange}>
-                        <option> Reporting Manager</option>
+                    <select name="gender" className="reporting" value={selectedOption}  onChange={handleSelectChange}>
+                    <option value="">Reporting Manager</option>
+                    {dropdownData.map((item) => (
+                    <option key={item.id} value={item.value}>
+                    {item.label}
+                    </option>
+                    ))}
                         
                     </select>
                 </div>
@@ -145,9 +169,11 @@ function PersonalForm() {
                             <option value='married'>Married</option>
                             <option value='unmarried'>UnMarried</option>
                         </select>
+                        <br/>
+                        <br/>
                         <div className="finale">
                             <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} />
-                            <label for="panNum">Pan card no</label>
+                            <label for="panNum">PAN Card Number</label>
                             {errorPanMsg != null && formsData.panNum != "" && <span className="error">{errorPanMsg}</span>}
                         </div>
 
@@ -175,7 +201,7 @@ function PersonalForm() {
                     <div className="over">
                         <div className="form-group">
                             <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} />
-                            <label for="phNum">phone no:</label>
+                            <label for="phNum">Phone Number</label>
                         </div>
                     </div>
                 </div>
@@ -211,7 +237,7 @@ function PersonalForm() {
                     <div className="over">
                         <div className="form-group">
                             <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} />
-                            <label for="phNum">phone no:</label>
+                            <label for="phNum">Adhar Card No:</label>
                         </div>
                     </div>
                 </div>

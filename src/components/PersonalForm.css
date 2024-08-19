@@ -147,8 +147,6 @@ border-radius: 10px;
     gap:30px;
 }
 
-
-
 .form-group {
     position: relative;
     margin-bottom: 20px;
@@ -292,16 +290,12 @@ border-radius: 10px;
   .distance{
     gap:1%;
   }
-  #phoneno{
-
-  }
-
-
+  
   .fo {
     position: relative;
     margin-bottom: 20px;
     margin: 0 10px;
-  }
+   }
   .fo input {
     width: 235%;
     padding: 10px;

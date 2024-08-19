@@ -1,13 +1,17 @@
 import sty from "./sidebar.module.css"
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PeopleIcon from '@mui/icons-material/People';
 import Register from "./Register";
+
 export default function SideBar(){
     return(
         <div className={sty.sidebar}>
-          <h2>Sidebar</h2>
+          
           <ul className={sty.unlist}>
-            <li className={sty.lilist}><a href="/">Dash Board</a></li>
-            <li className={sty.lilist} ><a href="/about">Create Employee</a></li>
-            <li className={sty.lilist}><a href="/contact">Employee List</a></li>
+            <ul className={sty.lilist}><a href="/" className="black"><span> <DashboardIcon/></span>Dash Board</a></ul>
+            <ul className={sty.lilist} ><a href="/about" className="black"><span> <PersonAddIcon/></span>Create Employee</a></ul>
+            <ul className={sty.lilist}><a href="/contact" className="black"><span> <PeopleIcon/></span>Employee List</a></ul>
           </ul>
         </div>
     );
