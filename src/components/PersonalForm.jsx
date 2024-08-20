@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import "./PersonalForm.css";
 import apiRequest from "../lib/apiRequest";
 import PopeUp from "./PopeUp";
+import sty from "./formatedStyle.module.css";
+
+
 function PersonalForm() {
     const [formsData, setformsData] = useState({
         fname: "",
@@ -206,20 +209,27 @@ function PersonalForm() {
 
                 <div className="group2" id="forthrow">
                     <div className="together">
-                        <select name="gender" className="gender selctor" value="DOB" onChange={handlechange}>
-                            <option> DOB</option>
-                            <option value='Male'>Male</option>
-                            <option value='Female'>Female</option>
-                            <option value='others'>Others</option>
-                        </select>
+                        
+                    <div className={sty.form_group}>
+                            <input
+                                type="date"
+                                id="messi3"
+                                placeholder=''
+                                className='textbox1'
+                            
+                                onChange={handlechange}
+                                // title='fill StartingDate'
+
+                                name='startDate'
+                                required
+                            />
+                            <label htmlFor="messi3"><span className="star">*</span>DOB</label>
+                           
+                        </div>
+
                         <select className='bloodgrp selctor' name="bldGrp" value="Nationality" onChange={handlechange}>
                             <option>Nationality </option>
-                            <option value='A+'> A+</option>
-                            <option value='B+'>AB+</option>
-                            <option value='O+'>O+</option>
-                            <option value='O-'> O-</option>
-                            <option value='AB-'>AB-</option>
-                            <option value='others'> Others</option>
+                           
                         </select>
 
                     </div>
