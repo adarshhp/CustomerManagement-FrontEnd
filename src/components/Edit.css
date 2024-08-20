@@ -89,9 +89,10 @@ height:max-content;
 padding-bottom: 20px;
 width:63%;
 position:fixed;
-left:196px;
+left:25%;
 top:150px;
 bottom:25px;
+z-index:1000;
 
 }
 .edit-header{

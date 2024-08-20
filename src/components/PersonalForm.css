@@ -134,7 +134,7 @@ border-radius: 10px;
    /* justify-content: space-around; */
     width: 100%;
     position: relative;
-    left: 55%;
+    left: 16%;
     gap:5%
 }
 .error{
@@ -238,9 +238,12 @@ border-radius: 10px;
     position: relative;
     margin-bottom: 20px;
     margin: 0 10px;
+    width:61%;
+    margin-top: 1%;
+    margin-bottom: 1%;
   }
   .forgrp input {
-    width: 52%;
+    width: 60%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -295,6 +298,7 @@ border-radius: 10px;
     position: relative;
     margin-bottom: 20px;
     margin: 0 10px;
+    width: 168%;
    }
   .fo input {
     width: 235%;
@@ -482,11 +486,14 @@ border-radius: 10px;
     width: 70%;
   }
 
-
+.error{
+  display:block;
+}
   .finale {
     position: relative;
     margin-bottom: 20px;
     margin: 0 10px;
+    display:block;
   }
   .finale input {
     width: 86%;
@@ -526,8 +533,12 @@ border-radius: 10px;
   }
 
   .dateselector{
-    
 
+
+  }
+  .move-left{
+    position: relative;
+    left:-1%;
   }
 
 

@@ -4,7 +4,7 @@ import apiRequest from "../lib/apiRequest";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditPopUp from "./EditPopUp";
-import sty from "./formatedStyle.module.css";
+import sty from "./educationalStyle.module.css";
 import edb from "./EditPopUp.module.css";
 import Model from "./Model";
 
@@ -35,7 +35,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     checkRequired();
   }, [formdata.cgpa, formdata.percentage]);
   const checkRequired = () => {
-    if ((formdata.cgpa == null || formdata.cgpa == "") && (formdata.percentage == null || formdata.percentage=="")) {
+    if ((formdata.cgpa == null || formdata.cgpa == "") && (formdata.percentage == null || formdata.percentage == "")) {
       setRequired(true);
       console.log("none is filled");
     } else {
@@ -64,9 +64,9 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
       setYoPFilled(e.target.value !== "");
     }
     if ((name == "percentage" || name == "cgpa") && (value == "" || value == " ")) {
-      console.log(null,"value spotted");
+      console.log(null, "value spotted");
       setformdata({ ...formdata, [name]: null });
-    } else if(name == "university"){
+    } else if (name == "university") {
       let val = e.target.value.replace(/\d/g, '');
       setformdata({ ...formdata, [name]: val });
       console.log(val);
@@ -74,7 +74,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
       setformdata({ ...formdata, [name]: value });
     }
   }
-  
+
   useEffect(() => {
     setformdata(initialDetails);
     // setSelQual(initialDetails.qualification);
@@ -88,8 +88,8 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     }
     setYoPFilled(
       initialDetails.yearOfPassing !== "" &&
-        typeof parseInt(initialDetails.yearOfPassing) == "number" &&
-        initialDetails.yearOfPassing != null
+      typeof parseInt(initialDetails.yearOfPassing) == "number" &&
+      initialDetails.yearOfPassing != null
     );
     const fetchInitial = async () => {
       const data = await apiRequest("/qualdetail");
@@ -128,10 +128,10 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
   const postEduData = async () => {
     let payload = formdata;
     console.log(formdata);
-    if(payload.cgpa == ""){
+    if (payload.cgpa == "") {
       payload.cgpa = null;
     }
-    if(payload.percentage == ""){
+    if (payload.percentage == "") {
       payload.percentage = null;
     }
     const response = await apiRequest("/EducationalDetails", "POST", payload);
@@ -154,11 +154,12 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     getEduData();
   };
   const getEduData = async () => {
-try{
-    const response = await apiRequest("/EducationalDetails/7");
-    setPrevList(response?.data || []);
-    console.log(response);}
-    catch(error){
+    try {
+      const response = await apiRequest("/EducationalDetails/7");
+      setPrevList(response?.data || []);
+      console.log(response);
+    }
+    catch (error) {
       console.log(error);
     }
 
@@ -227,9 +228,8 @@ try{
       <form className="details" onSubmit={handleSubmit}>
         <div className="row">
           <div
-            className={`${
-              isFilled ? `${sty.select_filled}` : `${sty.form_group}`
-            }`}
+            className={`${isFilled ? `${sty.select_filled}` : `${sty.form_group}`
+              }`}
           >
             <select
               className="item quali sel"
@@ -256,9 +256,8 @@ try{
             </label>
           </div>
           <div
-            className={`${
-              isDisciplineFilled ? `${sty.select_filled}` : `${sty.form_group}`
-            }`}
+            className={`${isDisciplineFilled ? `${sty.select_filled}` : `${sty.form_group}`
+              }`}
           >
             <select
               className="item quali sel"
@@ -297,13 +296,12 @@ try{
               required
             ></input>
             <label htmlFor="university">
-              <span className="star">*</span>University Name
+              <span className="star">*</span>University
             </label>
           </div>
           <div
-            className={`${
-              isYoPFilled ? `${sty.select_filled}` : `${sty.form_group}`
-            }`}
+            className={`${isYoPFilled ? `${sty.select_filled}` : `${sty.form_group}`
+              }`}
           >
             <select
               className="item quali sel"
@@ -358,7 +356,7 @@ try{
               required={required}
               title="Please select either one of Percentage or CGPA in decimal values"
             />
-            <label htmlFor="percentage">Percentage %</label>
+            <label htmlFor="percentage">Percentage </label>
           </div>
           <button type="submit" className="submitbtn" title="Save">
             <svg

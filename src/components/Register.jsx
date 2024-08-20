@@ -51,7 +51,7 @@ function Register() {
                     className={`tab-button ${currentTab === "Personal" ? "active" : ""}`}
                     onClick={() => handleTabChange("Personal")}
                 >
-                    Personal
+                    Employee Details
                 </button>
                 <button
                     className={`tab-button ${currentTab === "Educational Qualification" ? "active" : ""}`}
