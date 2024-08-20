@@ -6,6 +6,10 @@ import sty from "./formatedStyle.module.css";
 
 
 function PersonalForm() {
+
+
+
+
     const [formsData, setformsData] = useState({
         fname: "",
         lname: "",
@@ -35,7 +39,7 @@ function PersonalForm() {
 
         if (name === 'dob') {
 
-            validateDate(value);
+          //  validateDate(value);
         
             console.log("calling the dob validation"+value);
           
@@ -53,10 +57,10 @@ function PersonalForm() {
             }
             setformsData({ ...formsData, [name]: val });
         } else if (name === 'fname') {
-            let val = e.target.value.replace(/\d/g, '');
+            let val = e.target.value.replace(/[^a-zA-Z]/g, '');
             setformsData({ ...formsData, [name]: val });
         } else if (name === 'lname') {
-            let val = e.target.value.replace(/\d/g, '');
+            let val = e.target.value.replace(/[^a-zA-Z]/g, '');
             setformsData({ ...formsData, [name]: val });
         }
         else {
@@ -113,31 +117,43 @@ function PersonalForm() {
 
 
     const validateDate = (date) => {
-        const currentDate = new Date();
-        console.log(date,"console the comparison date");
-        const givenDate = new Date(date)
-        console.log("validating the dates"+currentDate+givenDate);
-        if (currentDate < givenDate) {
-
-            setDateErrorMessage("Invalid Date");
+        const currentDate = new Date(); // Get current date and time
+        console.log("Current Date:", currentDate);
+    
+        // Ensure the given date is parsed correctly
+        const givenDate = new Date(date);
+        if (isNaN(givenDate.getTime())) {
+            setDateErrorMessage("");
+            return;
         }
-        else {
-            setDateErrorMessage(null);
-            console.log("elsepart");
-        }
-
-        const cutoffYear = new Date('1960-01-01');
-
-        if (givenDate < cutoffYear) {
-            console.log("validatingdates")
+    
+        console.log("Given Date:", givenDate);
+    
+        // Convert both dates to milliseconds for comparison
+        const currentTimestamp = currentDate.getTime();
+        const givenTimestamp = givenDate.getTime();
+        
+        // Check if the given date is in the future
+        if (givenTimestamp > currentTimestamp) {
             setDateErrorMessage("Invalid Date");
             return;
-        }else{
-            setDateErrorMessage(null);
         }
-
-
-    }
+    
+        // Define the cutoff date (January 1, 1960)
+        const cutoffDate = new Date('1960-01-01');
+        const cutoffTimestamp = cutoffDate.getTime();
+    
+        // Check if the given date is before the cutoff date
+        if (givenTimestamp < cutoffTimestamp) {
+            setDateErrorMessage("Date cannot be before 1960.");
+            return;
+        }
+    
+        // If all checks pass, clear the error message
+        setDateErrorMessage(null);
+        console.log("Date is valid.");
+    };
+    
 
 
 
@@ -323,6 +339,15 @@ function PersonalForm() {
             console.error('Error fetching dropdown data:', error);
         }
     };
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        return `${day}-${month}-${year}`;
+    };
 
     useEffect(() => {
         fetchNation();
@@ -355,7 +380,7 @@ function PersonalForm() {
 
                     <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
                         {/* handleSelectChange */}
-                        <option value=""><span className="star">*</span>Reporting Manager</option>
+                        <option value="">Reporting Manager</option>
                         {manager.map((item, index) => (
                             <option key={index} value={item.name}>
                                 {item.name}
@@ -387,7 +412,7 @@ function PersonalForm() {
                     </div>
                     <div className="overr">
                         <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
-                            <option><span className="star">*</span>Marital Status</option>
+                            <option>Marital Status</option>
                             <option value='married'>Married</option>
                             <option value='unmarried'>UnMarried</option>
                         </select>
@@ -405,13 +430,13 @@ function PersonalForm() {
                 <div className="group2" id="forthrow">
                     <div className="together">
                         <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange} required>
-                            <option><span className="star">*</span> Gender</option>
+                            <option>Gender</option>
                             <option value='Male'>Male</option>
                             <option value='Female'>Female</option>
                             <option value='others'>Others</option>
                         </select>
                         <select className='bloodgrp selctor' name="bldGrp" value={formsData.bldGrp} onChange={handlechange} required>
-                            <option><span className="star">*</span>Blood Group </option>
+                            <option>Blood Group </option>
                             <option>A+</option>
                             <option>B+</option>
                             <option>O+</option>
@@ -439,6 +464,7 @@ function PersonalForm() {
                                 id="messi3"
                                 placeholder=''
                                 className='textbox1'
+                                max="2024-06-20"
 
                                 onChange={handlechange}
                                 // title='fill StartingDate'
@@ -454,7 +480,7 @@ function PersonalForm() {
                         </div>
 
                         <select className='bloodgrp selctor' name="nationality" value={formsData.nationality} onChange={handlechange} required>
-                            <option><span className="star">*</span>Nationality </option>
+                            <option>Nationality </option>
 
                             {dropdownData.map((item, index) => (
                                 <option key={index} value={item.nationality}>
@@ -478,7 +504,7 @@ function PersonalForm() {
                 <div className="move-left">
                     <div className="forgrp">
                         <select name="divisionOfEmployee" className="gender selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
-                            <option><span className="star">*</span>Division of employee</option>
+                            <option>Division of employee</option>
                             {divisionOfEmployee.map((val, index) => (
                                 <>
                                     <option value={val.division} key={index}>
@@ -492,7 +518,7 @@ function PersonalForm() {
 
                     <div className="forgrp">
                         <select name="roleOFEmployee" className="gender selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
-                            <option><span className="star">*</span>Role of employee</option>
+                            <option>Role of employee</option>
 
                             {role.map((val, index) => (
                                 <>
@@ -506,7 +532,7 @@ function PersonalForm() {
                     <div className="group4">
                         <div className="fo">
                             <select name="rank" className="gender selctor" value={formsData.rank} onChange={handlechange} required>
-                                <option><span className="star">*</span>Rank</option>
+                                <option>Rank</option>
 
                                 {rank.map((val, index) => (
                                     <>
