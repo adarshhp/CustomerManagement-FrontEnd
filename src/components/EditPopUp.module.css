@@ -1,11 +1,13 @@
 .largebox{
-    width: 80%;
+    width: 76%;
     height: 60%;
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 3;
+    left:255px;
 }
 .smallbox{
     width: 100%;
@@ -83,4 +85,12 @@
     top: 0;
     left: 0;
     backdrop-filter: blur(3px) brightness(0.7);
+}
+.rows{
+    gap:0%;
+    display:flex;
+    flex-direction: row;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
 }

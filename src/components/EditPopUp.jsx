@@ -94,6 +94,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
   const closeMessage = () => {
     setShowDialog(false);
   }
+ 
   return (
     <>
     {/* <ToastContainer/> */}
@@ -104,7 +105,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
           <button className={edb.close} type="button" onClick={()=>{close()}}><span>X</span></button>
         </div>
         <div className={edb.smallbox}>
-          <div className="row">
+          <div className={edb.rows}>
             <div
               className={`${
                 isFilled ? `${sty.select_filled}` : `${sty.form_group}`
@@ -237,7 +238,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 required={required}
                 title="Please select either one of Percentage or CGPA in decimal values"
                 />
-              <label htmlFor="percentage">Percentage %</label>
+              <label htmlFor="percentage">Percentage </label>
             </div>
             <button type="submit" className="submitbtn" title="Update">
               <svg

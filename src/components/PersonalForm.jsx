@@ -9,83 +9,134 @@ function PersonalForm() {
     const [formsData, setformsData] = useState({
         fname: "",
         lname: "",
-        reportingManager:"",
+        reportingManager: "",
         email: "",
         employeeID: "",
         permAddr: "",
         mstatus: "",
         panNum: "",
-        gender:"",
+        gender: "",
         bldGrp: "",
         phNum: "",
-        dob:"",
+        dob: "",
         nationality: "",
         aadhaarNum: "",
         divisionOfEmployee: "",
-        roleOFEmployee:"",
-        rank:""
-        
+        roleOFEmployee: "",
+        rank: ""
+
     })
     //usestate for changing form from readonly to editable
     const [editForm, setEditForm] = useState(true);
-    const [error,setErrors]=useState("");
+    const [error, setErrors] = useState("");
     function handlechange(e) {
         const { name, value } = e.target;
-      
-        
-        const isValidDate = (dateValue) => {
-          const date = new Date(dateValue);
-          const year = date.getFullYear();
-          return !isNaN(date.getTime()) && year >= 1900;
+        setformsData({ ...formsData, [name]: value });
 
-        };
-      
-      
         if (name === 'dob') {
-          if (isValidDate(value)) {
-            setformsData({ ...formsData, [name]: value });
-          } else {
-            alert("Date of birth cannot be before the year 1900.");
-          }
-        } else if(name==='phNum'){
+
+            validateDate(value);
+        
+            console.log("calling the dob validation"+value);
+          
+
+        } else if (name === 'phNum') {
             let val = e.target.value.replace(/[^\d]/g, '');
             if (val.length > 10) {
-                val = val.slice(0, 10); 
+                val = val.slice(0, 10);
             }
             setformsData({ ...formsData, [name]: val });
-        }else if(name==='aadhaarNum'){
+        } else if (name === 'aadhaarNum') {
             let val = e.target.value.replace(/[^\d]/g, '');
             if (val.length > 12) {
-                val = val.slice(0, 12); 
+                val = val.slice(0, 12);
             }
             setformsData({ ...formsData, [name]: val });
-        }else if(name==='fname'){
-            let val =  e.target.value.replace(/\d/g, '');
+        } else if (name === 'fname') {
+            let val = e.target.value.replace(/\d/g, '');
             setformsData({ ...formsData, [name]: val });
-        }else if(name==='lname'){
+        } else if (name === 'lname') {
             let val = e.target.value.replace(/\d/g, '');
             setformsData({ ...formsData, [name]: val });
         }
-            else {
-         
-          setformsData({ ...formsData, [name]: value });
-        }
-      
-        console.log(name, value, e.target.value);
-      }
-      
+        else {
 
-   
+            setformsData({ ...formsData, [name]: value });
+        }
+
+        console.log(name, value, e.target.value);
+    }
+
+
+
 
     useEffect(() => {
         validatePan(formsData.panNum);
         validateEmail(formsData.email);
-       // validateAdhar(formsData.aadhaarNum);
-       validateDate(formsData.Date);
+        // validateAdhar(formsData.aadhaarNum);
+        validateDate(formsData.Date);
+        console.log(formsData.Date, "wwwwwwwww")
+        validatePhone(formsData.phNum);
+        validateAadhar(formsData.aadhaarNum);
     }, [formsData]);
+    const [dateError, setDateErrorMessage] = useState(null);
+    // useEffect(()=>{
+    //     setDateErrorMessage("Invalid Date");
+    // })
+    const validatePhone = (phone) => {
+        const phonee = String(phone);
+        if (phonee.length !== 0) {
+            if (phonee.length <= 9) {
+                setPhoneError("Invalid Phone no")
+            } else {
+                setPhoneError("");
+            }
+        }
+    }
+    const validateAadhar = (aadhar) => {
+        const aadharr = String(aadhar);
+        if (aadharr.length !== 0) {
+            if (aadharr.length <= 11) {
 
-    validateDate=(date)=>{
-        
+                setAadharError("Invalid aadhar");
+            } else {
+                setAadharError("");
+            }
+        }
+
+
+    }
+
+    const [phoneError, setPhoneError] = useState("");
+    const [aadharError, setAadharError] = useState("");
+
+
+
+    const validateDate = (date) => {
+        const currentDate = new Date();
+        console.log(date,"console the comparison date");
+        const givenDate = new Date(date)
+        console.log("validating the dates"+currentDate+givenDate);
+        if (currentDate < givenDate) {
+
+            setDateErrorMessage("Invalid Date");
+        }
+        else {
+            setDateErrorMessage(null);
+            console.log("elsepart");
+        }
+
+        const cutoffYear = new Date('1960-01-01');
+
+        if (givenDate < cutoffYear) {
+            console.log("validatingdates")
+            setDateErrorMessage("Invalid Date");
+            return;
+        }else{
+            setDateErrorMessage(null);
+        }
+
+
     }
 
 
@@ -98,7 +149,7 @@ function PersonalForm() {
 
     function submitted(e) {
         e.preventDefault()
-        if (errorMessage == null) {
+        if (errorMessage == null&&!phoneError&&!dateError&&!aadharError&&!errorPanMsg) {
             setshowPopeup(true);
         }
     }
@@ -117,6 +168,7 @@ function PersonalForm() {
             setshowStatusBar(res.message);
             console.log(res);
         })
+        
 
     }
     function closestatus() {
@@ -133,10 +185,10 @@ function PersonalForm() {
     }
     const validatePan = (panNum) => {
         const pa = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-    
+
         const cleanedPanNum = panNum.toUpperCase().replace(/[^A-Z0-9]/g, '');
-        console.log(cleanedPanNum,"vvvvvvvvvvvv");
-    
+        console.log(cleanedPanNum, "vvvvvvvvvvvv");
+
         if (pa.test(cleanedPanNum)) {
             seterrorPanMsg(null);
         } else {
@@ -144,7 +196,7 @@ function PersonalForm() {
             seterrorPanMsg("Invalid PAN Number");
         }
     };
-    
+
     // const validateAdhar = (number) => {
     //     const ad = new RegExp(/^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/);
     //     console.log(number, ad.test(number));
@@ -154,7 +206,7 @@ function PersonalForm() {
     //         setAdharMsg("Invalid Aadhaar Number");
     //     }
     // }
-    
+
 
     const handleSelectChange = (event) => {
         setSelectedOption(event.target.value);
@@ -165,12 +217,12 @@ function PersonalForm() {
     const [errorPanMsg, seterrorPanMsg] = useState(null);
     const [errorAdharMsg, setAdharMsg] = useState(null);
 
-//use state for all dropdowns
-const [nation,setNation]=useState([]);
-const [role,setRole]=useState([]);
-const [divisionOfEmployee,setdivisionOfEmployee]=useState([]);
-const [rank,setRank]=useState([]);
-const [manager,setManager]=useState([]);
+    //use state for all dropdowns
+    const [nation, setNation] = useState([]);
+    const [role, setRole] = useState([]);
+    const [divisionOfEmployee, setdivisionOfEmployee] = useState([]);
+    const [rank, setRank] = useState([]);
+    const [manager, setManager] = useState([]);
 
 
 
@@ -205,17 +257,17 @@ const [manager,setManager]=useState([]);
         }
     };
     //fetch division
-    const fetchDivision=async()=>{
-        try{
-            const responce=await apiRequest('/GetDivisions');
+    const fetchDivision = async () => {
+        try {
+            const responce = await apiRequest('/GetDivisions');
             setdivisionOfEmployee(responce);
-            const data=await responce.json();
-            if(Array.isArray(data)){
+            const data = await responce.json();
+            if (Array.isArray(data)) {
                 setdivisionOfEmployee(data);
-            }else{
+            } else {
                 console.log('error fetching divisionOfEmployee');
             }
-        }catch(error){
+        } catch (error) {
             console.log(error);
         }
     }
@@ -225,11 +277,11 @@ const [manager,setManager]=useState([]);
         try {
             const response = await apiRequest('/GetRanks');
             setRank(response);
-           
+
             const data = await response.json();
 
             if (Array.isArray(data)) {
-               
+
 
                 setRank(data);
             } else {
@@ -246,42 +298,45 @@ const [manager,setManager]=useState([]);
             console.log(response, "responseeee");
             // const data = await response.json();
             console.log("inside........");
-            
-            
-            
+
+
+
             setDropdownData(response);
 
         } catch (error) {
             console.error('Error fetching dropdown data:', error);
         }
     };
-     //fetching reporting manager
-     const fetchManager = async () => {
+    //fetching reporting manager
+    const fetchManager = async () => {
         try {
             const response = await apiRequest("/ReportingManager");
             console.log(response, "responseeee");
             // const data = await response.json();
             console.log("inside........");
-            
-            
-            
+
+
+
             setManager(response);
 
         } catch (error) {
             console.error('Error fetching dropdown data:', error);
         }
     };
-    
-    useEffect(()=>{
-        fetchNation();
-fetchRole();
-fetchDivision();
-fetchRank();
-fetchDropdownData();
-fetchManager();
 
-    },[])
-    
+    useEffect(() => {
+        fetchNation();
+        fetchRole();
+        fetchDivision();
+        fetchRank();
+        fetchDropdownData();
+        fetchManager();
+
+    }, [])
+
+//     useEffect(()=>{
+// SetInitialDetails(formsData)
+//     },[formsData])
 
     return (
         <form className='personaldata' onSubmit={submitted} >
@@ -299,9 +354,9 @@ fetchManager();
                     </div>
 
                     <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
-                    {/* handleSelectChange */}
-                        <option value="">Reporting Manager</option>
-                        {manager.map((item,index) => (
+                        {/* handleSelectChange */}
+                        <option value=""><span className="star">*</span>Reporting Manager</option>
+                        {manager.map((item, index) => (
                             <option key={index} value={item.name}>
                                 {item.name}
                             </option>
@@ -318,8 +373,8 @@ fetchManager();
                     </div>
                     <div className="overr">
                         <div className="form-group">
-                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='employeeID' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.employeeID} onChange={handlechange} required/>
-                            <label for="phNum">Employee Id</label>
+                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='employeeID' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.employeeID} onChange={handlechange} required />
+                            <label for="phNum"><span className="star">*</span>Employee Id</label>
                         </div>
                     </div>
 
@@ -327,20 +382,20 @@ fetchManager();
 
                 <div className="labelish" >
                     <div className="fe">
-                        <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required/>
-                        <label for="permAddr">Permanent Address</label>
+                        <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required />
+                        <label for="permAddr"><span className="star">*</span>Permanent Address</label>
                     </div>
                     <div className="overr">
                         <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
-                            <option>Marital Status</option>
+                            <option><span className="star">*</span>Marital Status</option>
                             <option value='married'>Married</option>
                             <option value='unmarried'>UnMarried</option>
                         </select>
                         <br />
                         <br />
                         <div className="finale">
-                            <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} required/>
-                            <label for="panNum">PAN Card Number</label>
+                            <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} required />
+                            <label for="panNum"><span className="star">*</span>PAN Card Number</label>
                             {errorPanMsg != null && formsData.panNum != "" && <span className="error">{errorPanMsg}</span>}
                         </div>
 
@@ -350,25 +405,26 @@ fetchManager();
                 <div className="group2" id="forthrow">
                     <div className="together">
                         <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange} required>
-                            <option> Gender</option>
+                            <option><span className="star">*</span> Gender</option>
                             <option value='Male'>Male</option>
                             <option value='Female'>Female</option>
                             <option value='others'>Others</option>
                         </select>
                         <select className='bloodgrp selctor' name="bldGrp" value={formsData.bldGrp} onChange={handlechange} required>
-                            <option>Blood Group </option>
+                            <option><span className="star">*</span>Blood Group </option>
                             <option>A+</option>
                             <option>B+</option>
                             <option>O+</option>
                             <option>AB+</option>
                             <option>A-</option>
-                           
+
                         </select>
                     </div>
                     <div className="over">
                         <div className="form-group">
-                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} required/>
-                            <label for="phNum">Phone Number</label>
+                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} required />
+                            <label for="phNum"><span className="star">*</span>Phone Number</label>
+                            {phoneError && <p className="error">{phoneError}</p>}
                         </div>
                     </div>
                 </div>
@@ -386,23 +442,25 @@ fetchManager();
 
                                 onChange={handlechange}
                                 // title='fill StartingDate'
+                                value={formsData.dob}
 
                                 name='dob'
                                 required
                             />
                             <label htmlFor="messi3"><span className="star">*</span>DOB</label>
                             {error.DateError && <p className='error'>{error.DateError}</p>}
+                            {dateError && <p className="error">{dateError}</p>}
 
                         </div>
 
                         <select className='bloodgrp selctor' name="nationality" value={formsData.nationality} onChange={handlechange} required>
-                            <option>Nationality </option>
-                          
-                            {dropdownData.map((item,index) => (
-                            <option key={index} value={item.nationality}>
-                                {item.nationality}
-                            </option>
-                        ))}
+                            <option><span className="star">*</span>Nationality </option>
+
+                            {dropdownData.map((item, index) => (
+                                <option key={index} value={item.nationality}>
+                                    {item.nationality}
+                                </option>
+                            ))}
 
                         </select>
 
@@ -410,8 +468,9 @@ fetchManager();
 
                     <div className="over">
                         <div className="form-group">
-                            <input className='phnnum' id="phoneno" type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} required/>
-                            <label for="phNum">Adhar Card No:</label>
+                            <input className='phnnum' id="phoneno" type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} required />
+                            <label for="phNum"><span className="star">*</span>Adhar Card No:</label>
+                            {aadharError && <p className="error">{aadharError}</p>}
                         </div>
                     </div>
                 </div>
@@ -419,7 +478,7 @@ fetchManager();
                 <div className="move-left">
                     <div className="forgrp">
                         <select name="divisionOfEmployee" className="gender selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
-                            <option> Division of employee</option>
+                            <option><span className="star">*</span>Division of employee</option>
                             {divisionOfEmployee.map((val, index) => (
                                 <>
                                     <option value={val.division} key={index}>
@@ -427,14 +486,14 @@ fetchManager();
                                     </option>
                                 </>
                             ))}
-                           
+
                         </select>
                     </div>
 
                     <div className="forgrp">
                         <select name="roleOFEmployee" className="gender selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
-                            <option> Role of employee</option>
-                            
+                            <option><span className="star">*</span>Role of employee</option>
+
                             {role.map((val, index) => (
                                 <>
                                     <option value={val.role} key={index}>
@@ -447,21 +506,21 @@ fetchManager();
                     <div className="group4">
                         <div className="fo">
                             <select name="rank" className="gender selctor" value={formsData.rank} onChange={handlechange} required>
-                                <option> Rank</option>
-                               
-                            {rank.map((val, index) => (
-                                <>
-                                    <option value={val.rank} key={index}>
-                                        {val.rank}
-                                    </option>
-                                </>
-                            ))}
+                                <option><span className="star">*</span>Rank</option>
+
+                                {rank.map((val, index) => (
+                                    <>
+                                        <option value={val.rank} key={index}>
+                                            {val.rank}
+                                        </option>
+                                    </>
+                                ))}
                             </select>
                         </div>
 
                         <div className="cbutton">
                             <button className='button' type='submit'>Save</button>
-                            <button className="button" type="button" > Edit</button>
+                         
                         </div>
                     </div>
 
