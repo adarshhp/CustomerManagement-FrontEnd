@@ -542,6 +542,35 @@ border-radius: 10px;
   }
 
 
+  .sel_label{
+    top: -8px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 9px;
+    position: absolute;
+   pointer-events: none;
+
+  }
+  .select_filled {
+    position: relative;
+    width:61%;
+    left:9px;
+  }
+  
+  .select_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+
 
 
 

@@ -39,10 +39,10 @@ function PersonalForm() {
 
         if (name === 'dob') {
 
-          //  validateDate(value);
-        
-            console.log("calling the dob validation"+value);
-          
+            //  validateDate(value);
+
+            console.log("calling the dob validation" + value);
+
 
         } else if (name === 'phNum') {
             let val = e.target.value.replace(/[^\d]/g, '');
@@ -62,6 +62,10 @@ function PersonalForm() {
         } else if (name === 'lname') {
             let val = e.target.value.replace(/[^a-zA-Z]/g, '');
             setformsData({ ...formsData, [name]: val });
+        } else if (name === 'divisionOfEmployee') {
+            setDoE(true);
+        }else if(name===' roleOFEmployee'){
+            setRoleofEmployee(true);
         }
         else {
 
@@ -71,7 +75,8 @@ function PersonalForm() {
         console.log(name, value, e.target.value);
     }
 
-
+    const [isDoEFilled, setDoE] = useState(false);
+    const[isRoleFilled,setRoleofEmployee]=useState(true);
 
 
     useEffect(() => {
@@ -119,41 +124,41 @@ function PersonalForm() {
     const validateDate = (date) => {
         const currentDate = new Date(); // Get current date and time
         console.log("Current Date:", currentDate);
-    
+
         // Ensure the given date is parsed correctly
         const givenDate = new Date(date);
         if (isNaN(givenDate.getTime())) {
             setDateErrorMessage("");
             return;
         }
-    
+
         console.log("Given Date:", givenDate);
-    
+
         // Convert both dates to milliseconds for comparison
         const currentTimestamp = currentDate.getTime();
         const givenTimestamp = givenDate.getTime();
-        
+
         // Check if the given date is in the future
         if (givenTimestamp > currentTimestamp) {
             setDateErrorMessage("Invalid Date");
             return;
         }
-    
+
         // Define the cutoff date (January 1, 1960)
         const cutoffDate = new Date('1960-01-01');
         const cutoffTimestamp = cutoffDate.getTime();
-    
+
         // Check if the given date is before the cutoff date
         if (givenTimestamp < cutoffTimestamp) {
             setDateErrorMessage("Date cannot be before 1960.");
             return;
         }
-    
+
         // If all checks pass, clear the error message
         setDateErrorMessage(null);
         console.log("Date is valid.");
     };
-    
+
 
 
 
@@ -165,7 +170,7 @@ function PersonalForm() {
 
     function submitted(e) {
         e.preventDefault()
-        if (errorMessage == null&&!phoneError&&!dateError&&!aadharError&&!errorPanMsg) {
+        if (errorMessage == null && !phoneError && !dateError && !aadharError && !errorPanMsg) {
             setshowPopeup(true);
         }
     }
@@ -184,7 +189,7 @@ function PersonalForm() {
             setshowStatusBar(res.message);
             console.log(res);
         })
-        
+
 
     }
     function closestatus() {
@@ -359,9 +364,9 @@ function PersonalForm() {
 
     }, [])
 
-//     useEffect(()=>{
-// SetInitialDetails(formsData)
-//     },[formsData])
+    //     useEffect(()=>{
+    // SetInitialDetails(formsData)
+    //     },[formsData])
 
     return (
         <form className='personaldata' onSubmit={submitted} >
@@ -502,9 +507,10 @@ function PersonalForm() {
                 </div>
 
                 <div className="move-left">
-                    <div className="forgrp">
+                    <div  className={`${isDoEFilled ? `select_filled` : `forgrp`
+              }`}>
                         <select name="divisionOfEmployee" className="gender selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
-                            <option>Division of employee</option>
+                            <option></option>
                             {divisionOfEmployee.map((val, index) => (
                                 <>
                                     <option value={val.division} key={index}>
@@ -514,11 +520,17 @@ function PersonalForm() {
                             ))}
 
                         </select>
+                        <label
+                            className={`${isDoEFilled ? 'sel_label' : ''}`}
+                        >
+                            <span className="star">*</span>Division of employee
+                        </label>
                     </div>
 
-                    <div className="forgrp">
+                    <div  className={`${isRoleFilled ? `select_filled` : `forgrp`
+              }`}>
                         <select name="roleOFEmployee" className="gender selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
-                            <option>Role of employee</option>
+                            <option></option>
 
                             {role.map((val, index) => (
                                 <>
@@ -528,6 +540,11 @@ function PersonalForm() {
                                 </>
                             ))}
                         </select>
+                        <label
+                            className=  {`${isRoleFilled ? 'sel_label' : ''}`}
+                        >
+                            <span className="star">*</span>Role of Employee
+                        </label>
                     </div>
                     <div className="group4">
                         <div className="fo">
@@ -546,7 +563,7 @@ function PersonalForm() {
 
                         <div className="cbutton">
                             <button className='button' type='submit'>Save</button>
-                         
+
                         </div>
                     </div>
 
