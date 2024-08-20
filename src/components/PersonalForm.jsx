@@ -37,6 +37,7 @@ function PersonalForm() {
           const date = new Date(dateValue);
           const year = date.getFullYear();
           return !isNaN(date.getTime()) && year >= 1900;
+
         };
       
       
@@ -80,7 +81,12 @@ function PersonalForm() {
         validatePan(formsData.panNum);
         validateEmail(formsData.email);
        // validateAdhar(formsData.aadhaarNum);
+       validateDate(formsData.Date);
     }, [formsData]);
+
+    validateDate=(date)=>{
+        
+    }
 
 
 
@@ -292,7 +298,7 @@ fetchManager();
                         </div>
                     </div>
 
-                    <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange}>
+                    <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
                     {/* handleSelectChange */}
                         <option value="">Reporting Manager</option>
                         {manager.map((item,index) => (
@@ -312,7 +318,7 @@ fetchManager();
                     </div>
                     <div className="overr">
                         <div className="form-group">
-                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='employeeID' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.employeeID} onChange={handlechange} />
+                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='employeeID' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.employeeID} onChange={handlechange} required/>
                             <label for="phNum">Employee Id</label>
                         </div>
                     </div>
@@ -321,11 +327,11 @@ fetchManager();
 
                 <div className="labelish" >
                     <div className="fe">
-                        <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} />
+                        <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required/>
                         <label for="permAddr">Permanent Address</label>
                     </div>
                     <div className="overr">
-                        <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} >
+                        <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
                             <option>Marital Status</option>
                             <option value='married'>Married</option>
                             <option value='unmarried'>UnMarried</option>
@@ -333,7 +339,7 @@ fetchManager();
                         <br />
                         <br />
                         <div className="finale">
-                            <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} />
+                            <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} required/>
                             <label for="panNum">PAN Card Number</label>
                             {errorPanMsg != null && formsData.panNum != "" && <span className="error">{errorPanMsg}</span>}
                         </div>
@@ -343,13 +349,13 @@ fetchManager();
 
                 <div className="group2" id="forthrow">
                     <div className="together">
-                        <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange}>
+                        <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange} required>
                             <option> Gender</option>
                             <option value='Male'>Male</option>
                             <option value='Female'>Female</option>
                             <option value='others'>Others</option>
                         </select>
-                        <select className='bloodgrp selctor' name="bldGrp" value={formsData.bldGrp} onChange={handlechange}>
+                        <select className='bloodgrp selctor' name="bldGrp" value={formsData.bldGrp} onChange={handlechange} required>
                             <option>Blood Group </option>
                             <option>A+</option>
                             <option>B+</option>
@@ -361,7 +367,7 @@ fetchManager();
                     </div>
                     <div className="over">
                         <div className="form-group">
-                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} />
+                            <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} required/>
                             <label for="phNum">Phone Number</label>
                         </div>
                     </div>
@@ -389,7 +395,7 @@ fetchManager();
 
                         </div>
 
-                        <select className='bloodgrp selctor' name="nationality" value={formsData.nationality} onChange={handlechange}>
+                        <select className='bloodgrp selctor' name="nationality" value={formsData.nationality} onChange={handlechange} required>
                             <option>Nationality </option>
                           
                             {dropdownData.map((item,index) => (
@@ -404,7 +410,7 @@ fetchManager();
 
                     <div className="over">
                         <div className="form-group">
-                            <input className='phnnum' id="phoneno" type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} />
+                            <input className='phnnum' id="phoneno" type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} required/>
                             <label for="phNum">Adhar Card No:</label>
                         </div>
                     </div>
@@ -412,7 +418,7 @@ fetchManager();
 
                 <div className="move-left">
                     <div className="forgrp">
-                        <select name="divisionOfEmployee" className="gender selctor" value={formsData.divisionOfEmployee} onChange={handlechange}>
+                        <select name="divisionOfEmployee" className="gender selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
                             <option> Division of employee</option>
                             {divisionOfEmployee.map((val, index) => (
                                 <>
@@ -426,7 +432,7 @@ fetchManager();
                     </div>
 
                     <div className="forgrp">
-                        <select name="roleOFEmployee" className="gender selctor" value={formsData.roleOFEmployee} onChange={handlechange} >
+                        <select name="roleOFEmployee" className="gender selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
                             <option> Role of employee</option>
                             
                             {role.map((val, index) => (
@@ -440,7 +446,7 @@ fetchManager();
                     </div>
                     <div className="group4">
                         <div className="fo">
-                            <select name="rank" className="gender selctor" value={formsData.rank} onChange={handlechange}>
+                            <select name="rank" className="gender selctor" value={formsData.rank} onChange={handlechange} required>
                                 <option> Rank</option>
                                
                             {rank.map((val, index) => (
