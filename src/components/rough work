@@ -1,35 +1,40 @@
-import React from 'react'
-import "./Education.css";
+<div className="group2" id="forthrow">
+  <div className="together">
 
-function Education() {
-  return (
-    <form className='details'>
-       <div className='Full'>
-         <div><select className='quali' >
-            <option>Qualification</option>
-            <option>PG Graduate </option>
-            <option> UG Graduate </option>
-            <option> Diploma </option>
-         </select></div>
-        <div className='second'><select className='quai'>
-            <option>Discipline</option>
-            <option>Mechanical</option>
-            <option> Electronics</option>
-            <option> Electrical</option>
-        </select></div>
-        <div className='Third'><input type= 'text' placeholder='University Name'></input></div>
-        <div className='fourth'><select className='qali' placeholder ='Year of passing'>
-            <option>2024</option>
-            <option>2023 </option>
-            <option>2022</option>
-        </select></div>
-        <div className='fifth'><input type= 'text' placeholder= 'CGPA'></input></div>
-        <div className='six'><input type= 'text' placeholder='Percentage %'></input></div>
-        </div>
+    <div className={sty.form_group}>
+      <input type="date" id="messi3" placeholder='' className='textbox1' max="2024-06-20" onChange={handlechange} //
+        title='fill StartingDate' value={formsData.dob} name='dob' required />
+      <label htmlFor="messi3"><span className="star">*</span>DOB</label>
+      {error.DateError && <p className='error'>{error.DateError}</p>}
+      {dateError && <p className="error">{dateError}</p>}
 
+    </div>
+    <div className={`${isNationalityFilled ? `selectt_filled` : `blood` }`}>
+      <select className='bloodgrp selector' name="nationality" required value={formsData.nationality}
+        onChange={handlechange}>
+        <option> </option>
 
-    </form>
-  )
-}
+        {dropdownData.map((item, index) => (
+        <option key={index} value={item.nationality}>
+          {item.nationality}
+        </option>
+        ))}
 
-export default Education;
+      </select>
+      <label className={`${isNationalityFilled ? 'sel_label' : '' }`}>
+        <span className="star">*</span>Nationality
+      </label>
+
+    </div>
+
+  </div>
+
+  <div className="over">
+    <div className="form-groupp">
+      <input className='phnnum' id="phoneno" type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff"
+        placeholder='' value={formsData.aadhaarNum} onChange={handlechange} required />
+      <label for="phNum"><span className="star">*</span>Adhar Card No:</label>
+      {aadharError && <p className="error">{aadharError}</p>}
+    </div>
+  </div>
+</div>

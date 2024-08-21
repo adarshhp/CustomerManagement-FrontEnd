@@ -79,6 +79,8 @@ setNationality(true)
             setMarriage(true);
         }else if(name == 'employeeID'){
             testEmployeeId(value);
+            let val = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+            setformsData({ ...formsData, [name]: val });
         }else if(name==='reportingManager'){
             setReportId(true);
         }
@@ -222,7 +224,9 @@ setNationality(true)
 
     }
     const validateEmail = (email) => {
-        const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        // const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        const re = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+
         if (re.test(String(email).toLowerCase())) {
             setErrorMessage(null);
         } else {
@@ -358,11 +362,8 @@ setNationality(true)
     const fetchManager = async () => {
         try {
             const response = await apiRequest("/ReportingManager");
-            console.log(response, "responseeee");
-            // const data = await response.json();
-            console.log("inside........");
-
-
+            
+           
 
             setManager(response);
 
@@ -387,7 +388,6 @@ setNationality(true)
         fetchRank();
         fetchDropdownData();
         fetchManager();
-
     }, [])
 
     //     useEffect(()=>{
@@ -416,12 +416,12 @@ setNationality(true)
                             <label for="fname"><span className="star">*</span>Last Name</label>
                         </div>
                     </div>
-                    <div className={`${isReportFilled ? `selectt_filled` : `report`
+                    <div className={`${isReportFilled ? `change` : `report`
                         }`}>
                         <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
-                            {/* handleSelectChange */}
+                            {/* handleSelectChange    ---[...experiences].sort((a, b) => b.id - a.id).map((val, index)--- */}
                             <option value=""></option>
-                            {manager.map((item, index) => (
+                            {[...manager].sort((a, b) => a.name.localeCompare(b.name)).map((item, index) => (
                                 <option key={index} value={item.name}>
                                     {item.name}
                                 </option>
@@ -447,7 +447,7 @@ setNationality(true)
                         <div className="form-employee">
                             <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='employeeID' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.employeeID} onChange={handlechange} required />
                             <label for="phNum"><span className="star">*</span>Employee Id</label>
-                            {employeeErrorMessage != null && formsData.employeeID != "" && <span className="error">{employeeErrorMessage}</span>}
+                            {/* {employeeErrorMessage != null && formsData.employeeID != "" && <span className="error">{employeeErrorMessage}</span>} */}
                         </div>
                     </div>
 
@@ -459,7 +459,7 @@ setNationality(true)
                         <label for="permAddr"><span className="star">*</span>Permanent Address</label>
                     </div>
                     <div className="overr">
-                        <div  className={`${isMarriageFilled ? `sele_filled` : `marriage`
+                        <div  className={`${isMarriageFilled ? `b` : `marriage`
                         }`}>
                         <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
                             <option></option>
@@ -469,10 +469,11 @@ setNationality(true)
                         <label
                             className={`${isMarriageFilled ? 'sel_label' : ''}`}
                         >
-                            <span className="star">*</span>Marriage
+                            <span className="star">*</span>Marrital Status
                         </label>
                         </div>
                         <br />
+                        <br/>
                         <div className="finale">
                             <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} required />
                             <label for="panNum"><span className="star">*</span>PAN Card Number</label>
@@ -484,7 +485,7 @@ setNationality(true)
 
                 <div className="group2 sidewayFix" id="forthrow">
                     <div className="together">
-                        <div className={`${isGenderFilled ? `selectt_filled` : `${sty.form_group}`
+                        <div className={`${isGenderFilled ? `f_group` : `${sty.form_group}`
                             }`}>
                             <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange} required>
                                 <option></option>
@@ -519,7 +520,7 @@ setNationality(true)
                         </div>
                     </div>
                     <div className="over">
-                        <div className="form-group">
+                        <div className="rm-group">
                             <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} required />
                             <label for="phNum"><span className="star">*</span>Phone Number</label>
                             {phoneError && <p className="error">{phoneError}</p>}
@@ -587,7 +588,7 @@ setNationality(true)
                         }`}>
                         <select name="divisionOfEmployee" className="gende selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
                             <option></option>
-                            {divisionOfEmployee.map((val, index) => (
+                            {[...divisionOfEmployee].sort((a, b) => a.division.localeCompare(b.division)).map((val, index) => (
                                 <>
                                     <option value={val.division} key={index}>
                                         {val.division}
@@ -608,7 +609,7 @@ setNationality(true)
                         <select name="roleOFEmployee" className="gende selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
                             <option></option>
 
-                            {role.map((val, index) => (
+                            {[...role].sort((a, b) => a.role.localeCompare(b.role)).map((val, index) => (
                                 <>
                                     <option value={val.role} key={index}>
                                         {val.role}
@@ -623,7 +624,7 @@ setNationality(true)
                         </label>
                     </div>
                     <div className="group4">
-                        <div className={`${isRankFilled ? `selectt_filled` : `fo`
+                        <div className={`${isRankFilled ? `lectt_filled` : `fo`
                             }`}>
                             <select name="rank" className="gende selctor" value={formsData.rank} onChange={handlechange} required>
                                 <option></option>
@@ -637,7 +638,7 @@ setNationality(true)
                                 ))}
                             </select>
                             <label
-                                className={`${isRankFilled ? 'sel_label' : ''}`}
+                                className={`${isRankFilled ? 'sel_label' : 'sel_label'}`}
                             >
                                 <span className="star">*</span>Rank of Employee
                             </label>

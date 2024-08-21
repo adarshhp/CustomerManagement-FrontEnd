@@ -320,7 +320,7 @@ useEffect(()=>{
 
 
     return (
-        <div>
+        <div className='newdiv'>
             <ToastContainer />
             <form onSubmit={handleSubmit} className='formfull'>
                 <div className='formydata'>

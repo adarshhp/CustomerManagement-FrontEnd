@@ -1,10 +1,10 @@
 .formfull{
-    background-color: #F5F5F5;
+    background-color: #F6EFEF;
     display: flex;
     align-content: flex-start;
     flex-direction: row;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 0px;
     border-radius: 20px;
     gap: 10%;
     padding-bottom: 300px;

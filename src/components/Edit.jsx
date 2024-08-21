@@ -95,8 +95,14 @@ function Edit({ status, close, ide }) {
         }
 
         if (name === 'designation') {
+            let val = e.target.value.replace(/[^a-zA-Z]/g, '');
+            setFormsData({ ...formsData, [name]: val });
             const designationError = validateDesignation(value);
             setErrors({ ...errors, designationError });
+        }
+        if(name==='companyName'){
+            let val = e.target.value.replace(/[^a-zA-Z]/g, '');
+            setFormsData({ ...formsData, [name]: val });
         }
     };
 
