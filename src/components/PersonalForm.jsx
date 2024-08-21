@@ -459,7 +459,7 @@ setNationality(true)
                         <label for="permAddr"><span className="star">*</span>Permanent Address</label>
                     </div>
                     <div className="overr">
-                        <div  className={`${isMarriageFilled ? `selectt_filled` : `marriage`
+                        <div  className={`${isMarriageFilled ? `sele_filled` : `marriage`
                         }`}>
                         <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
                             <option></option>
@@ -551,7 +551,7 @@ setNationality(true)
                             {dateError && <p className="error">{dateError}</p>}
 
                         </div>
-                        <div className={`${isNationalityFilled ? `selectt_filled` : `blood`
+                        <div className={`${isNationalityFilled ? `zlatan_filled` : `blood`
                             }`}>
                             <select className='bloodgrp selector' name="nationality" required value={formsData.nationality} onChange={handlechange} >
                                 <option> </option>
