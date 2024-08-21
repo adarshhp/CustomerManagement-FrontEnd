@@ -64,8 +64,23 @@ function PersonalForm() {
             setformsData({ ...formsData, [name]: val });
         } else if (name === 'divisionOfEmployee') {
             setDoE(true);
-        }else if(name===' roleOFEmployee'){
+        } else if (name === 'roleOFEmployee') {
             setRoleofEmployee(true);
+        } else if (name === 'rank') {
+            setRanks(true);
+        } else if(name==='gender'){
+setGender(true);
+        }
+        else if(name==='bldGrp'){
+setBlood(true)
+        }else if(name==='nationality'){
+setNationality(true)
+        }else if(name==='mstatus'){
+            setMarriage(true);
+        }else if(name == 'employeeID'){
+            testEmployeeId(value);
+        }else if(name==='reportingManager'){
+            setReportId(true);
         }
         else {
 
@@ -76,7 +91,17 @@ function PersonalForm() {
     }
 
     const [isDoEFilled, setDoE] = useState(false);
-    const[isRoleFilled,setRoleofEmployee]=useState(true);
+    const [isRoleFilled, setRoleofEmployee] = useState(false);
+    const [isRankFilled, setRanks] = useState(false);
+    const [isBloodFilled, setBlood] = useState(false);
+
+    const [isNationalityFilled, setNationality] = useState(false);
+
+    const [isGenderFilled, setGender] = useState(false);
+    const[isMarriageFilled,setMarriage]=useState(false);
+    const[isReportFilled,setReportId]=useState(false);
+
+
 
 
     useEffect(() => {
@@ -235,6 +260,7 @@ function PersonalForm() {
     const [dropdownData, setDropdownData] = useState([]);
     const [selectedOption, setSelectedOption] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
+    const [employeeErrorMessage,setEmployeeErrorMessage] = useState(null);
     const [errorPanMsg, seterrorPanMsg] = useState(null);
     const [errorAdharMsg, setAdharMsg] = useState(null);
 
@@ -367,6 +393,14 @@ function PersonalForm() {
     //     useEffect(()=>{
     // SetInitialDetails(formsData)
     //     },[formsData])
+    function testEmployeeId(input) {
+        let regex = /XCL[0-9]{5}/i;
+        if(!(regex.test(input))){
+            setEmployeeErrorMessage("invalid Employeeid");
+        }else{
+            setEmployeeErrorMessage(null);
+        }
+    }
 
     return (
         <form className='personaldata' onSubmit={submitted} >
@@ -382,17 +416,25 @@ function PersonalForm() {
                             <label for="fname"><span className="star">*</span>Last Name</label>
                         </div>
                     </div>
+                    <div className={`${isReportFilled ? `selectt_filled` : `report`
+                        }`}>
+                        <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
+                            {/* handleSelectChange */}
+                            <option value=""></option>
+                            {manager.map((item, index) => (
+                                <option key={index} value={item.name}>
+                                    {item.name}
+                                </option>
+                            ))}
 
-                    <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
-                        {/* handleSelectChange */}
-                        <option value="">Reporting Manager</option>
-                        {manager.map((item, index) => (
-                            <option key={index} value={item.name}>
-                                {item.name}
-                            </option>
-                        ))}
+                        </select>
+                        <label
+                            className={`${isReportFilled ? 'sel_label' : ''}`}
+                        >
+                            <span className="star">*</span>Reporting Manager
+                        </label>
 
-                    </select>
+                    </div>
                 </div>
                 <div className="labelish">
                     <div className="fe">
@@ -402,9 +444,10 @@ function PersonalForm() {
                         {errorMessage != null && formsData.email != "" && <span className="error">{errorMessage}</span>}
                     </div>
                     <div className="overr">
-                        <div className="form-group">
+                        <div className="form-employee">
                             <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='employeeID' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.employeeID} onChange={handlechange} required />
                             <label for="phNum"><span className="star">*</span>Employee Id</label>
+                            {employeeErrorMessage != null && formsData.employeeID != "" && <span className="error">{employeeErrorMessage}</span>}
                         </div>
                     </div>
 
@@ -416,12 +459,19 @@ function PersonalForm() {
                         <label for="permAddr"><span className="star">*</span>Permanent Address</label>
                     </div>
                     <div className="overr">
+                        <div  className={`${isMarriageFilled ? `selectt_filled` : `marriage`
+                        }`}>
                         <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
-                            <option>Marital Status</option>
+                            <option></option>
                             <option value='married'>Married</option>
                             <option value='unmarried'>UnMarried</option>
                         </select>
-                        <br />
+                        <label
+                            className={`${isMarriageFilled ? 'sel_label' : ''}`}
+                        >
+                            <span className="star">*</span>Marriage
+                        </label>
+                        </div>
                         <br />
                         <div className="finale">
                             <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} required />
@@ -432,23 +482,41 @@ function PersonalForm() {
                     </div>
                 </div>
 
-                <div className="group2" id="forthrow">
+                <div className="group2 sidewayFix" id="forthrow">
                     <div className="together">
-                        <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange} required>
-                            <option>Gender</option>
-                            <option value='Male'>Male</option>
-                            <option value='Female'>Female</option>
-                            <option value='others'>Others</option>
-                        </select>
-                        <select className='bloodgrp selctor' name="bldGrp" value={formsData.bldGrp} onChange={handlechange} required>
-                            <option>Blood Group </option>
-                            <option>A+</option>
-                            <option>B+</option>
-                            <option>O+</option>
-                            <option>AB+</option>
-                            <option>A-</option>
+                        <div className={`${isGenderFilled ? `selectt_filled` : `${sty.form_group}`
+                            }`}>
+                            <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange} required>
+                                <option></option>
+                                <option value='Male'>Male</option>
+                                <option value='Female'>Female</option>
+                                <option value='others'>Others</option>
+                            </select>
+                            <label
+                                className={`${isGenderFilled ? 'sel_label' : ''}`}
+                            >
+                                <span className="star">*</span>Gender
+                            </label>
 
-                        </select>
+                        </div>
+                        <div className={`${isBloodFilled ? `selectt_filled` : `blood`
+                            }`}>
+                            <select className='bloodgrp selectorrr' name="bldGrp" value={formsData.bldGrp} onChange={handlechange} required>
+                                <option></option>
+                                <option>A+</option>
+                                <option>B+</option>
+                                <option>O+</option>
+                                <option>AB+</option>
+                                <option>A-</option>
+
+                            </select>
+                            <label
+                                className={`${isBloodFilled ? 'sel_label' : ''}`}
+                            >
+                                <span className="star">*</span>Blood Group
+                            </label>
+
+                        </div>
                     </div>
                     <div className="over">
                         <div className="form-group">
@@ -483,22 +551,30 @@ function PersonalForm() {
                             {dateError && <p className="error">{dateError}</p>}
 
                         </div>
+                        <div className={`${isNationalityFilled ? `selectt_filled` : `blood`
+                            }`}>
+                            <select className='bloodgrp selector' name="nationality" required value={formsData.nationality} onChange={handlechange} >
+                                <option> </option>
 
-                        <select className='bloodgrp selctor' name="nationality" value={formsData.nationality} onChange={handlechange} required>
-                            <option>Nationality </option>
+                                {dropdownData.map((item, index) => (
+                                    <option key={index} value={item.nationality}>
+                                        {item.nationality}
+                                    </option>
+                                ))}
 
-                            {dropdownData.map((item, index) => (
-                                <option key={index} value={item.nationality}>
-                                    {item.nationality}
-                                </option>
-                            ))}
+                            </select>
+                            <label
+                                className={`${isNationalityFilled ? 'sel_label' : ''}`}
+                            >
+                                <span className="star">*</span>Nationality
+                            </label>
 
-                        </select>
+                        </div>
 
                     </div>
 
                     <div className="over">
-                        <div className="form-group">
+                        <div className="form-groupp">
                             <input className='phnnum' id="phoneno" type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} required />
                             <label for="phNum"><span className="star">*</span>Adhar Card No:</label>
                             {aadharError && <p className="error">{aadharError}</p>}
@@ -507,9 +583,9 @@ function PersonalForm() {
                 </div>
 
                 <div className="move-left">
-                    <div  className={`${isDoEFilled ? `select_filled` : `forgrp`
-              }`}>
-                        <select name="divisionOfEmployee" className="gender selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
+                    <div className={`${isDoEFilled ? `select_filled` : `forgrp`
+                        }`}>
+                        <select name="divisionOfEmployee" className="gende selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
                             <option></option>
                             {divisionOfEmployee.map((val, index) => (
                                 <>
@@ -527,9 +603,9 @@ function PersonalForm() {
                         </label>
                     </div>
 
-                    <div  className={`${isRoleFilled ? `select_filled` : `forgrp`
-              }`}>
-                        <select name="roleOFEmployee" className="gender selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
+                    <div className={`${isRoleFilled ? `select_filled` : `forgrp`
+                        }`}>
+                        <select name="roleOFEmployee" className="gende selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
                             <option></option>
 
                             {role.map((val, index) => (
@@ -541,15 +617,16 @@ function PersonalForm() {
                             ))}
                         </select>
                         <label
-                            className=  {`${isRoleFilled ? 'sel_label' : ''}`}
+                            className={`${isRoleFilled ? 'sel_label' : ''}`}
                         >
                             <span className="star">*</span>Role of Employee
                         </label>
                     </div>
                     <div className="group4">
-                        <div className="fo">
-                            <select name="rank" className="gender selctor" value={formsData.rank} onChange={handlechange} required>
-                                <option>Rank</option>
+                        <div className={`${isRankFilled ? `selectt_filled` : `fo`
+                            }`}>
+                            <select name="rank" className="gende selctor" value={formsData.rank} onChange={handlechange} required>
+                                <option></option>
 
                                 {rank.map((val, index) => (
                                     <>
@@ -559,6 +636,11 @@ function PersonalForm() {
                                     </>
                                 ))}
                             </select>
+                            <label
+                                className={`${isRankFilled ? 'sel_label' : ''}`}
+                            >
+                                <span className="star">*</span>Rank of Employee
+                            </label>
                         </div>
 
                         <div className="cbutton">

@@ -67,7 +67,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
       console.log(null, "value spotted");
       setformdata({ ...formdata, [name]: null });
     } else if (name == "university") {
-      let val = e.target.value.replace(/\d/g, '');
+      let val = e.target.value.replace(/[^a-zA-Z]/g, '');
       setformdata({ ...formdata, [name]: val });
       console.log(val);
     } else {

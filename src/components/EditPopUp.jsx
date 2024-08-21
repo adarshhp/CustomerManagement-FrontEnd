@@ -66,9 +66,11 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
   }, [initialDetails]);
   useEffect(() => {
     const fetchDisp = async () => {
+     
       const data = await apiRequest("/listdeciplines", "POST", {
         Qualification: selQual,
       });
+     
       setdiscipline(data.data);
     };
     if (selQual != "") {
@@ -81,14 +83,24 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
    
   }
   const confirmSubmit = async () => {
+    try{
+      console.log(formdata,"checking")
     let response = await apiRequest('/EducationalDetails','PUT',formdata);
+   
     if(response.qualificationDetails){
       notify(response.message);
       setShowDialog(false);
       close();
     }
     console.log(response);
+  }catch(error){
+    console.log(error)
   }
+}
+
+
+
+
   const year = new Date().getFullYear();
   const years = Array.from(new Array(125), (val, index) => year - index);
   const closeMessage = () => {
