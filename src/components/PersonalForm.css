@@ -597,11 +597,49 @@ border-radius: 10px;
     left: 8px;
   }
 
+  .sele_filled {
+    position: relative;
+    width:100%;
+    left:9px;
+    margin-top: 12px;
+margin-bottom: 10px;
+  }
+  
+  .sele_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+  
+  .zlatan_filled {
+    position: relative;
+    width:46%;
+    left:9px;
+    /* margin-top: 12px; */
+margin-bottom: 10px;
+  }
+  
+  .zlatan_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+
 
   .selectt_filled {
     position: relative;
-    width:61%;
-    left:9px;
+    width:25%;
+    left:3px;
     margin-top: 12px;
   }
   
