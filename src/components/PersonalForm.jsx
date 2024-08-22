@@ -225,7 +225,9 @@ setNationality(true)
     }
     const validateEmail = (email) => {
         // const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        const re = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+        // const re = /^[a-zA-Z0-9._-]+\.com$/;
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/;
+
 
         if (re.test(String(email).toLowerCase())) {
             setErrorMessage(null);
@@ -552,7 +554,7 @@ setNationality(true)
                             {dateError && <p className="error">{dateError}</p>}
 
                         </div>
-                        <div className={`${isNationalityFilled ? `zlatan_filled` : `blood`
+                        <div className={`${isNationalityFilled ? `zlatan_filled` : `natione`
                             }`}>
                             <select className='bloodgrp selector' name="nationality" required value={formsData.nationality} onChange={handlechange} >
                                 <option> </option>
@@ -604,7 +606,7 @@ setNationality(true)
                         </label>
                     </div>
 
-                    <div className={`${isRoleFilled ? `select_filled` : `forgrp`
+                    <div className={`${isRoleFilled ? `select_filled` : `forr`
                         }`}>
                         <select name="roleOFEmployee" className="gende selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
                             <option></option>

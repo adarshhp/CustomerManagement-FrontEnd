@@ -226,6 +226,8 @@ border-radius: 10px;
   font-size: 16px;
   transition: border-color 0.3s ease;
   margin-left: 2px;
+  position:relative;
+  bottom:7px;
 }
 .star{
     color: red;
@@ -280,7 +282,7 @@ border-radius: 10px;
   .forgrp label {
     position: absolute;
     left: 12px;
-    top: 12px;
+    top: 6px;
     font-size: 14px;
     color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
@@ -329,7 +331,7 @@ border-radius: 10px;
     position: relative;
     margin-bottom: 20px;
     margin: 0 10px;
-    width: 168%;
+    width: 140%;
    }
   .fo input {
     width: 235%;
@@ -342,7 +344,7 @@ border-radius: 10px;
   .fo label {
     position: absolute;
     left: 12px;
-    top: 12px;
+    top: 6px;
     font-size: 14px;
     color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
@@ -506,6 +508,8 @@ border-radius: 10px;
   .together{
     display:flex;
     width:68%;
+    position:relative;
+    top:-25px;
   }
   .overr{
     position:relative;
@@ -525,7 +529,7 @@ border-radius: 10px;
     margin-bottom: 20px;
     margin: 0 10px;
     display:block;
-    top:-16px;
+    top:-32px;
   }
   .finale input {
     width: 86%;
@@ -668,7 +672,7 @@ margin-bottom: 10px;
     position: relative;
     width:45%;
     left:11px;
-    margin-top: 0px;
+    margin-top: 6px;
   }
   
   .selectt_filled + label {
@@ -702,8 +706,9 @@ margin-bottom: 10px;
     position: relative;
     width:45%;
     left:11px;
-    margin-top: -5px;
+    margin-top: 5px;
     margin-bottom: 5px;
+    height:10px;
   }
   
   .b_filled + label {
@@ -878,10 +883,11 @@ margin-bottom: 10px;
   width:61%;
   margin-top: -1%;
   margin-bottom: 1%;
+  left:-7px;
 }
 
 .blood {
-  width: 193px;
+  width: 197px;
   padding: 10px;
   /* border: 1px solid #ccc;
   border-radius: 4px; */
@@ -891,7 +897,7 @@ margin-bottom: 10px;
 .blood label {
   position: absolute;
   left: 21px;
-  top: 20px;
+  top: 13px;
   font-size: 14px;
   color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
@@ -924,6 +930,7 @@ margin-bottom: 10px;
   margin-top: -1%;
   margin-bottom: 1%;
   left:-21px;
+  top:4px;
 }
 
 .marriage {
@@ -967,6 +974,7 @@ margin-bottom: 10px;
   margin-bottom: 20px;
   margin: 0 10px;
   width:103%;
+  top:13px;
 }
 .form-employee input {
   width: 79%;
@@ -1015,7 +1023,7 @@ margin-bottom: 10px;
 }
 
 .gende {
-  width: 438px;
+  width: 436px;
   padding: 10px;
   /* border: 1px solid #ccc;
   border-radius: 4px; */
@@ -1057,6 +1065,7 @@ margin-bottom: 10px;
   margin: 0 10px;
   width:102%;
   left:-17px;
+  top:-16px;
 }
 .form-groupp input {
   width: 83%;
@@ -1207,6 +1216,7 @@ margin-bottom: 10px;
   margin: 0 10px;
   width:102%;
   right:7px;
+  bottom:30px;
 
 }
 .rm-group input {
@@ -1267,7 +1277,160 @@ margin-bottom: 10px;
 
 
 
+.natione {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:61%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+  left:-7px;
+}
+
+.natione {
+  width: 199px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.natione label {
+  position: absolute;
+  left: 28px;
+  top: 19px;
+  font-size: 14px;
+  color: #777;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.natione input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.natione input:hover + label,
+.natione input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
+.zlatanib_filled {
+  position: relative;
+  width:46%;
+  left:9px;
+  /* margin-top: 12px; */
+margin-bottom: 10px;
+}
+
+.zlatanib_filled + label {
+  top: -20px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
+
+.forr {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:61%;
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+.forr input {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.forr label {
+  position: absolute;
+  left: 12px;
+  top: 6px;
+  font-size: 14px;
+  color: #777;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.forr input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.forr input:hover + label,
+.forr input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
 
 
 
+
+
+.b {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:55%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+  left:-21px;
+  top:4px;
+}
+
+.b {
+  width: 379px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.b label {
+  position: absolute;
+  left: 25px;
+  top: 0px;
+  font-size: 14px;
+  color: #007bff;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.b input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.b input:hover + label,
+.b input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
   

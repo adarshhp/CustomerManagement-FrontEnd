@@ -20,10 +20,10 @@ function Edit({ status, close, ide }) {
         let endDateError = '';
         const today = new Date().setHours(0, 0, 0, 0);
 
-      //  if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
-        if ( new Date(startDate) >= new Date(lastDate)) {
+        //  if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
+        if (new Date(startDate) >= new Date(lastDate)) {
 
-          //  startDateError = 'Invalid Date';
+            //  startDateError = 'Invalid Date';
             endDateError = 'Invalid Date';
         }
         if (startDate && new Date(startDate) > today) {
@@ -32,9 +32,9 @@ function Edit({ status, close, ide }) {
         if (lastDate && new Date(lastDate) > today) {
             endDateError = 'Invalid Date';
         }
-        if(new Date(startDate)<=new Date(lastDate)){
-            startDateError='';
-            endDateError='';
+        if (new Date(startDate) <= new Date(lastDate)) {
+            startDateError = '';
+            endDateError = '';
         }
 
 
@@ -43,7 +43,7 @@ function Edit({ status, close, ide }) {
 
     const validateDesignation = (designation) => {
         if (designation.trim() === '') {
-            return ''; 
+            return '';
         }
         const designationRegex = /^[A-Za-z\s]+$/;
         return designationRegex.test(designation) ? '' : 'Invalid Character';
@@ -57,7 +57,7 @@ function Edit({ status, close, ide }) {
 
         if (startDateError || endDateError || designationError) {
             setErrors({ startDateError, endDateError, designationError });
-            console.log(errors+'from the validate form');
+            console.log(errors + 'from the validate form');
             return false;
         }
         return true;
@@ -100,14 +100,14 @@ function Edit({ status, close, ide }) {
             const designationError = validateDesignation(value);
             setErrors({ ...errors, designationError });
         }
-        if(name==='companyName'){
+        if (name === 'companyName') {
             let val = e.target.value.replace(/[^a-zA-Z]/g, '');
             setFormsData({ ...formsData, [name]: val });
         }
     };
 
     const handleSubmitting = async () => {
-        
+
         if (validateForm()) {
             const payload = {
                 id: ide.id,
@@ -125,7 +125,7 @@ function Edit({ status, close, ide }) {
                 //     headers: { "Content-Type": "application/json" },
                 //     body: JSON.stringify(payload)
                 // });
-                apiRequest('/preexp',"PUT",payload)
+                apiRequest('/preexp', "PUT", payload)
 
 
                 toast('Previous Experience has been updated successfully');
@@ -151,85 +151,87 @@ function Edit({ status, close, ide }) {
 
     return (
         <div className={edb.largebox}>
-            <div className='editpage'>
-                <div className={edb.top_bar}>
-                    <p className='heading'>EDIT PREVIOUS EXPERIENCE</p>
-                    <button type="button" onClick={close} className={edb.close} title='close'>X</button>
+            <div className='transparent'>
+                <div className='editpage'>
+                    <div className={edb.top_bar}>
+                        <p className='heading'>EDIT PREVIOUS EXPERIENCE</p>
+                        <button type="button" onClick={close} className={edb.close} title='close'>X</button>
+                    </div>
+                    <form className='inneritemss' onSubmit={handleSubmit}>
+                        <div className='form-groups'>
+                            <input
+                                type="text"
+                                id="messi"
+                                placeholder=''
+                                className='textbox1'
+                                value={formsData.companyName}
+                                onChange={handleChange}
+                                name='companyName'
+                                required
+                            />
+                            <label htmlFor="messi"><span className="star">*</span>Company</label>
+                        </div>
+                        <div className='form-groups'>
+                            <input
+                                type="text"
+                                id="messi2"
+                                required
+                                placeholder=''
+                                className='textbox1'
+                                value={formsData.designation}
+                                onChange={handleChange}
+                                name="designation"
+
+                            />
+                            <label htmlFor="messi2"><span className="star">*</span>Designation</label>
+                            {formsData.designation.trim() !== '' && errors.designationError && (
+                                <p className='error'>{errors.designationError}</p>
+                            )}
+                        </div>
+                        <div className='form-groups'>
+                            <input
+                                type="date"
+                                id="messi3"
+                                placeholder=''
+                                className='textbox1'
+                                value={formsData.startDate}
+                                onChange={handleChange}
+                                name='startDate'
+                                required
+                            />
+                            <label htmlFor="messi3"><span className="star">*</span>Start Date</label>
+                            {errors.startDateError && <p className='error'>{errors.startDateError}</p>}
+                        </div>
+                        <div className='form-groups'>
+                            <input
+                                type="date"
+                                id="messi4"
+                                placeholder=''
+                                className='textbox1'
+                                value={formsData.lastDate}
+                                onChange={handleChange}
+                                name='lastDate'
+                                required
+                            />
+                            <label htmlFor="messi4"><span className="star">*</span>End Date</label>
+                            {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
+                        </div>
+                        <button type="submit" className='submiticon' title="update">
+                            <EditButton />
+                        </button>
+                    </form>
+                    <p style={{ textAlign: 'center', marginTop: '10px', color: 'black', fontFamily: 'revert', fontSize: '15px' }}>
+                    </p>
+                    {updateState && (
+                        <div className={edb.Message}>
+                            <Model
+                                message='Are you sure , you want to update Previous Experience?'
+                                cancelHandler={handleCancelling}
+                                confirmHandler={handleSubmitting}
+                            />
+                        </div>
+                    )}
                 </div>
-                <form className='inneritemss' onSubmit={handleSubmit}>
-                    <div className='form-groups'>
-                        <input
-                            type="text"
-                            id="messi"
-                            placeholder=''
-                            className='textbox1'
-                            value={formsData.companyName}
-                            onChange={handleChange}
-                            name='companyName'
-                            required
-                        />
-                        <label htmlFor="messi"><span className="star">*</span>Company</label>
-                    </div>
-                    <div className='form-groups'>
-                        <input
-                            type="text"
-                            id="messi2"
-                            required
-                            placeholder=''
-                            className='textbox1'
-                            value={formsData.designation}
-                            onChange={handleChange}
-                            name="designation"
-                            
-                        />
-                        <label htmlFor="messi2"><span className="star">*</span>Designation</label>
-                        {formsData.designation.trim() !== '' && errors.designationError && (
-                            <p className='error'>{errors.designationError}</p>
-                        )}
-                    </div>
-                    <div className='form-groups'>
-                        <input
-                            type="date"
-                            id="messi3"
-                            placeholder=''
-                            className='textbox1'
-                            value={formsData.startDate}
-                            onChange={handleChange}
-                            name='startDate'
-                            required
-                        />
-                        <label htmlFor="messi3"><span className="star">*</span>Start Date</label>
-                        {errors.startDateError && <p className='error'>{errors.startDateError}</p>}
-                    </div>
-                    <div className='form-groups'>
-                        <input
-                            type="date"
-                            id="messi4"
-                            placeholder=''
-                            className='textbox1'
-                            value={formsData.lastDate}
-                            onChange={handleChange}
-                            name='lastDate'
-                            required
-                        />
-                        <label htmlFor="messi4"><span className="star">*</span>End Date</label>
-                        {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
-                    </div>
-                    <button type="submit" className='submiticon'  title="update">
-                        <EditButton />
-                    </button>
-                </form>
-                <p style={{ textAlign: 'center', marginTop: '10px', color: 'black', fontFamily: 'revert', fontSize: '15px' }}>
-                </p>
-                {updateState && (
-                    <div className={edb.Message}>
-                        <Model
-                            message='Are you sure , you want to update Previous Experience?'
-                            cancelHandler={handleCancelling}
-                            confirmHandler={handleSubmitting}
-                        />
-                    </div>
-                )}
             </div>
         </div>
     );

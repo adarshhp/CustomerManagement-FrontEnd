@@ -269,7 +269,7 @@ if(refresh){
     useEffect(() => {
 
         fetchEvents();
-    }, [refresh])
+    }, [])
 
 
 
@@ -355,9 +355,9 @@ useEffect(()=>{
                             />
                             <label htmlFor="messi2"><span className="star">*</span>Designation</label>
 
-                            {errors.designationError && (
+                            {/* {errors.designationError && (
                                 <p className='error'>{errors.designationError}</p>
-                            )}
+                            )} */}
 
 
                         </div>
@@ -451,8 +451,9 @@ useEffect(()=>{
             </form>
 
             {status && <div className={edb.Message}><PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} /></div>}
+            <div className={edb.transparent}>
             {editstatus && <Edit status={editstatus} close={handleClose} ide={identity} />}
-
+            </div>
             {deleteStatus && <div className={edb.Message}> <Model message='Are you sure, you want to Delete Previous Experiance' confirmHandler={confirmDelete} cancelHandler={cancelDelete} /></div>}
         </div>
     );
