@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Model from "./Model"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function EditPopUp({initialDetails,close,notify,name}) {
+export default function EditPopUp({initialDetails,close,notify,empId,name}) {
   const [isFilled, setIsFilled] = useState(false);
   const [isDisciplineFilled, setIsDisciplineFilled] = useState(false);
   const [isYoPFilled, setYoPFilled] = useState(false);
@@ -21,7 +21,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
     yearOfPassing: null,
     cgpa: null,
     percentage: null,
-    userid: 7,
+    userid: empId,
   });
   useEffect(() => {
     if (formdata.cgpa === null && formdata.percentage === null) {

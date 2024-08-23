@@ -281,7 +281,7 @@ border-radius: 10px;
   }
   .forgrp label {
     position: absolute;
-    left: 12px;
+    left: 19px;
     top: 6px;
     font-size: 14px;
     color: #777;
@@ -343,7 +343,7 @@ border-radius: 10px;
   }
   .fo label {
     position: absolute;
-    left: 12px;
+    left: 15px;
     top: 6px;
     font-size: 14px;
     color: #777;
@@ -1359,7 +1359,7 @@ margin-bottom: 10px;
 }
 .forr label {
   position: absolute;
-  left: 12px;
+  left: 19px;
   top: 6px;
   font-size: 14px;
   color: #777;

@@ -8,7 +8,7 @@ import sty from "./educationalStyle.module.css";
 import edb from "./EditPopUp.module.css";
 import Model from "./Model";
 
-function EducationalForm({ initialDetails, setInitialDetails }) {
+function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
   const [qualData, setQualData] = useState([]);
   const [discipline, setdiscipline] = useState([]);
   const [selQual, setSelQual] = useState("");
@@ -29,7 +29,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     yearOfPassing: null,
     cgpa: null,
     percentage: null,
-    userid: 7,
+    userid: passedId,
   });
   useEffect(() => {
     checkRequired();
@@ -50,29 +50,32 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
   }, [formdata]);
 
   function handleChange(e) {
-    const { name, value } = e.target;
-    if (name == "qualification") {
-      setIsFilled(e.target.value !== "");
-      setSelQual(value);
-      if (e.target.value === "") {
-        setSelQual("");
-        setIsDisciplineFilled(false);
+   if(passedId){
+      const { name, value } = e.target;
+      if (name == "qualification") {
+        setIsFilled(e.target.value !== "");
+        setSelQual(value);
+        if (e.target.value === "") {
+          setSelQual("");
+          setIsDisciplineFilled(false);
+        }
+      } else if (name == "discipline") {
+        setIsDisciplineFilled(e.target.value !== "");
+      } else if (name == "yearOfPassing") {
+        setYoPFilled(e.target.value !== "");
       }
-    } else if (name == "discipline") {
-      setIsDisciplineFilled(e.target.value !== "");
-    } else if (name == "yearOfPassing") {
-      setYoPFilled(e.target.value !== "");
-    }
-    if ((name == "percentage" || name == "cgpa") && (value == "" || value == " ")) {
-      console.log(null, "value spotted");
-      setformdata({ ...formdata, [name]: null });
-    } else if (name == "university") {
-      let val = e.target.value.replace(/[^a-zA-Z]/g, '');
-      setformdata({ ...formdata, [name]: val });
-      console.log(val);
-    } else {
-      setformdata({ ...formdata, [name]: value });
-    }
+      if ((name == "percentage" || name == "cgpa") && (value == "" || value == " ")) {
+        console.log(null, "value spotted");
+        setformdata({ ...formdata, [name]: null });
+      } else if (name == "university") {
+        let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+        setformdata({ ...formdata, [name]: val });
+        console.log(val);
+      } else {
+        setformdata({ ...formdata, [name]: value });
+      }
+   }
+
   }
 
   useEffect(() => {
@@ -136,7 +139,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     }
     const response = await apiRequest("/EducationalDetails", "POST", payload);
     if (response) {
-      toast(response?.message);
+      toast.success(response?.message);
       setformdata({
         qualification: "",
         discipline: "",
@@ -144,7 +147,8 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
         yearOfPassing: "",
         cgpa: "",
         percentage: "",
-        userid: 7,
+      //  userid: 7;
+      userid:passedId
       });
       checkRequired();
       setIsFilled(false);
@@ -155,7 +159,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
   };
   const getEduData = async () => {
     try {
-      const response = await apiRequest("/EducationalDetails/7");
+      const response = await apiRequest(`/EducationalDetails/${passedId}`);
       setPrevList(response?.data || []);
       console.log(response);
     }
@@ -221,6 +225,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
             initialDetails={currentEdit}
             close={closeEditDialog}
             notify={notify}
+            pasId={passedId}
             name={"Edit Educational Details"}
           />
         </div>
@@ -252,7 +257,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               htmlFor="qualification"
               className={`${isFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Qualification
+              <span className="star">*  </span>Qualification
             </label>
           </div>
           <div
@@ -280,7 +285,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               htmlFor="discipline"
               className={`${isDisciplineFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Discipline
+              <span className="star">*  </span>Discipline
             </label>
           </div>
           <div className={sty.form_group}>
@@ -296,7 +301,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               required
             ></input>
             <label htmlFor="university">
-              <span className="star">*</span>University
+              <span className="star">*  </span>University
             </label>
           </div>
           <div
@@ -324,7 +329,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               htmlFor="yearOfPassing"
               className={`${isYoPFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Year of Passing
+              <span className="star">*  </span>Year of Passing
             </label>
           </div>
           <div className={sty.form_group}>

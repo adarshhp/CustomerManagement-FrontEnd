@@ -6,8 +6,9 @@ import { toast } from 'react-toastify';
 import edb from "./EditPopUp.module.css";
 import apiRequest from '../lib/apiRequest';
 
-function Edit({ status, close, ide }) {
+function Edit({ status, close, ide ,passId}) {
     const [formsData, setFormsData] = useState(ide);
+    
     const [errors, setErrors] = useState({
         startDateError: '',
         endDateError: '',
@@ -111,7 +112,7 @@ function Edit({ status, close, ide }) {
         if (validateForm()) {
             const payload = {
                 id: ide.id,
-                userid: 7,
+                userid: passId,
                 companyName: formsData.companyName,
                 designation: formsData.designation,
                 startDate: new Date(formsData.startDate).toISOString(),
