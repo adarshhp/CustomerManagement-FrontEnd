@@ -4,6 +4,7 @@ import apiRequest from "../lib/apiRequest";
 import PopeUp from "./PopeUp";
 import sty from "./formatedStyle.module.css";
 import { ToastContainer, toast } from 'react-toastify';
+import PlusIcon from "../icons/PlusIcon";
 
 
 
@@ -30,7 +31,8 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
         aadhaarNum: "",
         divisionOfEmployee: "",
         roleOFEmployee: "",
-        rank: ""
+        rank: "",
+        doj: ""
 
     })
     useEffect(() => {
@@ -47,7 +49,7 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
         if (startDetails.rank !== "") {
             setRanks(true);
         }
-       
+
         if (startDetails.nationality !== "") {
             setNationality(true)
                 ;
@@ -58,13 +60,13 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
         if (startDetails.reportingManager != "") {
             setReportId(true);
         }
-        if(startDetails.mstatus!==""){
+        if (startDetails.mstatus !== "") {
             setMarriage(true);
         }
-        if(startDetails.roleOFEmployee!==""){
+        if (startDetails.roleOFEmployee !== "") {
             setRoleofEmployee(true);
         }
-        if(startDetails.gender!==""){
+        if (startDetails.gender !== "") {
             setGender(true);
         }
     }, [])
@@ -253,9 +255,10 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
         }).then(resp => resp.json()).then((res) => {
             setshowPopeup(false);
             setshowStatusBar(res.message);
-            if(res.message){
-            toast(res.message);      }    
-            
+            if (res.message) {
+                toast(res.message);
+            }
+
             console.log(res.user.userId, "lion3");
             setEmpId(res.user.userId);
 
@@ -450,14 +453,14 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
             fname: "",
             lname: "",
             reportingManager: "",
-            email: formsData.email,
+            email: "",
             employeeID: "",
             permAddr: "",
             mstatus: "",
             panNum: "",
             gender: "",
             bldGrp: "",
-            phNum: formsData.phNum,
+            phNum: "",
             dob: "",
             nationality: "",
             aadhaarNum: "",
@@ -466,17 +469,34 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
             rank: ""
 
         })
+        setEmpId(null);
+        setDoE(true);
+        setRanks(true);
+        setNationality(true)
+        setBlood(true);
     }
+    const getCurrentDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+        const day = ('0' + today.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    };
 
     return (
-      
+
         <form className='personaldata' onSubmit={submitted} >
             {/* <div><button onClick={clearForm}>click me</button></div> */}
-           
+
             <div className='personal1'>
-                <ToastContainer/>
+                <ToastContainer />
+                <div className="EMP_BUTTON" onClick={clearForm}>Create New<div className="iconn"></div></div>
+
                 <div className='group1'>
+
+
                     <div className="closeone">
+
                         <div class="form-group">
                             <input className='fname wide' name='fname' type='text' autocomplete="off" list="autocompleteOff" pattern="^[a-zA-Z ]*$" title="Alphabets only" placeholder="" value={formsData.fname} onChange={handlechange} required />
                             <label htmlFor="fname"><span className="star">*   </span>First Name</label>
@@ -488,6 +508,8 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
                     </div>
                     <div className={`${isReportFilled ? `change` : `report`
                         }`}>
+
+
                         <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
                             {/* handleSelectChange    ---[...experiences].sort((a, b) => b.id - a.id).map((val, index)--- */}
                             <option value=""></option>
@@ -608,7 +630,7 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
                                 id="messi3"
                                 placeholder=''
                                 className='textbox1'
-                                max="2024-06-20"
+                                max={getCurrentDate()}
 
                                 onChange={handlechange}
                                 // title='fill StartingDate'
@@ -654,25 +676,48 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
                 </div>
 
                 <div className="move-left">
-                    <div className={`${isDoEFilled ? `select_filled` : `forgrp`
-                        }`}>
-                        <select name="divisionOfEmployee" className="gende selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
-                            <option></option>
-                            {[...divisionOfEmployee].sort((a, b) => a.division.localeCompare(b.division)).map((val, index) => (
-                                <>
-                                    <option value={val.division} key={index}>
-                                        {val.division}
-                                    </option>
-                                </>
-                            ))}
+                    <div className="inlinee">
+                        <div className={`${isDoEFilled ? `select_filled` : `forgrp`
+                            }`}>
+                            <select name="divisionOfEmployee" className="gende selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
+                                <option></option>
+                                {[...divisionOfEmployee].sort((a, b) => a.division.localeCompare(b.division)).map((val, index) => (
+                                    <>
+                                        <option value={val.division} key={index}>
+                                            {val.division}
+                                        </option>
+                                    </>
+                                ))}
 
-                        </select>
-                        <label
-                            className={`${isDoEFilled ? 'sel_label' : ''}`}
-                        >
-                            <span className="star">*   </span> Division of employee
-                        </label>
+                            </select>
+                            <label
+                                className={`${isDoEFilled ? 'sel_label' : ''}`}
+                            >
+                                <span className="star">*   </span> Division of employee
+                            </label>
+                        </div>
+                        <div className={sty.form_group}>
+                            <input
+                                type="date"
+                                id="messi3"
+                                placeholder=''
+                                className='textbox1'
+
+
+                                onChange={handlechange}
+                                // title='fill StartingDate'
+                                value={formsData.doj}
+                                max={getCurrentDate()}
+                                name='doj'
+                                required
+                            />
+                            <label htmlFor="messi3"><span className="star">*   </span>Join date</label>
+                            {error.DateError && <p className='error'>{error.DateError}</p>}
+                            {dateError && <p className="error">{dateError}</p>}
+
+                        </div>
                     </div>
+
 
                     <div className={`${isRoleFilled ? `select_filled` : `forr`
                         }`}>

@@ -45,6 +45,26 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
   }
 
   useEffect(() => {
+    setformdata(initialDetails);
+}, [])
+// useEffect(()=>{
+//   if(passedId==null){
+//     console.log(passedId,"ppppppp");
+//     setformdata({
+//       qualification: "",
+//     discipline: "",
+//     university: "",
+//     yearOfPassing: null,
+//     cgpa: null,
+//     percentage: null,
+//     userid: null,
+//     })
+//   }
+// },[])some problem here have a look
+
+
+
+  useEffect(() => {
     setInitialDetails(formdata);
     console.log("changed");
   }, [formdata]);
@@ -79,6 +99,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
   }
 
   useEffect(() => {
+    console.log(initialDetails,"weeeeeee")
     setformdata(initialDetails);
     // setSelQual(initialDetails.qualification);
     setIsFilled(initialDetails.qualification !== "");

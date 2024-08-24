@@ -23,9 +23,9 @@ function Register() {
         percentage: null,
         userid: passId,
     });
+   
 
     const setterFunc = (data) => {
-        console.log(data);
         setformdata(data);
     }
     //setting the Id to pass for validation
@@ -81,7 +81,7 @@ const[startValues,setTempData]=useState({
                 <button
                     className={`tab-button ${currentTab === "Personal" ? "active" : ""}`}
                     onClick={() => handleTabChange("Personal")}
-                ><button >NEW</button>
+                >
                     Employee Details
                 </button>
                 <button

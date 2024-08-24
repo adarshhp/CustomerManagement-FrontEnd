@@ -26,8 +26,22 @@ function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
     });
 
     useEffect(() => {
+        console.log(initialDetailss,"expcheck")
         setFormsData(initialDetailss);
     }, [])
+
+
+useEffect(()=>{
+    if(passedId==null){
+        setFormsData({
+            companyName: "",
+            designation: "",
+            startDate: "",
+            lastDate: ""
+        });
+    }
+},[])
+
 
     //added this shit
     //const[initialDetailss,setInitialDetails]=useState([])
@@ -65,52 +79,54 @@ function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
 
     const handleChange = (e) => {
         if (passedId) {
-
             const { name, value } = e.target;
-            setFormsData({ ...formsData, [name]: value });
-
-            if (name === 'startDate' || name === 'lastDate') {
-                const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
-                setErrors({ ...errors, startDateError, endDateError });
-            }
-
-            if (name === 'designation') {
-                const designationError = validateDesignation(value);
-                setErrors({ ...errors, designationError });
-            }
-            if (name === 'companyName') {
-                let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-                setFormsData({ ...formsData, [name]: val });
-            }
-            if (name === 'designation') {
-                let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-                setFormsData({ ...formsData, [name]: val });
-            }
-
+            setFormsData(prevState => {
+                const newFormsData = { ...prevState, [name]: value };
+    
+                // Perform date validation after updating the state
+                if (name === 'startDate' || name === 'lastDate') {
+                    const { startDateError, endDateError } = validateDates(newFormsData.startDate, newFormsData.lastDate);
+                    setErrors(prevErrors => ({
+                        ...prevErrors,
+                        startDateError: name === 'startDate' ? startDateError : prevErrors.startDateError,
+                        endDateError
+                    }));
+                }
+    
+                if (name === 'designation') {
+                    const designationError = validateDesignation(value);
+                    setErrors(prevErrors => ({ ...prevErrors, designationError }));
+                }
+    
+                if (name === 'companyName' || name === 'designation') {
+                    let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                    newFormsData[name] = val;
+                }
+    
+                return newFormsData;
+            });
         }
     };
+    
 
 
 
     const validateDates = (startDate, lastDate) => {
         let startDateError = '';
         let endDateError = '';
-        const today = new Date().setHours(0, 0, 0, 0);
-
-        //    if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
-        if (new Date(startDate) >= new Date(lastDate)) {
-            // startDateError = 'Invalid Date';
-            endDateError = 'Invalid Date';
+    
+        if (startDate && lastDate) {
+            if (new Date(startDate) > new Date(lastDate)) {
+                endDateError = 'Invalid Date';
+            } else {
+                // No errors if dates are valid
+                endDateError = '';
+            }
         }
-        if (startDate && new Date(startDate) > today) {
-            startDateError = 'Invalid Date'
-        }
-        if (lastDate && new Date(lastDate) > today) {
-            endDateError = 'Invalid Date'
-        }
-
+    
         return { startDateError, endDateError };
     };
+    
 
 
 
@@ -130,15 +146,15 @@ function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
     const validateForm = () => {
         const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
         const designationError = validateDesignation(formsData.designation);
-        console.log(designationError + 'latest check');
-
+    
         if (startDateError || endDateError || designationError) {
             setErrors({ startDateError, endDateError, designationError });
             return false;
         }
-
+    
         return true;
     };
+    
 
 
 
@@ -322,6 +338,13 @@ function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
 
 
     //i am trying to keep whole delete functionality in this area above
+    const getCurrentDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+        const day = ('0' + today.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    };
 
 
     return (
@@ -375,7 +398,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
                                 value={formsData.startDate}
                                 onChange={handleChange}
                                 // title='fill StartingDate'
-
+max={getCurrentDate()}
                                 name='startDate'
                                 required
                             />
@@ -391,6 +414,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
                                 value={formsData.lastDate}
                                 onChange={handleChange}
                                 //  title='fill EndingDate'
+                                max={getCurrentDate()}
 
                                 name='lastDate'
                                 required

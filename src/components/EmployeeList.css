@@ -47,3 +47,9 @@ margin-top:18px;
 margin-left: 10px;
 font-size:20px;
 }
+.search-c{
+    height:34px;
+    position:relative;
+    top:7px;
+    right:-220px;
+}
