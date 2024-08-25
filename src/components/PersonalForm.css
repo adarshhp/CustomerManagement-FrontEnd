@@ -197,14 +197,14 @@ border-radius: 10px;
     width: 170px;
   }
   .selctor {
-    width: 87%;
+    width: 78%;
     height: 40px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease;
-    margin-left: 10px;
+    margin-left: 12px;
 }
 .selector {
   width: 137%;
@@ -436,6 +436,25 @@ border-radius: 10px;
    pointer-events: none;
 
   }
+ .fe textarea{
+  font-size: 16px;
+  width:227%
+ }
+  .fe textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .fe textarea:hover + label,
+  .fe textarea:not(:placeholder-shown) + label {
+    top: -12px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
   .fe input:focus {
     border-color: #007bff;
     outline: none;
@@ -507,8 +526,8 @@ border-radius: 10px;
   }
   .overr{
     position:relative;
-    left:43%;
-    width:46%;
+    left:46%;
+    width:43%;
     gap:5%;
   }
   .widdth{
@@ -672,6 +691,22 @@ margin-bottom: 10px;
     left: 8px;
   }
 
+.zlatan_filled input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.zlatan_filled input:hover + label,
+.zlatan_filled input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
 
 
   .selectt_filled {
@@ -794,10 +829,11 @@ margin-bottom: 10px;
   width:61%;
   margin-top: -1%;
   margin-bottom: 1%;
+  left:-5px;
 }
 
 .report {
-  width: 193px;
+  width: 171px;
   padding: 10px;
   /* border: 1px solid #ccc;
   border-radius: 4px; */
@@ -821,6 +857,50 @@ margin-bottom: 10px;
 
 .report input:hover + label,
 .report input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
+.report2 {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:61%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+  left:-5px;
+}
+
+.report2 {
+  width: 171px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.report2 label {
+  position: absolute;
+  left: 42px;
+  top: -1px;
+  font-size: 14px;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.report2 input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.report2 input:hover + label,
+.report2 input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
   color: #007bff;
@@ -974,8 +1054,9 @@ margin-bottom: 10px;
   position: relative;
   margin-bottom: 20px;
   margin: 0 10px;
-  width:100%;
+  width:97%;
   top:13px;
+  left:-22px;
 }
 .form-employee input {
   width: 83%;
@@ -1062,8 +1143,8 @@ margin-bottom: 10px;
   position: relative;
   margin-bottom: 20px;
   margin: 0 10px;
-  width:102%;
-  left:-17px;
+  width:94%;
+  left:-7px;
   top:-16px;
 }
 .form-groupp input {
@@ -1212,10 +1293,10 @@ margin-bottom: 10px;
   position: relative;
   margin-bottom: 20px;
   margin: 0 10px;
-  width:102%;
+  width:94%;
   right:7px;
   bottom:30px;
-
+left:2px;
 }
 .rm-group input {
   width: 83%;
@@ -1266,15 +1347,34 @@ margin-bottom: 10px;
   border-radius: 4px;
   left: 8px;
 }
+.lectt input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.lectt input:hover + label,
+.lectt input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
 
 .permnt{
   height: 90px;
   border-radius: 10px;
 }
+.aadressarea{
+height:120px;
+width:267%;
+}
 
 .EMP_BUTTON {
   position: relative;
-  left: 100%; /* Adjust as needed */
+  left: 98%; /* Adjust as needed */
   top:-13px;
   display: flex;
   align-items: center; /* Center content vertically */
@@ -1383,6 +1483,7 @@ margin-bottom: 10px;
   border-radius: 4px;
   left: 8px;
 }
+
 
 
 .forr {

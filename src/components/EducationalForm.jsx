@@ -70,7 +70,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
   }, [formdata]);
 
   function handleChange(e) {
-   if(passedId){
+   if(!passedId) return;
       const { name, value } = e.target;
       if (name == "qualification") {
         setIsFilled(e.target.value !== "");
@@ -94,7 +94,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
       } else {
         setformdata({ ...formdata, [name]: value });
       }
-   }
+   
 
   }
 
@@ -261,6 +261,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
               className="item quali sel"
               onChange={handleChange}
               value={formdata.qualification}
+              disabled={!passedId}
               name="qualification"
               title="Please select a qualification from the dropdown list"
               required
@@ -334,6 +335,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
               name="yearOfPassing"
               onChange={handleChange}
               value={formdata.yearOfPassing}
+              disabled={!passedId}
               title="Please select a year from the dropdown list"
               required
             >
@@ -363,6 +365,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
               className="quali"
               name="cgpa"
               onChange={handleChange}
+              disabled={!passedId}
               value={formdata.cgpa}
               title="Please select either one of CGPA or Percentage in decimal values"
               required={required}
@@ -378,6 +381,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
               className="quali"
               name="percentage"
               onChange={handleChange}
+              disabled={!passedId}
               value={formdata.percentage}
               required={required}
               title="Please select either one of Percentage or CGPA in decimal values"

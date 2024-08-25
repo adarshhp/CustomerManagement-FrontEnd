@@ -506,7 +506,7 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
                             <label for="fname"><span className="star">*   </span>Last Name</label>
                         </div>
                     </div>
-                    <div className={`${isReportFilled ? `change` : `report`
+                    <div className={`${isReportFilled ? `report2` : `report`
                         }`}>
 
 
@@ -547,7 +547,8 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
 
                 <div className="labelish" >
                     <div className="fe">
-                        <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required />
+                        {/* <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required /> */}
+                        <textarea className="aadressarea" name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required></textarea>
                         <label for="permAddr"><span className="star">*   </span>Permanent Address</label>
                     </div>
                     <div className="overr">
@@ -696,7 +697,7 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
                                 <span className="star">*   </span> Division of employee
                             </label>
                         </div>
-                        <div className={sty.form_group}>
+                        <div className={sty.rorm_group}>
                             <input
                                 type="date"
                                 id="messi3"
