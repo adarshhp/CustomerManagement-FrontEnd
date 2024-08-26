@@ -7,14 +7,14 @@ import './Model.css';
 import EducationalForm from "./EducationalForm";
 
 function Register() {
-    // Master values so their states are retained
-    const[passId,setPassId]=useState(null);
+    const [passId, setPassId] = useState(null);
 
-    const PassIdFunc=(pasId)=>{
-        console.log(pasId,"tiger");
+    const PassIdFunc = (pasId) => {
+        console.log(pasId, "tiger");
         setPassId(pasId);
-    }
-    const [formdata, setformdata] = useState({
+    };
+
+    const [formdata, setFormdata] = useState({
         qualification: "",
         decipline: "",
         university: "",
@@ -23,22 +23,24 @@ function Register() {
         percentage: null,
         userid: passId,
     });
-   
 
     const setterFunc = (data) => {
-        setformdata(data);
-    }
-    //setting the Id to pass for validation
-    
+        setFormdata(data);
+    };
 
     const [currentTab, setCurrentTab] = useState("Personal");
 
     const handleTabChange = (tab) => {
-        setCurrentTab(tab);
+        if (tab === "Educational Qualification" || tab === "Previous Experience") {
+            if (passId) {
+                setCurrentTab(tab);
+            }
+        } else {
+            setCurrentTab(tab);
+        }
     };
 
-    // Experience component state
-    const [formsData, setdataForm] = useState({
+    const [formsData, setFormsData] = useState({
         companyName: "",
         designation: "",
         startDate: "",
@@ -48,35 +50,36 @@ function Register() {
 
     const setInitial = (data) => {
         console.log(data);
-        setdataForm(data);
-    }
-    //personal page initial details setting
-    const setPersonal=(temp)=>{
-        setTempData(temp);
-    }
-const[startValues,setTempData]=useState({
-    fname: "",
-    lname: "",
-    reportingManager: "",
-    email: "",
-    employeeID: "",
-    permAddr: "",
-    mstatus: "",
-    panNum: "",
-    gender: "",
-    bldGrp: "",
-    phNum: "",
-    dob: "",
-    nationality: "",
-    aadhaarNum: "",
-    divisionOfEmployee: "",
-    roleOFEmployee: "",
-    rank: ""
-});
+        setFormsData(data);
+    };
+
+    const [startValues, setStartValues] = useState({
+        fname: "",
+        lname: "",
+        reportingManager: "",
+        email: "",
+        employeeID: "",
+        permAddr: "",
+        mstatus: "",
+        panNum: "",
+        gender: "",
+        bldGrp: "",
+        phNum: "",
+        dob: "",
+        nationality: "",
+        aadhaarNum: "",
+        divisionOfEmployee: "",
+        roleOFEmployee: "",
+        rank: ""
+    });
+
+    const setPersonal = (temp) => {
+        setStartValues(temp);
+    };
 
     return (
         <div className="register-container">
-          <div className="create-tab">Create Employee</div>
+            <div className="create-tab">Create Employee</div>
             <div className="tabs">
                 <button
                     className={`tab-button ${currentTab === "Personal" ? "active" : ""}`}
@@ -85,26 +88,27 @@ const[startValues,setTempData]=useState({
                     Employee Details
                 </button>
                 <button
-                    className={`tab-button ${currentTab === "Educational Qualification" ? "active" : ""}`}
+                    className={`tab-button ${currentTab === "Educational Qualification" ? "active" : ""} ${!passId ? "disabled" : ""}`}
                     onClick={() => handleTabChange("Educational Qualification")}
+                    disabled={!passId}
                 >
                     Educational Qualification
                 </button>
                 <button
-                    className={`tab-button ${currentTab === "Previous Experience" ? "active" : ""}`}
+                    className={`tab-button ${currentTab === "Previous Experience" ? "active" : ""} ${!passId ? "disabled" : ""}`}
                     onClick={() => handleTabChange("Previous Experience")}
+                    disabled={!passId}
                 >
                     Previous Experience
                 </button>
             </div>
             <div className="tab-content">
-                
-                {currentTab === "Personal" && <PersonalForm setEmpId={PassIdFunc} setStartDetails={setPersonal} startDetails={startValues}/>}
+                {currentTab === "Personal" && <PersonalForm setEmpId={PassIdFunc} setStartDetails={setPersonal} startDetails={startValues} />}
                 {currentTab === "Educational Qualification" && 
-                    <EducationalForm initialDetails={formdata} setInitialDetails={setterFunc} passedId={passId}/>
+                    <EducationalForm initialDetails={formdata} setInitialDetails={setterFunc} passedId={passId} />
                 }
                 {currentTab === "Previous Experience" && 
-                    <ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial} passedId={passId}/>
+                    <ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial} passedId={passId} />
                 }
             </div>
         </div>

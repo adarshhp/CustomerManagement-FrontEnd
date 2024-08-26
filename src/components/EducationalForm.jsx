@@ -44,23 +44,38 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
     }
   }
 
+ useEffect(() => {
+  if (!passedId) {
+    setformdata({
+      qualification: "",
+      discipline: "",
+      university: "",
+      yearOfPassing: "",
+      cgpa: "",
+      percentage: "",
+      userid: null, 
+    });
+  }
+}, []);
+
+
   useEffect(() => {
     setformdata(initialDetails);
-}, [])
-// useEffect(()=>{
-//   if(passedId==null){
-//     console.log(passedId,"ppppppp");
-//     setformdata({
-//       qualification: "",
-//     discipline: "",
-//     university: "",
-//     yearOfPassing: null,
-//     cgpa: null,
-//     percentage: null,
-//     userid: null,
-//     })
-//   }
-// },[])some problem here have a look
+  }, [])
+  // useEffect(()=>{
+  //   if(passedId==null){
+  //     console.log(passedId,"ppppppp");
+  //     setformdata({
+  //       qualification: "",
+  //     discipline: "",
+  //     university: "",
+  //     yearOfPassing: null,
+  //     cgpa: null,
+  //     percentage: null,
+  //     userid: null,
+  //     })
+  //   }
+  // },[])some problem here have a look
 
 
 
@@ -70,36 +85,36 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
   }, [formdata]);
 
   function handleChange(e) {
-   if(!passedId) return;
-      const { name, value } = e.target;
-      if (name == "qualification") {
-        setIsFilled(e.target.value !== "");
-        setSelQual(value);
-        if (e.target.value === "") {
-          setSelQual("");
-          setIsDisciplineFilled(false);
-        }
-      } else if (name == "discipline") {
-        setIsDisciplineFilled(e.target.value !== "");
-      } else if (name == "yearOfPassing") {
-        setYoPFilled(e.target.value !== "");
+    if (!passedId) return;
+    const { name, value } = e.target;
+    if (name == "qualification") {
+      setIsFilled(e.target.value !== "");
+      setSelQual(value);
+      if (e.target.value === "") {
+        setSelQual("");
+        setIsDisciplineFilled(false);
       }
-      if ((name == "percentage" || name == "cgpa") && (value == "" || value == " ")) {
-        console.log(null, "value spotted");
-        setformdata({ ...formdata, [name]: null });
-      } else if (name == "university") {
-        let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
-        setformdata({ ...formdata, [name]: val });
-        console.log(val);
-      } else {
-        setformdata({ ...formdata, [name]: value });
-      }
-   
+    } else if (name == "discipline") {
+      setIsDisciplineFilled(e.target.value !== "");
+    } else if (name == "yearOfPassing") {
+      setYoPFilled(e.target.value !== "");
+    }
+    if ((name == "percentage" || name == "cgpa") && (value == "" || value == " ")) {
+      console.log(null, "value spotted");
+      setformdata({ ...formdata, [name]: null });
+    } else if (name == "university") {
+      let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+      setformdata({ ...formdata, [name]: val });
+      console.log(val);
+    } else {
+      setformdata({ ...formdata, [name]: value });
+    }
+
 
   }
 
   useEffect(() => {
-    console.log(initialDetails,"weeeeeee")
+    console.log(initialDetails, "weeeeeee")
     setformdata(initialDetails);
     // setSelQual(initialDetails.qualification);
     setIsFilled(initialDetails.qualification !== "");
@@ -168,8 +183,8 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
         yearOfPassing: "",
         cgpa: "",
         percentage: "",
-      //  userid: 7;
-      userid:passedId
+        //  userid: 7;
+        userid: passedId
       });
       checkRequired();
       setIsFilled(false);

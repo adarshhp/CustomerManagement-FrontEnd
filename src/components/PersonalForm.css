@@ -178,7 +178,7 @@ border-radius: 10px;
 
   }
   .form-group input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -186,7 +186,7 @@ border-radius: 10px;
   .form-group input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -289,7 +289,7 @@ border-radius: 10px;
 
   }
   .forgrp input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -297,7 +297,7 @@ border-radius: 10px;
   .forgrp input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -350,7 +350,7 @@ border-radius: 10px;
 
   }
   .fo input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -358,7 +358,7 @@ border-radius: 10px;
   .fo input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -391,7 +391,7 @@ border-radius: 10px;
 
   }
   .f input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -399,7 +399,7 @@ border-radius: 10px;
   .f input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -441,7 +441,7 @@ border-radius: 10px;
   width:227%
  }
   .fe textarea:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -449,14 +449,14 @@ border-radius: 10px;
   .fe textarea:not(:placeholder-shown) + label {
     top: -12px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
     left: 8px;
   }
   .fe input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -464,7 +464,7 @@ border-radius: 10px;
   .fe input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -499,7 +499,7 @@ border-radius: 10px;
 
   }
   .feemp input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -507,7 +507,7 @@ border-radius: 10px;
   .feemp input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -565,7 +565,7 @@ border-radius: 10px;
 
   }
   .finale input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -573,7 +573,7 @@ border-radius: 10px;
   .finale input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -605,7 +605,7 @@ border-radius: 10px;
   .sel_label + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -615,7 +615,7 @@ border-radius: 10px;
 
   
   .select_filled {
-    color: #007bff;
+    color: black;
     position: relative;
     width:64%;
     left:9px;
@@ -626,7 +626,7 @@ margin-bottom:10px;
   .select_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -646,7 +646,7 @@ bottom:10px;
   .seect_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -665,7 +665,7 @@ margin-bottom: 12px;
   .sele_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -675,7 +675,7 @@ margin-bottom: 12px;
   
   .zlatan_filled {
     position: relative;
-    width:46%;
+    width:47%;
     left:9px;
     /* margin-top: 12px; */
 margin-bottom: 10px;
@@ -684,7 +684,7 @@ margin-bottom: 10px;
   .zlatan_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -692,7 +692,7 @@ margin-bottom: 10px;
   }
 
 .zlatan_filled input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -700,7 +700,7 @@ margin-bottom: 10px;
 .zlatan_filled input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -711,7 +711,7 @@ margin-bottom: 10px;
 
   .selectt_filled {
     position: relative;
-    width:45%;
+    width:46%;
     left:11px;
     margin-top: 6px;
   }
@@ -719,7 +719,7 @@ margin-bottom: 10px;
   .selectt_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -736,7 +736,7 @@ margin-bottom: 10px;
   .a_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -755,7 +755,7 @@ margin-bottom: 10px;
   .b_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color:black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -772,7 +772,7 @@ margin-bottom: 10px;
   .c_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -806,7 +806,7 @@ margin-bottom: 10px;
 
 }
 .forgrppe input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -814,7 +814,7 @@ margin-bottom: 10px;
 .forgrppe input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -851,7 +851,7 @@ margin-bottom: 10px;
 
 }
 .report input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -859,7 +859,7 @@ margin-bottom: 10px;
 .report input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -895,7 +895,7 @@ margin-bottom: 10px;
 
 }
 .report2 input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -903,7 +903,7 @@ margin-bottom: 10px;
 .report2 input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -942,7 +942,7 @@ margin-bottom: 10px;
 
 }
 .gender input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -950,7 +950,7 @@ margin-bottom: 10px;
 .gender input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -988,7 +988,7 @@ margin-bottom: 10px;
 
 }
 .blood input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -996,7 +996,7 @@ margin-bottom: 10px;
 .blood input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1034,7 +1034,7 @@ margin-bottom: 10px;
 
 }
 .marriage input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1042,7 +1042,7 @@ margin-bottom: 10px;
 .marriage input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1077,7 +1077,7 @@ margin-bottom: 10px;
 
 }
 .form-employee input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1085,7 +1085,7 @@ margin-bottom: 10px;
 .form-employee input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1122,7 +1122,7 @@ margin-bottom: 10px;
 
 }
 .gende input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1130,7 +1130,7 @@ margin-bottom: 10px;
 .gende input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1166,7 +1166,7 @@ margin-bottom: 10px;
 
 }
 .form-groupp input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1174,7 +1174,7 @@ margin-bottom: 10px;
 .form-groupp input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1188,14 +1188,14 @@ margin-bottom: 10px;
   left: 51px;
   top: -4px;
   font-size: 14px;
-  color:  #007bff;
+  color:  black;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .change input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1203,7 +1203,7 @@ margin-bottom: 10px;
 .change input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1246,14 +1246,14 @@ margin-bottom: 10px;
   left: 12px;
   top: -11px;
   font-size: 14px;
-  color: #007bff;
+  color: black;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .f_group input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1261,7 +1261,7 @@ margin-bottom: 10px;
 .f_group input:not(:placeholder-shown) + label {
   top: -2px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1270,7 +1270,7 @@ margin-bottom: 10px;
 .f_group select:hover + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1317,7 +1317,7 @@ left:2px;
 
 }
 .rm-group input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1325,7 +1325,7 @@ left:2px;
 .rm-group input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1341,14 +1341,14 @@ left:2px;
 .lectt_filled + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
   left: 8px;
 }
 .lectt input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1356,7 +1356,7 @@ left:2px;
 .lectt input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1451,7 +1451,7 @@ width:267%;
 
 }
 .natione input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1459,7 +1459,7 @@ width:267%;
 .natione input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1477,7 +1477,7 @@ margin-bottom: 10px;
 .zlatanib_filled + label {
   top: -20px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1513,7 +1513,7 @@ margin-bottom: 10px;
 
 }
 .forr input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1521,7 +1521,7 @@ margin-bottom: 10px;
 .forr input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1556,14 +1556,14 @@ margin-bottom: 10px;
   left: 25px;
   top: 0px;
   font-size: 14px;
-  color: #007bff;
+  color:black;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .b input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1571,7 +1571,7 @@ margin-bottom: 10px;
 .b input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;

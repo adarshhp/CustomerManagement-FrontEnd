@@ -10,6 +10,7 @@ import Education from './components/Education';
 import PreviousExperiance from './components/PreviousExperiance'; import Layout from './components/Layout';
 import Dashboard from './components/Dashboard';
 import EmployeeList from './components/EmployeeList';
+import EditPage from './components/EditPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<Register />} />
             <Route path="/contact" element={<EmployeeList />} />
+            <Route path="/editpage/:id" element={<EditPage/>}/>
 
           </Route>
         </Routes>

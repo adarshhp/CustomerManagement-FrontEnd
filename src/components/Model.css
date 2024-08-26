@@ -97,3 +97,9 @@
     font-weight: bold;
     padding-bottom: 10px;
 }
+
+.tab-button.disabled {
+   
+    cursor: not-allowed;
+}
+

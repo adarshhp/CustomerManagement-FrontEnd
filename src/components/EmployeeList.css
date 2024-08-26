@@ -51,5 +51,20 @@ font-size:20px;
     height:34px;
     position:relative;
     top:7px;
-    right:-220px;
+    right:-163px;
+}
+.filter-button{
+height:33px;
+width:114px;
+position:relative;
+top:8px;
+right:5%;
+}
+.addfilter{
+    position:relative;
+    left:-1%;
+}
+.search-filter{
+    display: flex;
+    flex-direction: row;
 }
