@@ -135,10 +135,10 @@ const handleBack=()=>{
                 
                 {currentTab === "Personal" && <PersonalForm setEmpId={PassIdFunc} setStartDetails={setPersonal} startDetails={startValues} initialPersonalForm={id}/>}
                 {currentTab === "Educational Qualification" && 
-                    <EducationalForm initialDetails={formdata} setInitialDetails={setterFunc} passedId={passId} initialPersonalForm={id}/>
+                    <EducationalForm initialDetails={formdata} setInitialDetails={setterFunc} passedId={passId||id} initialPersonalForm={id}/>
                 }
                 {currentTab === "Previous Experience" && 
-                    <ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial} passedId={passId} initialPersonalForm={id}/>
+                    <ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial} passedId={passId||id} initialPersonalForm={id}/>
                 }
             </div>
         </div>

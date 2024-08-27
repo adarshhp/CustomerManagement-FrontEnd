@@ -12,10 +12,10 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails ,initialPersonal
 
 
 const[editing,setEditData]=useState([])
-console.log(initialPersonalForm,"france outside");
 useEffect(()=>{
 const fetcheditdata= async()=>{
     const editdata=await apiRequest(`/getUserById${initialPersonalForm}`)
+    console.log(editdata,"france 4")
     setformsData(editdata)
     if (editdata.divisionOfEmployee !== "") {
         setDoE(true);
@@ -49,7 +49,6 @@ if(initialPersonalForm){
 }
    
 },[])
-console.log(editing,"france")
 
 
     const [formsData, setformsData] = useState({
@@ -532,6 +531,7 @@ console.log(editing,"france")
 
             <div className='personal1'>
                 <ToastContainer />
+                
                 <div className="EMP_BUTTON" onClick={clearForm}>Create New<div className="iconn"></div></div>
 
                 <div className='group1'>

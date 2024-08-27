@@ -7,24 +7,31 @@ import EditPopUp from "./EditPopUp";
 import sty from "./educationalStyle.module.css";
 import edb from "./EditPopUp.module.css";
 import Model from "./Model";
+import { useParams } from "react-router-dom";
 
 function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPersonalForm }) {
+//   let { id } = useParams
+
+//   useEffect(()=>{
+// passedId=id;
+//   },[id])
 
 
 
 
-
+const [educationarray,setEducation]=useState([])
   useEffect(()=>{
     const fetcheditdata=async()=>{
        const editdata=await apiRequest(`/EducationalDetails/${initialPersonalForm}`)
-       setformdata(editdata.data)
-       console.log(editdata.data,"france2")
+       setEducation(editdata);
+       console.log(editdata,"france 6")
+
+       setPrevList(editdata?.data || [])
     }
     if(initialPersonalForm){
         fetcheditdata();
     }
     },[initialPersonalForm])
-
 
 
 
@@ -116,7 +123,6 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPe
   }, [formdata]);
 
   function handleChange(e) {
-    if (!passedId) return;
     const { name, value } = e.target;
     if (name == "qualification") {
       setIsFilled(e.target.value !== "");
@@ -307,7 +313,7 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPe
               className="item quali sel"
               onChange={handleChange}
               value={formdata.qualification}
-              disabled={!passedId}
+
               name="qualification"
               title="Please select a qualification from the dropdown list"
               required
@@ -381,7 +387,6 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPe
               name="yearOfPassing"
               onChange={handleChange}
               value={formdata.yearOfPassing}
-              disabled={!passedId}
               title="Please select a year from the dropdown list"
               required
             >
@@ -411,7 +416,6 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPe
               className="quali"
               name="cgpa"
               onChange={handleChange}
-              disabled={!passedId}
               value={formdata.cgpa}
               title="Please select either one of CGPA or Percentage in decimal values"
               required={required}
@@ -427,7 +431,6 @@ function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPe
               className="quali"
               name="percentage"
               onChange={handleChange}
-              disabled={!passedId}
               value={formdata.percentage}
               required={required}
               title="Please select either one of Percentage or CGPA in decimal values"

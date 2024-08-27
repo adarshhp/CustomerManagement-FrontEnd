@@ -18,27 +18,17 @@ import DateImage from '../icons/DateImage';
 
 function ExperianceForm({ initialDetailss, setInitialDetails, passedId ,initialPersonalForm}) {
 
-
 useEffect(()=>{
 const fetcheditdata=async ()=>{
     const editdata=await apiRequest(`/GetPrevExp/${initialPersonalForm}`)
-    setFormsData(editdata)
-    console.log(editdata,"france3")
+    setExperiences(editdata);
+    console.log(editdata,"france 7")
 
 }
 if(initialPersonalForm){
     fetcheditdata();
 }
 },[initialPersonalForm])
-
-
-
-
-
-
-
-
-
 
 
 
@@ -51,7 +41,6 @@ if(initialPersonalForm){
     });
 
     useEffect(() => {
-        console.log(initialDetailss,"expcheck")
         setFormsData(initialDetailss);
     }, [])
                                                                                     
@@ -86,7 +75,6 @@ useEffect(()=>{
 
 
     const [experiences, setExperiences] = useState([]);
-    console.log(experiences + 'gvykhyukefvfgysgvoyefuskfev');
 
 
 
@@ -103,7 +91,6 @@ useEffect(()=>{
 
 
     const handleChange = (e) => {
-        if (passedId) {
             const { name, value } = e.target;
             setFormsData(prevState => {
                 const newFormsData = { ...prevState, [name]: value };
@@ -130,7 +117,7 @@ useEffect(()=>{
     
                 return newFormsData;
             });
-        }
+        
     };
     
 
