@@ -3,11 +3,52 @@ import "./PersonalForm.css";
 import apiRequest from "../lib/apiRequest";
 import PopeUp from "./PopeUp";
 import sty from "./formatedStyle.module.css";
+import { ToastContainer, toast } from 'react-toastify';
+import PlusIcon from "../icons/PlusIcon";
 
 
-function PersonalForm() {
+
+function PersonalForm({ setEmpId, setStartDetails, startDetails ,initialPersonalForm}) {
 
 
+const[editing,setEditData]=useState([])
+useEffect(()=>{
+const fetcheditdata= async()=>{
+    const editdata=await apiRequest(`/getUserById${initialPersonalForm}`)
+    console.log(editdata,"france 4")
+    setformsData(editdata)
+    if (editdata.divisionOfEmployee !== "") {
+        setDoE(true);
+    }
+    if (editdata.rank !== "") {
+        setRanks(true);
+    }
+
+    if (editdata.nationality !== "") {
+        setNationality(true)
+            ;
+    }
+    if (editdata.bldGrp !== "") {
+        setBlood(true);
+    }
+    if (editdata.reportingManager != "") {
+        setReportId(true);
+    }
+    if (editdata.mstatus !== "") {
+        setMarriage(true);
+    }
+    if (editdata.roleOFEmployee !== "") {
+        setRoleofEmployee(true);
+    }
+    if (editdata.gender !== "") {
+        setGender(true);
+    }
+}
+if(initialPersonalForm){
+   fetcheditdata();
+}
+   
+},[])
 
 
     const [formsData, setformsData] = useState({
@@ -27,9 +68,50 @@ function PersonalForm() {
         aadhaarNum: "",
         divisionOfEmployee: "",
         roleOFEmployee: "",
-        rank: ""
+        rank: "",
+        doj: ""
 
     })
+    useEffect(() => {
+        setStartDetails(formsData)
+    }, [formsData])
+
+
+    useEffect(() => {
+        //i edited here to set editing or startdetails based on data
+       
+        setformsData(startDetails);
+        
+
+        console.log(startDetails, "jjjjjjjj");
+        if (startDetails.divisionOfEmployee !== "") {
+            setDoE(true);
+        }
+        if (startDetails.rank !== "") {
+            setRanks(true);
+        }
+
+        if (startDetails.nationality !== "") {
+            setNationality(true)
+                ;
+        }
+        if (startDetails.bldGrp !== "") {
+            setBlood(true);
+        }
+        if (startDetails.reportingManager != "") {
+            setReportId(true);
+        }
+        if (startDetails.mstatus !== "") {
+            setMarriage(true);
+        }
+        if (startDetails.roleOFEmployee !== "") {
+            setRoleofEmployee(true);
+        }
+        if (startDetails.gender !== "") {
+            setGender(true);
+        }
+    }, [])
+
     //usestate for changing form from readonly to editable
     const [editForm, setEditForm] = useState(true);
     const [error, setErrors] = useState("");
@@ -60,7 +142,7 @@ function PersonalForm() {
             let val = e.target.value.replace(/[^a-zA-Z]/g, '');
             setformsData({ ...formsData, [name]: val });
         } else if (name === 'lname') {
-            let val = e.target.value.replace(/[^a-zA-Z]/g, '');
+            let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
             setformsData({ ...formsData, [name]: val });
         } else if (name === 'divisionOfEmployee') {
             setDoE(true);
@@ -68,18 +150,20 @@ function PersonalForm() {
             setRoleofEmployee(true);
         } else if (name === 'rank') {
             setRanks(true);
-        } else if(name==='gender'){
-setGender(true);
+        } else if (name === 'gender') {
+            setGender(true);
         }
-        else if(name==='bldGrp'){
-setBlood(true)
-        }else if(name==='nationality'){
-setNationality(true)
-        }else if(name==='mstatus'){
+        else if (name === 'bldGrp') {
+            setBlood(true)
+        } else if (name === 'nationality') {
+            setNationality(true)
+        } else if (name === 'mstatus') {
             setMarriage(true);
-        }else if(name == 'employeeID'){
+        } else if (name == 'employeeID') {
             testEmployeeId(value);
-        }else if(name==='reportingManager'){
+            let val = e.target.value.replace(/[^a-zA-Z0-9]/g, '');
+            setformsData({ ...formsData, [name]: val });
+        } else if (name === 'reportingManager') {
             setReportId(true);
         }
         else {
@@ -98,8 +182,8 @@ setNationality(true)
     const [isNationalityFilled, setNationality] = useState(false);
 
     const [isGenderFilled, setGender] = useState(false);
-    const[isMarriageFilled,setMarriage]=useState(false);
-    const[isReportFilled,setReportId]=useState(false);
+    const [isMarriageFilled, setMarriage] = useState(false);
+    const [isReportFilled, setReportId] = useState(false);
 
 
 
@@ -212,17 +296,25 @@ setNationality(true)
         }).then(resp => resp.json()).then((res) => {
             setshowPopeup(false);
             setshowStatusBar(res.message);
-            console.log(res);
+            if (res.message) {
+                toast(res.message);
+            }
+
+            console.log(res.user.userId, "lion3");
+            setEmpId(res.user.userId);
+
         })
-
-
     }
     function closestatus() {
         setshowStatusBar(null);
 
     }
     const validateEmail = (email) => {
-        const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        // const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        // const re = /^[a-zA-Z0-9._-]+\.com$/;
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/;
+
+
         if (re.test(String(email).toLowerCase())) {
             setErrorMessage(null);
         } else {
@@ -260,7 +352,7 @@ setNationality(true)
     const [dropdownData, setDropdownData] = useState([]);
     const [selectedOption, setSelectedOption] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
-    const [employeeErrorMessage,setEmployeeErrorMessage] = useState(null);
+    const [employeeErrorMessage, setEmployeeErrorMessage] = useState(null);
     const [errorPanMsg, seterrorPanMsg] = useState(null);
     const [errorAdharMsg, setAdharMsg] = useState(null);
 
@@ -358,9 +450,6 @@ setNationality(true)
     const fetchManager = async () => {
         try {
             const response = await apiRequest("/ReportingManager");
-            console.log(response, "responseeee");
-            // const data = await response.json();
-            console.log("inside........");
 
 
 
@@ -387,7 +476,6 @@ setNationality(true)
         fetchRank();
         fetchDropdownData();
         fetchManager();
-
     }, [])
 
     //     useEffect(()=>{
@@ -395,33 +483,79 @@ setNationality(true)
     //     },[formsData])
     function testEmployeeId(input) {
         let regex = /XCL[0-9]{5}/i;
-        if(!(regex.test(input))){
+        if (!(regex.test(input))) {
             setEmployeeErrorMessage("invalid Employeeid");
-        }else{
+        } else {
             setEmployeeErrorMessage(null);
         }
     }
+    const clearForm = () => {
+        setformsData({
+            fname: "",
+            lname: "",
+            reportingManager: "",
+            email: "",
+            employeeID: "",
+            permAddr: "",
+            mstatus: "",
+            panNum: "",
+            gender: "",
+            bldGrp: "",
+            phNum: "",
+            dob: "",
+            nationality: "",
+            aadhaarNum: "",
+            divisionOfEmployee: "",
+            roleOFEmployee: "",
+            rank: ""
+
+        })
+        setEmpId(null);
+        setDoE(true);
+        setRanks(true);
+        setNationality(true)
+        setBlood(true);
+    }
+    const getCurrentDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+        const day = ('0' + today.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    };
 
     return (
+
         <form className='personaldata' onSubmit={submitted} >
+            {/* <div><button onClick={clearForm}>click me</button></div> */}
+
             <div className='personal1'>
+                <ToastContainer />
+                
+                <div className="EMP_BUTTON" onClick={clearForm}>Create New<div className="iconn"></div></div>
+
                 <div className='group1'>
+
+
                     <div className="closeone">
+
                         <div class="form-group">
                             <input className='fname wide' name='fname' type='text' autocomplete="off" list="autocompleteOff" pattern="^[a-zA-Z ]*$" title="Alphabets only" placeholder="" value={formsData.fname} onChange={handlechange} required />
-                            <label htmlFor="fname"><span className="star">*</span>First Name</label>
+                            <label htmlFor="fname"><span className="star">*   </span>First Name</label>
                         </div>
                         <div className="form-group">
                             <input className='lname' name='lname' type='text' autocomplete="off" list="autocompleteOff" pattern="^[a-zA-Z ]*$" title="Alphabets only" placeholder='' value={formsData.lname} onChange={handlechange} required />
-                            <label for="fname"><span className="star">*</span>Last Name</label>
+                            <label for="fname"><span className="star">*   </span>Last Name</label>
                         </div>
                     </div>
-                    <div className={`${isReportFilled ? `selectt_filled` : `report`
+                    <div className={`${isReportFilled ? `report2` : `report`
                         }`}>
+
+
                         <select name="reportingManager" className="reporting" value={formsData.reportingManager} onChange={handlechange} required>
-                            {/* handleSelectChange */}
+                            {/* handleSelectChange    ---[...experiences].sort((a, b) => b.id - a.id).map((val, index)--- */}
                             <option value=""></option>
-                            {manager.map((item, index) => (
+                            {[...manager].sort((a, b) => a.name.localeCompare(b.name)).map((item, index) => (
                                 <option key={index} value={item.name}>
                                     {item.name}
                                 </option>
@@ -431,7 +565,7 @@ setNationality(true)
                         <label
                             className={`${isReportFilled ? 'sel_label' : ''}`}
                         >
-                            <span className="star">*</span>Reporting Manager
+                            <span className="star">*   </span>Reporting Manager
                         </label>
 
                     </div>
@@ -440,14 +574,14 @@ setNationality(true)
                     <div className="fe">
                         <span className="star"></span>
                         <input className="email" name="email" autocomplete="off" list="autocompleteOff" type="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="" onChange={handlechange} value={formsData.email} required />
-                        <label for="email"><span className="star">*</span>Email</label>
+                        <label for="email"><span className="star">*   </span>Email</label>
                         {errorMessage != null && formsData.email != "" && <span className="error">{errorMessage}</span>}
                     </div>
                     <div className="overr">
                         <div className="form-employee">
                             <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='employeeID' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.employeeID} onChange={handlechange} required />
-                            <label for="phNum"><span className="star">*</span>Employee Id</label>
-                            {employeeErrorMessage != null && formsData.employeeID != "" && <span className="error">{employeeErrorMessage}</span>}
+                            <label for="phNum"><span className="star">*   </span>Employee Id</label>
+                            {/* {employeeErrorMessage != null && formsData.employeeID != "" && <span className="error">{employeeErrorMessage}</span>} */}
                         </div>
                     </div>
 
@@ -455,27 +589,29 @@ setNationality(true)
 
                 <div className="labelish" >
                     <div className="fe">
-                        <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required />
-                        <label for="permAddr"><span className="star">*</span>Permanent Address</label>
+                        {/* <input className='permnt' name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required /> */}
+                        <textarea className="aadressarea" name="permAddr" type='text' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.permAddr} onChange={handlechange} required></textarea>
+                        <label for="permAddr"><span className="star">*   </span>Permanent Address</label>
                     </div>
                     <div className="overr">
-                        <div  className={`${isMarriageFilled ? `sele_filled` : `marriage`
-                        }`}>
-                        <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
-                            <option></option>
-                            <option value='married'>Married</option>
-                            <option value='unmarried'>UnMarried</option>
-                        </select>
-                        <label
-                            className={`${isMarriageFilled ? 'sel_label' : ''}`}
-                        >
-                            <span className="star">*</span>Marriage
-                        </label>
+                        <div className={`${isMarriageFilled ? `b` : `marriage`
+                            }`}>
+                            <select className='marstatus selctor' name='mstatus' value={formsData.mstatus} onChange={handlechange} required >
+                                <option></option>
+                                <option value='married'>Married</option>
+                                <option value='unmarried'>UnMarried</option>
+                            </select>
+                            <label
+                                className={`${isMarriageFilled ? 'sel_label' : ''}`}
+                            >
+                                <span className="star">*   </span> Marrital Status
+                            </label>
                         </div>
+                        <br />
                         <br />
                         <div className="finale">
                             <input className='forgrp' type='text' name='panNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.panNum.toUpperCase()} onChange={handlechange} required />
-                            <label for="panNum"><span className="star">*</span>PAN Card Number</label>
+                            <label for="panNum"><span className="star">*   </span>PAN Card Number</label>
                             {errorPanMsg != null && formsData.panNum != "" && <span className="error">{errorPanMsg}</span>}
                         </div>
 
@@ -484,7 +620,7 @@ setNationality(true)
 
                 <div className="group2 sidewayFix" id="forthrow">
                     <div className="together">
-                        <div className={`${isGenderFilled ? `selectt_filled` : `${sty.form_group}`
+                        <div className={`${isGenderFilled ? `f_group` : `${sty.form_group}`
                             }`}>
                             <select name="gender" className="gender selctor" value={formsData.gender} onChange={handlechange} required>
                                 <option></option>
@@ -495,7 +631,7 @@ setNationality(true)
                             <label
                                 className={`${isGenderFilled ? 'sel_label' : ''}`}
                             >
-                                <span className="star">*</span>Gender
+                                <span className="star">*   </span>Gender
                             </label>
 
                         </div>
@@ -513,15 +649,15 @@ setNationality(true)
                             <label
                                 className={`${isBloodFilled ? 'sel_label' : ''}`}
                             >
-                                <span className="star">*</span>Blood Group
+                                <span className="star">*   </span>Blood Group
                             </label>
 
                         </div>
                     </div>
                     <div className="over">
-                        <div className="form-group">
+                        <div className="rm-group">
                             <input className='phnnum' id="phoneno" type='text' pattern=".{5,10}" name='phNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.phNum} onChange={handlechange} required />
-                            <label for="phNum"><span className="star">*</span>Phone Number</label>
+                            <label for="phNum"><span className="star">*   </span>Phone Number</label>
                             {phoneError && <p className="error">{phoneError}</p>}
                         </div>
                     </div>
@@ -537,7 +673,7 @@ setNationality(true)
                                 id="messi3"
                                 placeholder=''
                                 className='textbox1'
-                                max="2024-06-20"
+                                max={getCurrentDate()}
 
                                 onChange={handlechange}
                                 // title='fill StartingDate'
@@ -546,12 +682,12 @@ setNationality(true)
                                 name='dob'
                                 required
                             />
-                            <label htmlFor="messi3"><span className="star">*</span>DOB</label>
+                            <label htmlFor="messi3"><span className="star">*   </span>DOB</label>
                             {error.DateError && <p className='error'>{error.DateError}</p>}
                             {dateError && <p className="error">{dateError}</p>}
 
                         </div>
-                        <div className={`${isNationalityFilled ? `zlatan_filled` : `blood`
+                        <div className={`${isNationalityFilled ? `zlatan_filled` : `natione`
                             }`}>
                             <select className='bloodgrp selector' name="nationality" required value={formsData.nationality} onChange={handlechange} >
                                 <option> </option>
@@ -566,7 +702,7 @@ setNationality(true)
                             <label
                                 className={`${isNationalityFilled ? 'sel_label' : ''}`}
                             >
-                                <span className="star">*</span>Nationality
+                                <span className="star">*   </span> Nationality
                             </label>
 
                         </div>
@@ -576,39 +712,62 @@ setNationality(true)
                     <div className="over">
                         <div className="form-groupp">
                             <input className='phnnum' id="phoneno" type='text' name='aadhaarNum' autocomplete="off" list="autocompleteOff" placeholder='' value={formsData.aadhaarNum} onChange={handlechange} required />
-                            <label for="phNum"><span className="star">*</span>Adhar Card No:</label>
+                            <label for="phNum"><span className="star">*   </span>Adhar Card No:</label>
                             {aadharError && <p className="error">{aadharError}</p>}
                         </div>
                     </div>
                 </div>
 
                 <div className="move-left">
-                    <div className={`${isDoEFilled ? `select_filled` : `forgrp`
-                        }`}>
-                        <select name="divisionOfEmployee" className="gende selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
-                            <option></option>
-                            {divisionOfEmployee.map((val, index) => (
-                                <>
-                                    <option value={val.division} key={index}>
-                                        {val.division}
-                                    </option>
-                                </>
-                            ))}
+                    <div className="inlinee">
+                        <div className={`${isDoEFilled ? `select_filled` : `forgrp`
+                            }`}>
+                            <select name="divisionOfEmployee" className="gende selctor" value={formsData.divisionOfEmployee} onChange={handlechange} required>
+                                <option></option>
+                                {[...divisionOfEmployee].sort((a, b) => a.division.localeCompare(b.division)).map((val, index) => (
+                                    <>
+                                        <option value={val.division} key={index}>
+                                            {val.division}
+                                        </option>
+                                    </>
+                                ))}
 
-                        </select>
-                        <label
-                            className={`${isDoEFilled ? 'sel_label' : ''}`}
-                        >
-                            <span className="star">*</span>Division of employee
-                        </label>
+                            </select>
+                            <label
+                                className={`${isDoEFilled ? 'sel_label' : ''}`}
+                            >
+                                <span className="star">*   </span> Division of employee
+                            </label>
+                        </div>
+                        <div className={sty.rorm_group}>
+                            <input
+                                type="date"
+                                id="messi3"
+                                placeholder=''
+                                className='textbox1'
+
+
+                                onChange={handlechange}
+                                // title='fill StartingDate'
+                                value={formsData.doj}
+                                max={getCurrentDate()}
+                                name='doj'
+                                required
+                            />
+                            <label htmlFor="messi3"><span className="star">*   </span>Join date</label>
+                            {error.DateError && <p className='error'>{error.DateError}</p>}
+                            {dateError && <p className="error">{dateError}</p>}
+
+                        </div>
                     </div>
 
-                    <div className={`${isRoleFilled ? `select_filled` : `forgrp`
+
+                    <div className={`${isRoleFilled ? `select_filled` : `forr`
                         }`}>
                         <select name="roleOFEmployee" className="gende selctor" value={formsData.roleOFEmployee} onChange={handlechange} required >
                             <option></option>
 
-                            {role.map((val, index) => (
+                            {[...role].sort((a, b) => a.role.localeCompare(b.role)).map((val, index) => (
                                 <>
                                     <option value={val.role} key={index}>
                                         {val.role}
@@ -619,11 +778,11 @@ setNationality(true)
                         <label
                             className={`${isRoleFilled ? 'sel_label' : ''}`}
                         >
-                            <span className="star">*</span>Role of Employee
+                            <span className="star">*   </span> Role of Employee
                         </label>
                     </div>
                     <div className="group4">
-                        <div className={`${isRankFilled ? `selectt_filled` : `fo`
+                        <div className={`${isRankFilled ? `lectt_filled` : `fo`
                             }`}>
                             <select name="rank" className="gende selctor" value={formsData.rank} onChange={handlechange} required>
                                 <option></option>
@@ -637,9 +796,9 @@ setNationality(true)
                                 ))}
                             </select>
                             <label
-                                className={`${isRankFilled ? 'sel_label' : ''}`}
+                                className={`${isRankFilled ? 'sel_label' : 'sel_label'}`}
                             >
-                                <span className="star">*</span>Rank of Employee
+                                <span className="star">*   </span> Rank of Employee
                             </label>
                         </div>
 
@@ -660,11 +819,11 @@ setNationality(true)
 
             </div>
             {showPopeup && (<PopeUp submitconfirm={submitconfirm} submitcancel={submitcancel} />)}
-            {
+            {/* {
                 showStatusBar != null && (
                     <PopeUp message={showStatusBar} submitconfirm={closestatus} />
                 )
-            }
+            } */}
         </form >
     )
 

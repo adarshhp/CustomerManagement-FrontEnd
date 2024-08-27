@@ -1,31 +1,38 @@
 .sidebar {
-    width: 180px;
-    grid-area: 2 / 1 / 6 / 2; 
-    background-color: #FEEBBD;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    }
-  
-.unlist{
-padding-top:20px;
-list-style: none;
-list-style-type: none;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+  width: 180px;
+  grid-area: 2 / 1 / 6 / 2; 
+  background-color: #FEEBBD;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  height:150%;
 }
 
-.lilist{
-text-align: center;
-margin:1px;
-color:inherit;
-padding-top: 20px;
-padding-right : 15px;
-}
-.lilist a:hover {
-    color:brown; 
+.unlist {
+  padding-top: 20px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-a:link{
+.lilist {
+  text-align: center;
+  margin: 1px;
+  color: inherit;
+  padding-top: 20px;
+  padding-right: 15px;
+}
+
+.lilist a {
   text-decoration: none;
+  color: inherit;
+}
+
+.lilist a:hover {
+  color: brown; 
+}
+
+.lilist a.active {
+  color: blue; 
+ 
 }

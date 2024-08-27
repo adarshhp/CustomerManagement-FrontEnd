@@ -16,7 +16,22 @@ import DateImage from '../icons/DateImage';
 
 
 
-function ExperianceForm({ initialDetailss, setInitialDetails }) {
+function ExperianceForm({ initialDetailss, setInitialDetails, passedId ,initialPersonalForm}) {
+
+useEffect(()=>{
+const fetcheditdata=async ()=>{
+    const editdata=await apiRequest(`/GetPrevExp/${initialPersonalForm}`)
+    setExperiences(editdata);
+    console.log(editdata,"france 7")
+
+}
+if(initialPersonalForm){
+    fetcheditdata();
+}
+},[initialPersonalForm])
+
+
+
     const [status, setShowStatus] = useState(false);
     const [formsData, setFormsData] = useState({
         companyName: "",
@@ -28,6 +43,19 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
     useEffect(() => {
         setFormsData(initialDetailss);
     }, [])
+                                                                                    
+
+useEffect(()=>{
+    if(passedId==null){
+        setFormsData({
+            companyName: "",
+            designation: "",
+            startDate: "",
+            lastDate: ""
+        });
+    }
+},[])
+
 
     //added this shit
     //const[initialDetailss,setInitialDetails]=useState([])
@@ -47,7 +75,6 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
 
 
     const [experiences, setExperiences] = useState([]);
-    console.log(experiences + 'gvykhyukefvfgysgvoyefuskfev');
 
 
 
@@ -64,49 +91,54 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
 
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormsData({ ...formsData, [name]: value });
-
-        if (name === 'startDate' || name === 'lastDate') {
-            const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
-            setErrors({ ...errors, startDateError, endDateError });
-        }
-
-        if (name === 'designation') {
-            const designationError = validateDesignation(value);
-            setErrors({ ...errors, designationError });
-        }
-        if(name==='companyName'){
-            let val = e.target.value.replace(/[^a-zA-Z]/g, '');
-            setFormsData({ ...formsData, [name]: val });
-        }
-        if(name==='designation'){
-            let val = e.target.value.replace(/[^a-zA-Z]/g, '');
-            setFormsData({ ...formsData, [name]: val });
-        }
+            const { name, value } = e.target;
+            setFormsData(prevState => {
+                const newFormsData = { ...prevState, [name]: value };
+    
+                // Perform date validation after updating the state
+                if (name === 'startDate' || name === 'lastDate') {
+                    const { startDateError, endDateError } = validateDates(newFormsData.startDate, newFormsData.lastDate);
+                    setErrors(prevErrors => ({
+                        ...prevErrors,
+                        startDateError: name === 'startDate' ? startDateError : prevErrors.startDateError,
+                        endDateError
+                    }));
+                }
+    
+                if (name === 'designation') {
+                    const designationError = validateDesignation(value);
+                    setErrors(prevErrors => ({ ...prevErrors, designationError }));
+                }
+    
+                if (name === 'companyName' || name === 'designation') {
+                    let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+                    newFormsData[name] = val;
+                }
+    
+                return newFormsData;
+            });
+        
     };
+    
 
 
 
     const validateDates = (startDate, lastDate) => {
         let startDateError = '';
         let endDateError = '';
-        const today = new Date().setHours(0, 0, 0, 0);
-
-        //    if (startDate && lastDate && new Date(startDate) >= new Date(lastDate)) {
-        if (new Date(startDate) >= new Date(lastDate)) {
-            // startDateError = 'Invalid Date';
-            endDateError = 'Invalid Date';
+    
+        if (startDate && lastDate) {
+            if (new Date(startDate) > new Date(lastDate)) {
+                endDateError = 'Invalid Date';
+            } else {
+                // No errors if dates are valid
+                endDateError = '';
+            }
         }
-        if (startDate && new Date(startDate) > today) {
-            startDateError = 'Invalid Date'
-        }
-        if (lastDate && new Date(lastDate) > today) {
-            endDateError = 'Invalid Date'
-        }
-
+    
         return { startDateError, endDateError };
     };
+    
 
 
 
@@ -126,15 +158,15 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
     const validateForm = () => {
         const { startDateError, endDateError } = validateDates(formsData.startDate, formsData.lastDate);
         const designationError = validateDesignation(formsData.designation);
-        console.log(designationError + 'latest check');
-
+    
         if (startDateError || endDateError || designationError) {
             setErrors({ startDateError, endDateError, designationError });
             return false;
         }
-
+    
         return true;
     };
+    
 
 
 
@@ -146,7 +178,8 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
             console.log(validateForm(), "KKKKKKKKKKKKK");
 
             const payload = {
-                userid: 7,
+                //userid: 7,
+                userid: passedId,
                 companyName: formsData.companyName,
                 designation: formsData.designation,
                 startDate: new Date(formsData.startDate).toISOString(),
@@ -174,7 +207,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
                 setErrors(startDateError, '');
                 setErrors(designationError);
                 if (res) {
-                    toast(res.message);
+                    toast.success(res.message);
                 }
 
 
@@ -189,10 +222,10 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
     };
     const fetchEvents = async () => {
         console.log("inside1");
-        
+
         try {
-          //  const response= axios.get('http://192.168.2.81:5003/api/GetPrevExp/7')
-           const response = await apiRequest("/GetPrevExp/7")
+            //  const response= axios.get('http://192.168.2.81:5003/api/GetPrevExp/7')
+            const response = await apiRequest(`/GetPrevExp/${passedId}`)
 
             console.log("tttttttt fetch events is being called")
 
@@ -209,7 +242,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
 
 
     }
-  
+
 
 
     const formatDate = (dateString) => {
@@ -235,23 +268,23 @@ function ExperianceForm({ initialDetailss, setInitialDetails }) {
 
     const handleClose = () => {
         fetchEvents();
-        try{
-        console.log("handleClosemethod triggered")
-        setEditStatus(false);
-        }catch(error){
+        try {
+            console.log("handleClosemethod triggered")
+            setEditStatus(false);
+        } catch (error) {
             console.log(error)
-        }finally{
+        } finally {
             console.log("i am here");
             fetchEvents();
         }
-if(refresh){
-        setRefreshValue(true);
-}else{
-    setRefreshValue(false);
-}
-       
+        if (refresh) {
+            setRefreshValue(true);
+        } else {
+            setRefreshValue(false);
+        }
+
     };
-    const [refresh,setRefreshValue]=useState(false);
+    const [refresh, setRefreshValue] = useState(false);
 
     //i am trying to keep whole delete functionality in this area below
     const [deleteStatus, setDeleteStatus] = useState(false);
@@ -269,11 +302,11 @@ if(refresh){
     useEffect(() => {
 
         fetchEvents();
-    }, [refresh])
+    }, [])
 
 
 
-    const confirmDelete =  () => {
+    const confirmDelete = () => {
         if (!itemToDelete) return;
 
         //   const url = `http://localhost:5003/api/preexp`;
@@ -301,7 +334,7 @@ if(refresh){
 
         }
         console.log("delete method called")
-       
+
         setItemToDelete(null);
         setDeleteStatus(false);
         console.log(fetchEvents, "ooooooooooooooooooooo")
@@ -311,16 +344,23 @@ if(refresh){
         setDeleteStatus(false);
         setItemToDelete(null);
     }
-useEffect(()=>{
-    fetchEvents();
-},[editstatus,status,deleteStatus])
+    useEffect(() => {
+        fetchEvents();
+    }, [editstatus, status, deleteStatus])
 
 
     //i am trying to keep whole delete functionality in this area above
+    const getCurrentDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = ('0' + (today.getMonth() + 1)).slice(-2); // Months are zero-based
+        const day = ('0' + today.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    };
 
 
     return (
-        <div>
+        <div className='newdiv'>
             <ToastContainer />
             <form onSubmit={handleSubmit} className='formfull'>
                 <div className='formydata'>
@@ -338,7 +378,7 @@ useEffect(()=>{
                                 required
                             // autoFocus="off"
                             />
-                            <label htmlFor="messi"><span className="star">*</span>Company Name</label>
+                            <label htmlFor="messi"><span className="star">*  </span>Company Name</label>
                         </div>
                         <div className={sty.form_group}>
                             <input
@@ -353,11 +393,11 @@ useEffect(()=>{
 
                                 name="designation"
                             />
-                            <label htmlFor="messi2"><span className="star">*</span>Designation</label>
+                            <label htmlFor="messi2"><span className="star">*  </span>Designation</label>
 
-                            {errors.designationError && (
+                            {/* {errors.designationError && (
                                 <p className='error'>{errors.designationError}</p>
-                            )}
+                            )} */}
 
 
                         </div>
@@ -370,11 +410,11 @@ useEffect(()=>{
                                 value={formsData.startDate}
                                 onChange={handleChange}
                                 // title='fill StartingDate'
-
+max={getCurrentDate()}
                                 name='startDate'
                                 required
                             />
-                            <label htmlFor="messi3"><span className="star">*</span>Start Date</label>
+                            <label htmlFor="messi3"><span className="star">*  </span>Start Date<span></span></label>
                             {errors.startDateError && <p className='error'>{errors.startDateError}</p>}
                         </div>
                         <div className={sty.form_group}>
@@ -386,11 +426,12 @@ useEffect(()=>{
                                 value={formsData.lastDate}
                                 onChange={handleChange}
                                 //  title='fill EndingDate'
+                                max={getCurrentDate()}
 
                                 name='lastDate'
                                 required
                             />
-                            <label htmlFor="messi4"><span className="star">*</span>End Date</label>
+                            <label htmlFor="messi4"><span className="star">*  </span>End Date</label>
                             {errors.endDateError && <p className='error'>{errors.endDateError}</p>}
                         </div>
                         <button type="submit" className='submiticon' title='save'>
@@ -451,8 +492,9 @@ useEffect(()=>{
             </form>
 
             {status && <div className={edb.Message}><PopeUp submitconfirm={handleConfirm} submitcancel={handleCancel} /></div>}
-            {editstatus && <Edit status={editstatus} close={handleClose} ide={identity} />}
-
+            <div className={edb.transparent}>
+                {editstatus && <Edit status={editstatus} close={handleClose} ide={identity} passId={passedId} />}
+            </div>
             {deleteStatus && <div className={edb.Message}> <Model message='Are you sure, you want to Delete Previous Experiance' confirmHandler={confirmDelete} cancelHandler={cancelDelete} /></div>}
         </div>
     );

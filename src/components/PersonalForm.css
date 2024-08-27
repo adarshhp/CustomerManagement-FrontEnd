@@ -3,26 +3,30 @@
     display: flex;
     justify-content: center;
 }
+.form-group {
+  position: relative;
+  width:102%
+}
 .sidewayFix {
   transform: translateX(-10px);
 }
 .personaldata{
-    background-color: #F5F5F5;
+    background-color:#F6EFEF;
     display: flex;
     align-content: center;
     flex-direction: row;
-    width:96%;
+    width:100%;
     /* justify-content: center; */
     margin-top: 10px;
     border-radius: 20px;
     gap: 10%;
-    padding: 20px;
+    padding: 0px;
 }
 .personal1{
     display: flex;
     flex-direction: column;
-    background-color: #F5F5F5;
-    gap: 20px;
+    background-color: #F6EFEF;
+    gap: 22px;
     justify-content: center; 
     
 }
@@ -90,10 +94,7 @@ height: 50px;
 border-radius: 10px;
     
 }
-.permnt{
-    height: 50px;
-    border-radius: 10px;
-}
+
 .marstatus{
     height: 18px;
     border-radius: 10px;
@@ -137,7 +138,7 @@ border-radius: 10px;
    /* justify-content: space-around; */
     width: 100%;
     position: relative;
-    left: 16%;
+    left: 23%;
     gap:5%
 }
 .error{
@@ -154,7 +155,9 @@ border-radius: 10px;
     position: relative;
     margin-bottom: 20px;
     margin: 0 10px;
-    width:98%;
+    width:102%;
+    right:7px;
+
   }
   .form-group input {
     width: 83%;
@@ -169,14 +172,13 @@ border-radius: 10px;
     left: 12px;
     top: 12px;
     font-size: 14px;
-    color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
    pointer-events: none;
 
   }
   .form-group input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -184,7 +186,7 @@ border-radius: 10px;
   .form-group input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -195,17 +197,17 @@ border-radius: 10px;
     width: 170px;
   }
   .selctor {
-    width: 87%;
+    width: 78%;
     height: 40px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease;
-    margin-left: 10px;
+    margin-left: 12px;
 }
 .selector {
-  width: 138%;
+  width: 137%;
   height: 40px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -215,14 +217,16 @@ border-radius: 10px;
   margin-left: 10px;
 }
 .selectorrr {
-  width: 135%;
+  width: 139%;
   height: 40px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   transition: border-color 0.3s ease;
-  margin-left: 10px;
+  margin-left: 2px;
+  position:relative;
+  bottom:7px;
 }
 .star{
     color: red;
@@ -276,17 +280,16 @@ border-radius: 10px;
   }
   .forgrp label {
     position: absolute;
-    left: 12px;
-    top: 12px;
+    left: 19px;
+    top: 6px;
     font-size: 14px;
-    color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
    pointer-events: none;
 
   }
   .forgrp input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -294,7 +297,7 @@ border-radius: 10px;
   .forgrp input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -303,11 +306,15 @@ border-radius: 10px;
   .group4{
     display:flex;
     flex-direction: row;
+    position:relative;
+    left: -1px;
   }
   .closeone{
     gap:2%;
     display:flex;
     flex-direction: row;
+    position: relative;
+    left:8px;
   }
   .labelish{
     position: relative;
@@ -322,7 +329,7 @@ border-radius: 10px;
     position: relative;
     margin-bottom: 20px;
     margin: 0 10px;
-    width: 168%;
+    width: 140%;
    }
   .fo input {
     width: 235%;
@@ -334,17 +341,16 @@ border-radius: 10px;
   }
   .fo label {
     position: absolute;
-    left: 12px;
-    top: 12px;
+    left: 15px;
+    top: 6px;
     font-size: 14px;
-    color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
    pointer-events: none;
 
   }
   .fo input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -352,7 +358,7 @@ border-radius: 10px;
   .fo input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -379,14 +385,13 @@ border-radius: 10px;
     left: 12px;
     top: 12px;
     font-size: 14px;
-    color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
    pointer-events: none;
 
   }
   .f input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -394,7 +399,7 @@ border-radius: 10px;
   .f input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -426,14 +431,32 @@ border-radius: 10px;
     left: 12px;
     top: 12px;
     font-size: 14px;
-    color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
    pointer-events: none;
 
   }
+ .fe textarea{
+  font-size: 16px;
+  width:227%
+ }
+  .fe textarea:focus {
+    border-color: black;
+    outline: none;
+  }
+  
+  .fe textarea:hover + label,
+  .fe textarea:not(:placeholder-shown) + label {
+    top: -12px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
   .fe input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -441,7 +464,7 @@ border-radius: 10px;
   .fe input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -470,14 +493,13 @@ border-radius: 10px;
     left: 152%;
     top: 12px;
     font-size: 14px;
-    color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
    pointer-events: none;
 
   }
   .feemp input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -485,7 +507,7 @@ border-radius: 10px;
   .feemp input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -499,11 +521,13 @@ border-radius: 10px;
   .together{
     display:flex;
     width:68%;
+    position:relative;
+    top:-25px;
   }
   .overr{
     position:relative;
-    left:43%;
-    width:47%;
+    left:46%;
+    width:43%;
     gap:5%;
   }
   .widdth{
@@ -518,10 +542,10 @@ border-radius: 10px;
     margin-bottom: 20px;
     margin: 0 10px;
     display:block;
-    top:-30px;
+    top:-32px;
   }
   .finale input {
-    width: 86%;
+    width: 87%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -535,14 +559,13 @@ border-radius: 10px;
     left: 12px;
     top: 12px;
     font-size: 14px;
-    color: #777;
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
     user-select: none;
    pointer-events: none;
 
   }
   .finale input:focus {
-    border-color: #007bff;
+    border-color: black;
     outline: none;
   }
   
@@ -550,7 +573,7 @@ border-radius: 10px;
   .finale input:not(:placeholder-shown) + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -570,7 +593,7 @@ border-radius: 10px;
   .sel_label{
     top: -8px;
     font-size: 12px;
-    color: #007bff;
+   
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -579,18 +602,51 @@ border-radius: 10px;
    pointer-events: none;
 
   }
+  .sel_label + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+
+  
   .select_filled {
+    color: black;
     position: relative;
-    width:61%;
+    width:64%;
     left:9px;
     margin-top: 12px;
-
+margin-bottom:10px;
   }
   
   .select_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+
+  
+  .seect_filled {
+    position: relative;
+    width:26%;
+    left:9px;
+    margin-top: 12px;
+margin-bottom:10px;
+bottom:10px;
+  }
+  
+  .seect_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -599,16 +655,17 @@ border-radius: 10px;
 
   .sele_filled {
     position: relative;
-    width:100%;
-    left:9px;
-    margin-top: 12px;
-margin-bottom: 10px;
+    width:108%;
+    left:0px;
+    margin-top: 0px;
+margin-bottom: 12px;
   }
+  
   
   .sele_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
@@ -618,7 +675,7 @@ margin-bottom: 10px;
   
   .zlatan_filled {
     position: relative;
-    width:46%;
+    width:47%;
     left:9px;
     /* margin-top: 12px; */
 margin-bottom: 10px;
@@ -627,32 +684,100 @@ margin-bottom: 10px;
   .zlatan_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
     left: 8px;
   }
+
+.zlatan_filled input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.zlatan_filled input:hover + label,
+.zlatan_filled input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
 
 
 
   .selectt_filled {
     position: relative;
-    width:25%;
-    left:3px;
-    margin-top: 12px;
+    width:46%;
+    left:11px;
+    margin-top: 6px;
   }
   
   .selectt_filled + label {
     top: -6px;
     font-size: 12px;
-    color: #007bff;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  
+  .a_filled {
+    position: relative;
+    width:45%;
+    left:11px;
+    margin-top: 0px;
+  }
+  
+  .a_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
     background-color: #ffffff;
     padding: 0 4px;
     border-radius: 4px;
     left: 8px;
   }
 
+  .b_filled {
+    position: relative;
+    width:45%;
+    left:11px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height:10px;
+  }
+  
+  .b_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color:black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  
+  .c_filled {
+    position: relative;
+    width:45%;
+    left:11px;
+    margin-top: 0px;
+  }
+  
+  .c_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
   
 .forgrppe {
   position: relative;
@@ -675,14 +800,13 @@ margin-bottom: 10px;
   left: 12px;
   top: 12px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .forgrppe input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -690,7 +814,7 @@ margin-bottom: 10px;
 .forgrppe input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -705,10 +829,11 @@ margin-bottom: 10px;
   width:61%;
   margin-top: -1%;
   margin-bottom: 1%;
+  left:-5px;
 }
 
 .report {
-  width: 193px;
+  width: 171px;
   padding: 10px;
   /* border: 1px solid #ccc;
   border-radius: 4px; */
@@ -720,14 +845,13 @@ margin-bottom: 10px;
   left: 53px;
   top: 20px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .report input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -735,7 +859,51 @@ margin-bottom: 10px;
 .report input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
+.report2 {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:61%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+  left:-5px;
+}
+
+.report2 {
+  width: 171px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.report2 label {
+  position: absolute;
+  left: 42px;
+  top: -1px;
+  font-size: 14px;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.report2 input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.report2 input:hover + label,
+.report2 input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -768,14 +936,13 @@ margin-bottom: 10px;
   left: 53px;
   top: 20px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .gender input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -783,7 +950,7 @@ margin-bottom: 10px;
 .gender input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -799,10 +966,11 @@ margin-bottom: 10px;
   width:61%;
   margin-top: -1%;
   margin-bottom: 1%;
+  left:-7px;
 }
 
 .blood {
-  width: 193px;
+  width: 197px;
   padding: 10px;
   /* border: 1px solid #ccc;
   border-radius: 4px; */
@@ -811,17 +979,16 @@ margin-bottom: 10px;
 }
 .blood label {
   position: absolute;
-  left: 53px;
-  top: 20px;
+  left: 21px;
+  top: 13px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .blood input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -829,7 +996,7 @@ margin-bottom: 10px;
 .blood input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -841,10 +1008,11 @@ margin-bottom: 10px;
   position: relative;
   margin-bottom: 20px;
   margin: 0 10px;
-  width:61%;
+  width:55%;
   margin-top: -1%;
   margin-bottom: 1%;
   left:-21px;
+  top:4px;
 }
 
 .marriage {
@@ -857,17 +1025,16 @@ margin-bottom: 10px;
 }
 .marriage label {
   position: absolute;
-  left: 53px;
+  left: 34px;
   top: 20px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .marriage input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -875,7 +1042,7 @@ margin-bottom: 10px;
 .marriage input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -887,7 +1054,9 @@ margin-bottom: 10px;
   position: relative;
   margin-bottom: 20px;
   margin: 0 10px;
-  width:98%;
+  width:97%;
+  top:13px;
+  left:-22px;
 }
 .form-employee input {
   width: 83%;
@@ -902,14 +1071,13 @@ margin-bottom: 10px;
   left: 12px;
   top: 12px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .form-employee input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -917,7 +1085,7 @@ margin-bottom: 10px;
 .form-employee input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -936,7 +1104,7 @@ margin-bottom: 10px;
 }
 
 .gende {
-  width: 438px;
+  width: 436px;
   padding: 10px;
   /* border: 1px solid #ccc;
   border-radius: 4px; */
@@ -948,14 +1116,13 @@ margin-bottom: 10px;
   left: 53px;
   top: 20px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .gende input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -963,7 +1130,7 @@ margin-bottom: 10px;
 .gende input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -976,8 +1143,9 @@ margin-bottom: 10px;
   position: relative;
   margin-bottom: 20px;
   margin: 0 10px;
-  width:102%;
-  left:-17px;
+  width:94%;
+  left:-7px;
+  top:-16px;
 }
 .form-groupp input {
   width: 83%;
@@ -992,14 +1160,13 @@ margin-bottom: 10px;
   left: 12px;
   top: 12px;
   font-size: 14px;
-  color: #777;
   transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
   user-select: none;
  pointer-events: none;
 
 }
 .form-groupp input:focus {
-  border-color: #007bff;
+  border-color: black;
   outline: none;
 }
 
@@ -1007,7 +1174,354 @@ margin-bottom: 10px;
 .form-groupp input:not(:placeholder-shown) + label {
   top: -6px;
   font-size: 12px;
-  color: #007bff;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+.change{
+
+}
+.change label {
+  position: absolute;
+  left: 51px;
+  top: -4px;
+  font-size: 14px;
+  color:  black;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.change input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.change input:hover + label,
+.change input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+ 
+.change {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:61%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+}
+
+.change {
+  width: 193px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.f_group {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+}
+.f_group input {
+  width: 86%;
+  height: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.f_group label {
+  position: absolute;
+  left: 12px;
+  top: -11px;
+  font-size: 14px;
+  color: black;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.f_group input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.f_group input:hover + label,
+.f_group input:not(:placeholder-shown) + label {
+  top: -2px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+.f_group select:hover + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+.f_group select {
+  width: 130px; /* Adjust width as needed */
+  height: 40px; /* Adjust height as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
+}
+
+
+
+.rm-group {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:94%;
+  right:7px;
+  bottom:30px;
+left:2px;
+}
+.rm-group input {
+  width: 83%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.rm-group label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-size: 14px;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.rm-group input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.rm-group input:hover + label,
+.rm-group input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+.lectt_filled {
+  position: relative;
+  width:57%;
+  left:11px;
+  margin-top: 0px;
+}
+
+.lectt_filled + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+.lectt input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.lectt input:hover + label,
+.lectt input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
+.permnt{
+  height: 90px;
+  border-radius: 10px;
+}
+.aadressarea{
+height:120px;
+width:267%;
+}
+
+.EMP_BUTTON {
+  position: relative;
+  left: 98%; /* Adjust as needed */
+  top:-13px;
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  padding: 10px 20px; /* Add padding for better click area */
+  background-color: #FFA724; /* Primary color, adjust as needed */
+  color: black; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Text size */
+   /* Make text bold */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+  text-align: center; /* Center text */
+  line-height: 1.5; /* Line height for text */
+  width:13%;
+  height:11px;
+}
+.inlinee{
+  display:flex;
+  flex-direction: row;
+  gap:13%;
+}
+
+
+.EMP_BUTTON:hover {
+  background-color: white; /* Darker shade on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+.EMP_BUTTON:active {
+ /* Even darker shade on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Reduce shadow on click */
+}
+
+.EMP_BUTTON svg {
+  margin-left: 8px; /* Space between text and icon */
+  fill: #ffffff; /* Icon color */
+  width: 20px; /* Icon size */
+  height: 20px; /* Icon size */
+}
+
+.iconn{
+  
+}
+
+
+.natione {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:61%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+  left:-7px;
+}
+
+.natione {
+  width: 199px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.natione label {
+  position: absolute;
+  left: 28px;
+  top: 19px;
+  font-size: 14px;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.natione input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.natione input:hover + label,
+.natione input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
+.zlatanib_filled {
+  position: relative;
+  width:46%;
+  left:9px;
+  /* margin-top: 12px; */
+margin-bottom: 10px;
+}
+
+.zlatanib_filled + label {
+  top: -20px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
+
+
+
+.forr {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:61%;
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+.forr input {
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.forr label {
+  position: absolute;
+  left: 19px;
+  top: 6px;
+  font-size: 14px;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.forr input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.forr input:hover + label,
+.forr input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
   background-color: #ffffff;
   padding: 0 4px;
   border-radius: 4px;
@@ -1017,4 +1531,50 @@ margin-bottom: 10px;
 
 
 
+
+.b {
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 10px;
+  width:55%;
+  margin-top: -1%;
+  margin-bottom: 1%;
+  left:-21px;
+  top:4px;
+}
+
+.b {
+  width: 379px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+.b label {
+  position: absolute;
+  left: 25px;
+  top: 0px;
+  font-size: 14px;
+  color:black;
+  transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+  user-select: none;
+ pointer-events: none;
+
+}
+.b input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.b input:hover + label,
+.b input:not(:placeholder-shown) + label {
+  top: -6px;
+  font-size: 12px;
+  color: black;
+  background-color: #ffffff;
+  padding: 0 4px;
+  border-radius: 4px;
+  left: 8px;
+}
   

@@ -38,7 +38,7 @@
   }
   .content {
     padding: 20px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 
     /* flex: 1;
     overflow-y: auto; Ensure content area scrolls if necessary */

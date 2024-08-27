@@ -7,8 +7,46 @@ import EditPopUp from "./EditPopUp";
 import sty from "./educationalStyle.module.css";
 import edb from "./EditPopUp.module.css";
 import Model from "./Model";
+import { useParams } from "react-router-dom";
 
-function EducationalForm({ initialDetails, setInitialDetails }) {
+function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPersonalForm }) {
+//   let { id } = useParams
+
+//   useEffect(()=>{
+// passedId=id;
+//   },[id])
+
+
+
+
+const [educationarray,setEducation]=useState([])
+  useEffect(()=>{
+    const fetcheditdata=async()=>{
+       const editdata=await apiRequest(`/EducationalDetails/${initialPersonalForm}`)
+       setEducation(editdata);
+       console.log(editdata,"france 6")
+
+       setPrevList(editdata?.data || [])
+    }
+    if(initialPersonalForm){
+        fetcheditdata();
+    }
+    },[initialPersonalForm])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [qualData, setQualData] = useState([]);
   const [discipline, setdiscipline] = useState([]);
   const [selQual, setSelQual] = useState("");
@@ -29,7 +67,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     yearOfPassing: null,
     cgpa: null,
     percentage: null,
-    userid: 7,
+    userid: passedId,
   });
   useEffect(() => {
     checkRequired();
@@ -43,6 +81,41 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
       setRequired(false);
     }
   }
+
+ useEffect(() => {
+  if (!passedId) {
+    setformdata({
+      qualification: "",
+      discipline: "",
+      university: "",
+      yearOfPassing: "",
+      cgpa: "",
+      percentage: "",
+      userid: null, 
+    });
+  }
+}, []);
+
+
+  useEffect(() => {
+    setformdata(initialDetails);
+  }, [])
+  // useEffect(()=>{
+  //   if(passedId==null){
+  //     console.log(passedId,"ppppppp");
+  //     setformdata({
+  //       qualification: "",
+  //     discipline: "",
+  //     university: "",
+  //     yearOfPassing: null,
+  //     cgpa: null,
+  //     percentage: null,
+  //     userid: null,
+  //     })
+  //   }
+  // },[])some problem here have a look
+
+
 
   useEffect(() => {
     setInitialDetails(formdata);
@@ -67,15 +140,18 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
       console.log(null, "value spotted");
       setformdata({ ...formdata, [name]: null });
     } else if (name == "university") {
-      let val = e.target.value.replace(/[^a-zA-Z]/g, '');
+      let val = e.target.value.replace(/[^a-zA-Z\s]/g, '');
       setformdata({ ...formdata, [name]: val });
       console.log(val);
     } else {
       setformdata({ ...formdata, [name]: value });
     }
+
+
   }
 
   useEffect(() => {
+    console.log(initialDetails, "weeeeeee")
     setformdata(initialDetails);
     // setSelQual(initialDetails.qualification);
     setIsFilled(initialDetails.qualification !== "");
@@ -136,7 +212,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
     }
     const response = await apiRequest("/EducationalDetails", "POST", payload);
     if (response) {
-      toast(response?.message);
+      toast.success(response?.message);
       setformdata({
         qualification: "",
         discipline: "",
@@ -144,7 +220,8 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
         yearOfPassing: "",
         cgpa: "",
         percentage: "",
-        userid: 7,
+        //  userid: 7;
+        userid: passedId
       });
       checkRequired();
       setIsFilled(false);
@@ -155,7 +232,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
   };
   const getEduData = async () => {
     try {
-      const response = await apiRequest("/EducationalDetails/7");
+      const response = await apiRequest(`/EducationalDetails/${passedId}`);
       setPrevList(response?.data || []);
       console.log(response);
     }
@@ -221,6 +298,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
             initialDetails={currentEdit}
             close={closeEditDialog}
             notify={notify}
+            pasId={passedId}
             name={"Edit Educational Details"}
           />
         </div>
@@ -235,6 +313,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               className="item quali sel"
               onChange={handleChange}
               value={formdata.qualification}
+
               name="qualification"
               title="Please select a qualification from the dropdown list"
               required
@@ -252,7 +331,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               htmlFor="qualification"
               className={`${isFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Qualification
+              <span className="star">*  </span>Qualification
             </label>
           </div>
           <div
@@ -280,7 +359,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               htmlFor="discipline"
               className={`${isDisciplineFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Discipline
+              <span className="star">*  </span>Discipline
             </label>
           </div>
           <div className={sty.form_group}>
@@ -296,7 +375,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               required
             ></input>
             <label htmlFor="university">
-              <span className="star">*</span>University
+              <span className="star">*  </span>University
             </label>
           </div>
           <div
@@ -324,7 +403,7 @@ function EducationalForm({ initialDetails, setInitialDetails }) {
               htmlFor="yearOfPassing"
               className={`${isYoPFilled ? `${sty.sel_label}` : ""}`}
             >
-              <span className="star">*</span>Year of Passing
+              <span className="star">*  </span>Year of Passing
             </label>
           </div>
           <div className={sty.form_group}>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Model from "./Model"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function EditPopUp({initialDetails,close,notify,name}) {
+export default function EditPopUp({initialDetails,close,notify,empId,name}) {
   const [isFilled, setIsFilled] = useState(false);
   const [isDisciplineFilled, setIsDisciplineFilled] = useState(false);
   const [isYoPFilled, setYoPFilled] = useState(false);
@@ -16,12 +16,12 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
   const [showDialog,setShowDialog] = useState(false);
   const [formdata, setformdata] = useState({
     qualification: "",
-    decipline: "",
+    discipline: "",
     university: "",
     yearOfPassing: null,
     cgpa: null,
     percentage: null,
-    userid: 7,
+    userid: empId,
   });
   useEffect(() => {
     if (formdata.cgpa === null && formdata.percentage === null) {
@@ -37,7 +37,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
     if (name === "qualification") {
       setIsFilled(e.target.value !== "");
       setSelQual(value);
-    } else if (name === "decipline") {
+    } else if (name === "discipline") {
       setIsDisciplineFilled(e.target.value !== "");
     } else if (name === "yearOfPassing") {
       setYoPFilled(e.target.value !== "");
@@ -50,27 +50,44 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
     
   }
   useEffect(() => {
+    if(initialDetails.qualification !== ""){
     setIsFilled(initialDetails.qualification !== "");
     setSelQual(initialDetails.qualification);
-    setIsDisciplineFilled(initialDetails.decipline !== "");
+    setformdata({...formdata,"qualification":initialDetails.qualification});
+    }
+    if(initialDetails.discipline !== ""){
+      if(discipline.length > 0 && discipline.includes(initialDetails.discipline)){
+        setIsDisciplineFilled(initialDetails.discipline !== "");
+        setformdata({...formdata,"discipline":initialDetails.discipline});
+      }else{
+        setIsDisciplineFilled(initialDetails.discipline !== "");
+        setformdata({...formdata,"discipline":discipline[0]});
+      }
+    }
     setYoPFilled(initialDetails.yearOfPassing !== "");
-    setformdata(initialDetails);
-    
-    console.log(initialDetails);
-    
     const fetchInitial = async () => {
       const data = await apiRequest("/qualdetail");
       setQualData(data.data);
     };
     fetchInitial();
+    if(initialDetails.qualification == "10th "){
+      setformdata({...initialDetails,"discipline":"10th "});
+    }else if(initialDetails.qualification == "12th "){
+      setformdata({...initialDetails,"discipline":"12th "});
+    }else if(initialDetails.qualification == "VHSE "){
+      setformdata({...initialDetails,"discipline":"VHSE "});
+    }else{
+    setformdata(initialDetails);
+    }
+    console.log(initialDetails,formdata);
   }, [initialDetails]);
+
+
   useEffect(() => {
     const fetchDisp = async () => {
-     
       const data = await apiRequest("/listdeciplines", "POST", {
         Qualification: selQual,
       });
-     
       setdiscipline(data.data);
     };
     if (selQual != "") {
@@ -78,14 +95,20 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
     }
   }, [selQual]);
   const handleSubmit = (e) => {
+    const myFormData = new FormData(e.target);
+
+    const formDataObj = {};
+    myFormData.forEach((value, key) => (formDataObj[key] = value));
+    console.log(formDataObj);
+    setformdata({...formdata,"qualification":formDataObj.qualification,"discipline":formDataObj.discipline});
     e.preventDefault();
     setShowDialog(true);
    
   }
   const confirmSubmit = async () => {
     try{
-      console.log(formdata,"checking")
-    let response = await apiRequest('/EducationalDetails','PUT',formdata);
+      console.log(formdata,"values sent")
+      let response = await apiRequest('/EducationalDetails','PUT',formdata);
    
     if(response.qualificationDetails){
       notify(response.message);
@@ -155,10 +178,10 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
             >
               <select
                 className="item quali sel"
-                name="decipline"
-                title="Please select a Decipline from the dropdown list"
+                name="discipline"
+                title="Please select a discipline from the dropdown list"
                 onChange={handleChange}
-                value={formdata.decipline}
+                value={formdata.discipline}
                 required
               >
                 {discipline.map((val, index) => (
@@ -170,7 +193,7 @@ export default function EditPopUp({initialDetails,close,notify,name}) {
                 ))}
               </select>
               <label
-                htmlFor="decipline"
+                htmlFor="discipline"
                 className={`${isDisciplineFilled ? `${sty.sel_label}` : ""}`}
               >
                 <span className="star">*</span>Discipline

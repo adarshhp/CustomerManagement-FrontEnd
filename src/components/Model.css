@@ -78,14 +78,15 @@
     border-radius: 5px;
     transition: background 0.3s;
     width:33%;
+    background-color:#FFA724;
+
 }
 
 .tab-button.active {
-    background-color:#FFA724
-    ;
+    background-color:white;
     color: black;
 }
-
+/* #FFA724 */
 .tab-content {
     padding: -4px;
     border: 1px solid #ccc;
@@ -96,3 +97,9 @@
     font-weight: bold;
     padding-bottom: 10px;
 }
+
+.tab-button.disabled {
+   
+    cursor: not-allowed;
+}
+
