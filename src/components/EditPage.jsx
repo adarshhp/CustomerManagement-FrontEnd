@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PersonalForm from "./PersonalForm";
 import Wrapper from "./Wrapper";
 import ExperianceForm from "./ExperianceForm";
@@ -7,14 +7,13 @@ import './Model.css';
 import EducationalForm from "./EducationalForm";
 import { useNavigate, useParams } from "react-router-dom";
 import './EditPage.css';
+import apiRequest from "../lib/apiRequest";
 
 function EditPage() {
 
 
 //all newly done things here
 let { id } = useParams();
-console.log(id,"adarsh")
-
 
 
 
@@ -134,12 +133,12 @@ const handleBack=()=>{
             </div>
             <div className="tab-content">
                 
-                {currentTab === "Personal" && <PersonalForm setEmpId={PassIdFunc} setStartDetails={setPersonal} startDetails={startValues}/>}
+                {currentTab === "Personal" && <PersonalForm setEmpId={PassIdFunc} setStartDetails={setPersonal} startDetails={startValues} initialPersonalForm={id}/>}
                 {currentTab === "Educational Qualification" && 
-                    <EducationalForm initialDetails={formdata} setInitialDetails={setterFunc} passedId={passId}/>
+                    <EducationalForm initialDetails={formdata} setInitialDetails={setterFunc} passedId={passId} initialPersonalForm={id}/>
                 }
                 {currentTab === "Previous Experience" && 
-                    <ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial} passedId={passId}/>
+                    <ExperianceForm initialDetailss={formsData} setInitialDetails={setInitial} passedId={passId} initialPersonalForm={id}/>
                 }
             </div>
         </div>

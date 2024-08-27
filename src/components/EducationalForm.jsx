@@ -8,7 +8,38 @@ import sty from "./educationalStyle.module.css";
 import edb from "./EditPopUp.module.css";
 import Model from "./Model";
 
-function EducationalForm({ initialDetails, setInitialDetails, passedId }) {
+function EducationalForm({ initialDetails, setInitialDetails, passedId,initialPersonalForm }) {
+
+
+
+
+
+  useEffect(()=>{
+    const fetcheditdata=async()=>{
+       const editdata=await apiRequest(`/EducationalDetails/${initialPersonalForm}`)
+       setformdata(editdata.data)
+       console.log(editdata.data,"france2")
+    }
+    if(initialPersonalForm){
+        fetcheditdata();
+    }
+    },[initialPersonalForm])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [qualData, setQualData] = useState([]);
   const [discipline, setdiscipline] = useState([]);
   const [selQual, setSelQual] = useState("");

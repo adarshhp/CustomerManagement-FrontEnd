@@ -78,7 +78,7 @@ if(filterstatus === false){
 
     const bringEdit=(id)=>{
         console.log(id,"oooooooooo")
-        Navigate(`/editpage/id=${id}`)
+        Navigate(`/editpage/${id}`)
     }
 
     return (

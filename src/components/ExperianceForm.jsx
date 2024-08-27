@@ -16,7 +16,32 @@ import DateImage from '../icons/DateImage';
 
 
 
-function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
+function ExperianceForm({ initialDetailss, setInitialDetails, passedId ,initialPersonalForm}) {
+
+
+useEffect(()=>{
+const fetcheditdata=async ()=>{
+    const editdata=await apiRequest(`/GetPrevExp/${initialPersonalForm}`)
+    setFormsData(editdata)
+    console.log(editdata,"france3")
+
+}
+if(initialPersonalForm){
+    fetcheditdata();
+}
+},[initialPersonalForm])
+
+
+
+
+
+
+
+
+
+
+
+
     const [status, setShowStatus] = useState(false);
     const [formsData, setFormsData] = useState({
         companyName: "",
@@ -29,7 +54,7 @@ function ExperianceForm({ initialDetailss, setInitialDetails, passedId }) {
         console.log(initialDetailss,"expcheck")
         setFormsData(initialDetailss);
     }, [])
-
+                                                                                    
 
 useEffect(()=>{
     if(passedId==null){

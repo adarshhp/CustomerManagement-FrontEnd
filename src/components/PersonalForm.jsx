@@ -8,10 +8,48 @@ import PlusIcon from "../icons/PlusIcon";
 
 
 
-function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
+function PersonalForm({ setEmpId, setStartDetails, startDetails ,initialPersonalForm}) {
 
 
+const[editing,setEditData]=useState([])
+console.log(initialPersonalForm,"france outside");
+useEffect(()=>{
+const fetcheditdata= async()=>{
+    const editdata=await apiRequest(`/getUserById${initialPersonalForm}`)
+    setformsData(editdata)
+    if (editdata.divisionOfEmployee !== "") {
+        setDoE(true);
+    }
+    if (editdata.rank !== "") {
+        setRanks(true);
+    }
 
+    if (editdata.nationality !== "") {
+        setNationality(true)
+            ;
+    }
+    if (editdata.bldGrp !== "") {
+        setBlood(true);
+    }
+    if (editdata.reportingManager != "") {
+        setReportId(true);
+    }
+    if (editdata.mstatus !== "") {
+        setMarriage(true);
+    }
+    if (editdata.roleOFEmployee !== "") {
+        setRoleofEmployee(true);
+    }
+    if (editdata.gender !== "") {
+        setGender(true);
+    }
+}
+if(initialPersonalForm){
+   fetcheditdata();
+}
+   
+},[])
+console.log(editing,"france")
 
 
     const [formsData, setformsData] = useState({
@@ -41,7 +79,11 @@ function PersonalForm({ setEmpId, setStartDetails, startDetails }) {
 
 
     useEffect(() => {
+        //i edited here to set editing or startdetails based on data
+       
         setformsData(startDetails);
+        
+
         console.log(startDetails, "jjjjjjjj");
         if (startDetails.divisionOfEmployee !== "") {
             setDoE(true);
