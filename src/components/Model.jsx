@@ -2,6 +2,7 @@ import React from 'react'
 import "./Model.css";
 
 function Model({message,confirmHandler,cancelHandler}) {
+  //check
   return (
     <div className="largebox">
       <div className="smallbox">
