@@ -1,0 +1,47 @@
+/* Layout.css */
+.layout {
+    /* display: flex; */
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 0.25fr repeat(4, 1fr);
+    grid-template-rows: 0.25fr repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+  
+  .main {
+    /* flex: 1; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    display: contents;
+  }
+  
+  .top_bar {
+    background-color: #FFF3F9;
+    height: 50px;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    grid-area: 1 / 1 / 2 / 6;
+    display: flex;
+    justify-content: space-between;
+  }
+  .logo img{
+    width: 180px;
+
+  }
+  .name{
+    text-align: center;
+    color: #ff0000a1;
+    font-size: 2rem;
+  }
+  .content {
+    padding: 20px;
+    /* overflow-y: scroll; */
+
+    /* flex: 1;
+    overflow-y: auto; Ensure content area scrolls if necessary */
+    grid-area: 2 / 2 / 6 / 6;
+  }
+  

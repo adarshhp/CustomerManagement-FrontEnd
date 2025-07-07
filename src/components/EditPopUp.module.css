@@ -1,0 +1,96 @@
+.largebox{
+    width: 76%;
+    height: 60%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 3;
+    left:255px;
+}
+.smallbox{
+    width: 100%;
+    height: 40%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 1px solid; */
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: -1px 0px 6px 0px #00000078;
+}
+.save{
+    background-color: #F58D11;
+    color: white;
+    border-radius: 10px;
+    width: 60px;
+    height: 30px;
+}
+.cancel{
+    background-color: #F58D11;
+    color: white;
+    border-radius: 10px;
+    width: 60px;
+    height: 30px;
+}
+.but{
+     display: flex;
+    gap: 20%;
+    margin-left: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+.msg{
+    display: flex;
+    justify-content: center;
+}
+.grouper{
+    justify-content: center;
+    gap: 20px;
+}
+.close{
+    width: 25px;
+    height: 25px;
+    border-radius: 30px;
+    font-size: medium;
+    background-color: black;
+    color: white;
+    border: none;
+}
+.top_bar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: white;
+    height: 36px;
+    border-radius: 20px;
+    /* border: 1px solid black; */
+    align-items: center;
+    margin-bottom: 5px;
+    box-shadow: -1px 0px 6px 0px #00000078;
+}
+.top_bar h5{
+    padding: 10px;
+}
+.top_bar button {
+    margin-right: 10px;
+}
+.Message{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(3px) brightness(0.7);
+}
+.rows{
+    gap:0%;
+    display:flex;
+    flex-direction: row;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+}

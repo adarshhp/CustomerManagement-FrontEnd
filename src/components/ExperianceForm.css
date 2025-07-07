@@ -1,0 +1,150 @@
+.formfull{
+    background-color: #F6EFEF;
+    display: flex;
+    align-content: flex-start;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 0px;
+    border-radius: 20px;
+    gap: 10%;
+    padding-bottom: 300px;
+    align-items: flex-start;
+    height: 500px;
+    padding-top: 15px;
+    padding: 30px;
+    overflow-y: scroll;
+    width:94%;
+  
+}
+.formydata{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 1108px;
+}
+
+.textbox1{
+    border-radius: 10px;
+    background-color:  white;
+    width:50px;
+    
+}
+.inneritems{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   margin-top: 15px;
+    gap:0%; 
+    padding-right: 55px;
+
+}
+.list-exp{
+    display: flex;
+    flex-direction: row;
+   justify-content: space-evenly;
+    padding-right: 5px;
+    gap:55%;
+
+}
+
+.ite{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:  #D9D9D9;
+    width:150px;
+    border-radius: 10px;
+}
+.listed{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:5%;
+    padding-top:10px;
+
+    .index{
+        font-size: 25px;
+        position: absolute;
+        left: 138px;
+    }
+    
+    
+}
+#edit-icon{
+    
+    width:20px;
+    height:20px;
+    position:relative;
+    right:78px;
+
+}
+
+#ff{
+    background-color: 
+    #FFFFFF;
+    height:40px;
+    text-align: center;
+    border-radius: 10px;
+    width:188px;
+    gap:20px
+}
+
+.topside{
+    padding-top: 10px;
+}
+
+.error{
+    position:absolute;
+    color:black;
+}
+#edit-icon{
+height:30px;
+width:30px;
+margin-left:89px;
+}
+#delete-icon{
+    height:30px;
+width:30px;
+margin-left: -73px;
+
+}
+
+.tablehead{
+    background-color: #f7c9316e;
+    width:95%;
+}
+.tabl {
+    width: 95%;
+    border-collapse: collapse; /* Ensures no double borders */
+    margin: 20px 0; /* Adds some spacing around the table */
+  }
+  .submiticon{
+    border: none;
+
+  }
+  .delete-button{
+    border:none;
+    background-color: none;
+  }
+  .font-correction{
+   
+  }
+  .decrese-me-there{
+    height:30px;
+  }
+  .top-heading{
+    font-weight:bolder;
+    font-size:medium;
+  }
+  .editdeleteicons{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .datevalue{
+    display:flex;
+    flex-direction: row;
+    gap:0%;
+  }

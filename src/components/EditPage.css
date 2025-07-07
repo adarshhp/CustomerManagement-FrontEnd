@@ -1,0 +1,15 @@
+.hori-editpage{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+.backbutton{
+    background-color: #FFA724;
+    height:26px;
+    width:58px;
+    position:relative;
+    right:10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}

@@ -1,0 +1,161 @@
+.form_group {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+  }
+  .form_group input {
+    width: 86%;
+    height: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .form_group label {
+    position: absolute;
+    left: 19px;
+    top: 12px;
+    font-size: 14px;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .form_group input:focus {
+    border-color: black;
+    outline: none;
+  }
+  
+  .form_group input:hover + label,
+  .form_group input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  .form_group select:hover + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  .form_group select {
+    width: 130px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+  }
+  .select_filled {
+    position: relative;
+  }
+  
+  .select_filled + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  .sel_label{
+    top: -8px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 9px;
+    position: absolute;
+   pointer-events: none;
+
+  }
+
+
+  .select_group  {
+    width: 130px; /* Adjust width as needed */
+    height: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .save {
+    border: none;
+    background-color: transparent;
+  }
+
+
+
+  .rorm_group {
+    position: relative;
+    margin-bottom: 20px;
+    margin: 0 10px;
+    left:9px;
+  }
+  .rorm_group input {
+    width: 86%;
+    height: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  .rorm_group label {
+    position: absolute;
+    left: 19px;
+    top: 12px;
+    font-size: 14px;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    user-select: none;
+   pointer-events: none;
+
+  }
+  .rorm_group input:focus {
+    border-color: black;
+    outline: none;
+  }
+  
+  .rorm_group input:hover + label,
+  .rorm_group input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  .rorm_group select:hover + label {
+    top: -6px;
+    font-size: 12px;
+    color:black;
+    background-color: #ffffff;
+    padding: 0 4px;
+    border-radius: 4px;
+    left: 8px;
+  }
+  .rorm_group select {
+    width: 130px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+  }
+  
